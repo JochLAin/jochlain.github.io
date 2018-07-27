@@ -16,7 +16,7 @@ export default class Presentation extends Component {
                         que je me suis essayé aux technologies du web en auto-didacte.
                     </p>
                     <p>
-                        Cela fait maintenant presque 5 ans qe je découvre, apprends, aiguise mes compétences.
+                        Cela fait maintenant presque 5 ans que je découvre, apprends, aiguise mes compétences.
                     </p>
                     <p>
                         Au départ très épris du backend, je me suis petit à petit formé sur le front puis l'intégration des sites web.
