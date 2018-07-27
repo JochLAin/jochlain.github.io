@@ -49,17 +49,13 @@ export default class Navigation extends Component {
     }
 
     componentDidMount() {
-        const menu = [...this.state.menu];
-        for (let index in menu) {
-            menu[index].position = document.getElementById(menu[index].anchor).getBoundingClientRect();
-        }
-        this.setState({ menu });
-
+        this.refreshPosition();
         $(document).ready(() => {
             // if (this.top != 0) {
             //     document.location.href = `#${this.state.menu[0].anchor}`;
             // }
             setTimeout(() => {
+                window.addEventListener('resize', this.refreshPosition, false);
                 window.addEventListener('scroll', this.onScroll, false);
                 this.refreshMenu();
             }, 100);
@@ -121,6 +117,14 @@ export default class Navigation extends Component {
             }
         }
         menu[current].active = true;
+        this.setState({ menu });
+    }
+
+    refreshPosition = () => {
+        const menu = [...this.state.menu];
+        for (let index in menu) {
+            menu[index].position = document.getElementById(menu[index].anchor).getBoundingClientRect();
+        }
         this.setState({ menu });
     }
 

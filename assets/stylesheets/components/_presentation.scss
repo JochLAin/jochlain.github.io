@@ -1,5 +1,4 @@
 .presentation {
-    background-color: $primary;
     overflow: hidden;
     position: relative;
 
@@ -82,13 +81,18 @@
 
 @include media-breakpoint-down('xs') {
     .presentation {
-        flex-direction: column;
+        flex-direction: column !important;
 
-        .presentation__left {
+        .presentation__left,
+        .presentation__right--arrow {
             display: none;
         }
         .presentation__right {
-            flex-grow: 1;
+            padding-left: 4rem;
+            width: 100%;
+        }
+        .presentation__text {
+            max-width: 100%;
         }
     }
 }
