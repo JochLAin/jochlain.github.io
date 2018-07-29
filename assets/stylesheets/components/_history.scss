@@ -37,7 +37,8 @@ $history-month-height: 2.5rem;
         }
 
         .history__graph--header {
-            align-items: end;
+            // align-content: flex-end;
+            align-items: flex-end;
             display: flex;
             height: $history-header-height;
         }
