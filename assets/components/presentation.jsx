@@ -1,6 +1,7 @@
 
 
 import React, { Component } from 'react';
+import profil from '@images/jocelyn-faihy.png';
 
 export default class Presentation extends Component {
     render() {
@@ -8,6 +9,8 @@ export default class Presentation extends Component {
             <section className="presentation__left" />
             <section className="presentation__right">
                 <article className="presentation__text">
+                    <img src={profil} alt="Photo" className="rounded-circle" style={{ width: '15rem' }} />
+                    <hr/>
                     <h1>Jocelyn Faihy</h1>
                     <h2>Développeur web <small>(fullstack)</small></h2>
                     <hr/>
