@@ -1,11 +1,5 @@
-$history-header-height: 7rem;
+$history-header-height: 6rem;
 $history-month-height: 2.5rem;
-
-.history__container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
 
 .history {
     align-items: center;
@@ -94,13 +88,22 @@ $history-month-height: 2.5rem;
             hr {
                 margin: .5rem 0;
             }
+            .history__date {
+                display: none;
+            }
         }
     }
 }
 
 @include media-breakpoint-down('xs') {
+    .history {
+        justify-content: start !important;
+    }
     .history__graph {
         display: none !important;
+    }
+    .history__date {
+        display: block !important;
     }
     .history__list {
         padding-left: 0 !important;

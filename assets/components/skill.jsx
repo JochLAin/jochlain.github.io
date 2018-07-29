@@ -52,84 +52,115 @@ export default class Skills extends Component {
     state = { skills: SKILLS };
 
     render() {
-        return <section id="skill" className="skill__container container h-100vh py-3">
-            <h3>Compétences && Maîtrises</h3>
-            <table className="table table-bordered table-hover table-sm table-striped my-3">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Langage</th>
-                        <th>Bibliothèque && Framework</th>
-                        <th>Outil</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {LEVELS.map((label, level) => {
-                        return <tr key={uuid.v4()}>
-                            <td>{label}</td>
-                            <td>
-                                {this.state.skills.filter(skill => {
-                                    return skill.level == level && skill.type == 'language';
-                                }).map(skill => {
-                                    return <span key={uuid.v4()} className="badge badge-pill badge-dark mx-1">{skill.name}</span>
-                                })}
-                            </td>
-                            <td>
-                                {this.state.skills.filter(skill => {
-                                    return skill.level == level && skill.type == 'framework';
-                                }).map(skill => {
-                                    return <span key={uuid.v4()} className="badge badge-pill badge-secondary mx-1">{skill.name}</span>
-                                })}
-                            </td>
-                            <td>
-                                {this.state.skills.filter(skill => {
-                                    return skill.level == level && skill.type == 'tool';
-                                }).map(skill => {
-                                    return <span key={uuid.v4()} className="badge badge-pill badge-light mx-1">{skill.name}</span>
-                                })}
-                            </td>
+        return <article id="skill" className="skill__view view">
+            <article className="container">
+                <h3>Compétences && Centres d'intérêt</h3>
+                <table className="table table-bordered table-hover table-sm table-striped my-3">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Langage</th>
+                            <th>Bibliothèque && Framework</th>
+                            <th>Outil</th>
                         </tr>
-                    }).reverse()}
-                </tbody>
-            </table>
-            <table className="table table-bordered table-hover table-sm table-striped my-3">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Moteur de recherche</th>
-                        <th>IDE / Éditeur</th>
-                        <th>Navigateur</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {LOVES.map((label, level) => {
-                        return <tr key={uuid.v4()}>
-                            <td>{label}</td>
-                            <td>
-                                {this.state.skills.filter(skill => {
-                                    return skill.level == level && skill.type == 'research';
-                                }).map(skill => {
-                                    return <span key={uuid.v4()} className="badge badge-pill badge-dark mx-1">{skill.name}</span>
-                                })}
-                            </td>
-                            <td>
-                                {this.state.skills.filter(skill => {
-                                    return skill.level == level && skill.type == 'editor';
-                                }).map(skill => {
-                                    return <span key={uuid.v4()} className="badge badge-pill badge-secondary mx-1">{skill.name}</span>
-                                })}
-                            </td>
-                            <td>
-                                {this.state.skills.filter(skill => {
-                                    return skill.level == level && skill.type == 'navigator';
-                                }).map(skill => {
-                                    return <span key={uuid.v4()} className="badge badge-pill badge-light mx-1">{skill.name}</span>
-                                })}
-                            </td>
+                    </thead>
+                    <tbody>
+                        {LEVELS.map((label, level) => {
+                            return <tr key={uuid.v4()}>
+                                <td>{label}</td>
+                                <td>
+                                    {this.state.skills.filter(skill => {
+                                        return skill.level == level && skill.type == 'language';
+                                    }).map(skill => {
+                                        return <span key={uuid.v4()} className="badge badge-pill badge-dark mx-1">{skill.name}</span>
+                                    })}
+                                </td>
+                                <td>
+                                    {this.state.skills.filter(skill => {
+                                        return skill.level == level && skill.type == 'framework';
+                                    }).map(skill => {
+                                        return <span key={uuid.v4()} className="badge badge-pill badge-secondary mx-1">{skill.name}</span>
+                                    })}
+                                </td>
+                                <td>
+                                    {this.state.skills.filter(skill => {
+                                        return skill.level == level && skill.type == 'tool';
+                                    }).map(skill => {
+                                        return <span key={uuid.v4()} className="badge badge-pill badge-light mx-1">{skill.name}</span>
+                                    })}
+                                </td>
+                            </tr>
+                        }).reverse()}
+                    </tbody>
+                </table>
+                <table className="table table-bordered table-hover table-sm table-striped my-3">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Moteur de recherche</th>
+                            <th>IDE / Éditeur</th>
+                            <th>Navigateur</th>
                         </tr>
-                    }).reverse()}
-                </tbody>
-            </table>
-        </section>
+                    </thead>
+                    <tbody>
+                        {LOVES.map((label, level) => {
+                            return <tr key={uuid.v4()}>
+                                <td>{label}</td>
+                                <td>
+                                    {this.state.skills.filter(skill => {
+                                        return skill.level == level && skill.type == 'research';
+                                    }).map(skill => {
+                                        return <span key={uuid.v4()} className="badge badge-pill badge-dark mx-1">{skill.name}</span>
+                                    })}
+                                </td>
+                                <td>
+                                    {this.state.skills.filter(skill => {
+                                        return skill.level == level && skill.type == 'editor';
+                                    }).map(skill => {
+                                        return <span key={uuid.v4()} className="badge badge-pill badge-secondary mx-1">{skill.name}</span>
+                                    })}
+                                </td>
+                                <td>
+                                    {this.state.skills.filter(skill => {
+                                        return skill.level == level && skill.type == 'navigator';
+                                    }).map(skill => {
+                                        return <span key={uuid.v4()} className="badge badge-pill badge-light mx-1">{skill.name}</span>
+                                    })}
+                                </td>
+                            </tr>
+                        }).reverse()}
+                    </tbody>
+                </table>
+                <section className="row my-3">
+                    <aside className="col-2">
+                        <span className="fa-stack fa-2x">
+                            <span className="far fa-circle fa-stack-1x fa-2x fa-fw"></span>
+                            <span className="fas fa-language fa-stack-1x fa-fw"></span>
+                        </span>
+                    </aside>
+                    <section className="col-4">
+                        <b>Français :</b> lu, écrit, parlé<br />
+                        <b>Anglais :</b> lu, écrit, parlé<br />
+                        <b>Espagnol :</b> lu<br />
+                        <b>Japonais :</b> notion<br />
+                    </section>
+                    <aside className="col-2">
+                        <span className="fa-stack fa-2x">
+                            <span className="far fa-circle fa-stack-1x fa-2x fa-fw"></span>
+                            <span className="fas fa-info fa-stack-1x fa-fw"></span>
+                        </span>
+                    </aside>
+                    <section className="col-4">
+                        <ul className="m-0 p-0">
+                            <li className="d-inline-block mx-1"><span className="fas fa-angle-right fa-fw" /> Lecture / Mangas</li>
+                            <li className="d-inline-block mx-1"><span className="fas fa-angle-right fa-fw" /> Gadget</li>
+                            <li className="d-inline-block mx-1"><span className="fas fa-angle-right fa-fw" /> Jardin / Potager</li>
+                            <li className="d-inline-block mx-1"><span className="fas fa-angle-right fa-fw" /> Jeux vidéos</li>
+                            <li className="d-inline-block mx-1"><span className="fas fa-angle-right fa-fw" /> Gastronomie</li>
+                        </ul>
+                    </section>
+                </section>
+            </article>
+        </article>
     }
 }

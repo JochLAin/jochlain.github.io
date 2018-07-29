@@ -11,12 +11,17 @@ const MENU = [{
     ref: React.createRef(),
     active: true,
 }, {
+    label: 'À propos',
+    anchor: 'description',
+    ref: React.createRef(),
+    active: true,
+}, {
     label: 'Formations && Expériences',
     anchor: 'history',
     ref: React.createRef(),
     active: false,
 }, {
-    label: 'Compétences && Maîtrises',
+    label: 'Compétences && Centres d\'intérêt',
     anchor: 'skill',
     ref: React.createRef(),
     active: false,
@@ -51,14 +56,9 @@ export default class Navigation extends Component {
     componentDidMount() {
         this.refreshPosition();
         $(document).ready(() => {
-            // if (this.top != 0) {
-            //     document.location.href = `#${this.state.menu[0].anchor}`;
-            // }
-            setTimeout(() => {
-                window.addEventListener('resize', this.refreshPosition, false);
-                window.addEventListener('scroll', this.onScroll, false);
-                this.refreshMenu();
-            }, 100);
+            window.addEventListener('resize', this.refreshPosition, false);
+            window.addEventListener('scroll', this.refreshMenu, false);
+            this.refreshMenu();
         })
     }
 
@@ -69,41 +69,6 @@ export default class Navigation extends Component {
             this.refreshMenu();
             this.scrolling = false;
         }, TIMEOUT_SCROLL);
-    }
-
-    onScroll = (event) => {
-        this.refreshMenu();
-        // event.preventDefault();
-        // const scroll = window.pageYOffset || document.documentElement.scrollTop;
-
-        // if (!this.scrolling) {
-        //     this.scrolling = true;
-        //     const anchor = this.anchor;
-        //     const index = anchor ? this.state.menu.findIndex(item => item.anchor == anchor) : 0;
-
-        //     if (scroll > this.last_scroll) {
-        //         if (index == this.state.menu.length -1) {
-        //             this.scrolling = false;
-        //             return;
-        //         }
-        //         const next = this.state.menu[index +1];
-        //         document.location.href = `#${next.anchor}`;
-        //     } else {
-        //         if (index == 0) {
-        //             this.scrolling = false;
-        //             return;
-        //         }
-        //         const next = this.state.menu[index -1];
-        //         document.location.href = `#${next.anchor}`;
-        //     }
-
-        //     setTimeout(() => {
-                // this.refreshMenu();
-        //         this.scrolling = false;
-        //     }, TIMEOUT_SCROLL);
-        // }
-
-        // this.last_scroll = scroll <= 0 ? 0 : scroll;
     }
 
     refreshMenu = () => {

@@ -10,23 +10,14 @@ export default class Presentation extends Component {
                 <article className="presentation__text">
                     <h1>Jocelyn Faihy</h1>
                     <h2>Développeur web <small>(fullstack)</small></h2>
-                    <hr className="border-light" />
-                    <p>
-                        C'est après des études dans l'informatique, les réseaux et le développement mobile
-                        que je me suis essayé aux technologies du web en auto-didacte.
-                    </p>
-                    <p>
-                        Cela fait maintenant presque 5 ans que je découvre, apprends, aiguise mes compétences.
-                    </p>
-                    <p>
-                        Au départ très épris du backend, je me suis petit à petit formé sur le front puis l'intégration des sites web.
-                    </p>
+                    <hr/>
+                    <h4>Le code aussi bien visuel que structurel.</h4>
                 </article>
                 <aside className="presentation__right--arrow" />
             </section>
-            <aside className="presentation__arrow--down">
+            <a href="#description" className="presentation__arrow--down">
                 <span className="fas fa-angle-down fa-fw fa-2x"></span>
-            </aside>
+            </a>
         </article>;
     }
 }
