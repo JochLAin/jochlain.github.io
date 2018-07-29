@@ -24,11 +24,6 @@ h3 {
     justify-content: center;
 }
 
-@include media-breakpoint-up('lg') {
-    .view {
-    }
-}
-
 @include media-breakpoint-down('md') {
     html {
         font-size: 80%;
@@ -38,11 +33,5 @@ h3 {
 @include media-breakpoint-down('sm') {
     html {
         font-size: 60%;
-    }
-}
-
-@media (min-width: 600px) and (max-width: 650px) {
-    h3 {
-        display: none;
     }
 }
