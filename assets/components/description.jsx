@@ -24,7 +24,7 @@ export default class Description extends Component {
                                     <li>un "power-point like" sur web et mobile ;</li>
                                     <li>un réseau social de la maison à fort trafic ;</li>
                                     <li>un gestionnaire de configurateur 3D ;</li>
-                                    <li>le développement d'un CMS.</li>
+                                    <li>le développement d'un CMS ;</li>
                                 </ul>
                                 <p className="card-text">
                                     Au départ très épris de la programmation côté serveur, je me suis petit à petit formé, en plus, sur l'affichage dynamique puis le visuel des sites web.<br />
