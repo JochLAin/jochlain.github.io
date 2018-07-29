@@ -35,8 +35,9 @@ const SKILLS = [
     { name: 'jQuery', type: 'framework', level: 4 },
     { name: 'ChartJS', type: 'framework', level: 4 },
     { name: 'Webpack', type: 'framework', level: 3 },
-    { name: 'WebGL', type: 'framework', level: 2 },
     { name: 'BabylonJS', type: 'framework', level: 2 },
+    { name: 'WebGL', type: 'framework', level: 1 },
+    { name: 'ThreeJS', type: 'framework', level: 1 },
 
     { name: 'Docker', type: 'tool', level: 4 },
     { name: 'Docker Compose', type: 'tool', level: 4 },
