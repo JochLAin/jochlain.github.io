@@ -29,8 +29,8 @@ const EXPERIENCES = [{
     type: 'job',
     company: 'Mairie de Villieu-Loyes-Mollon',
     job: 'Développeur web',
-    start: new Date(2012, 7),
-    end: new Date(2012, 7),
+    start: new Date(2011, 7),
+    end: new Date(2011, 7),
     color: 'teal',
 }, {
     type: 'job',
@@ -150,7 +150,8 @@ export default class History extends Component {
                                                 {[...Array(12)].map((a, x) => {
                                                     const date = new Date(2008 + y, x +1);
                                                     const experience = this.state.experiences.find(experience => {
-                                                        return date.getTime() >= experience.start.getTime()
+                                                        return !(experience.type == 'formation' && [7, 8].includes(date.getMonth()))
+                                                            && date.getTime() >= experience.start.getTime()
                                                             && date.getTime() <= experience.end.getTime();
                                                     });
 
@@ -164,7 +165,7 @@ export default class History extends Component {
 
                                                     const classes = Classnames('history__graph--case', color && `text-${color}`);
                                                     let icon = <span className="far fa-square fa-2x fa-fw"></span>
-                                                    if (experience && experience.type == 'formation') {
+                                                    if (experience && experience.type == 'formation' && ![7, 8].includes(date.getMonth())) {
                                                         icon = <span className="fa-stack">
                                                             <span className="fas fa-graduation-cap fa-stack-1x fa-fw"></span>
                                                             <span className="far fa-square fa-stack-1x fa-2x fa-fw"></span>
