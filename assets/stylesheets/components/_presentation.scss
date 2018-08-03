@@ -112,8 +112,8 @@
 
 @include media-breakpoint-down('lg') {
     .presentation {
-        .presentation__right {
-            .presentation__right--arrow {
+        &__right {
+            &--arrow {
                 &::after {
                     transform: rotate(5deg);
                 }
@@ -125,16 +125,22 @@
 @include media-breakpoint-down('xs') {
     .presentation {
         flex-direction: column !important;
+        &__left {
+            display: none !important;
+        }
 
-        .presentation__left,
-        .presentation__right--arrow {
-            display: none;
-        }
-        .presentation__right {
+        &__right {
+            width: 100% !important;
+            display: flex;
+            justify-content: center;
+            opacity: 1 !important;            
             padding-left: 4rem;
-            width: 100%;
+
+            &--arrow {
+                display: none;
+            }
         }
-        .presentation__text {
+        &__text {
             max-width: 100%;
         }
     }
