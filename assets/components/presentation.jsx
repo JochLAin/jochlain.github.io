@@ -49,10 +49,6 @@ export default class Presentation extends Component {
                 this.ref_landscape.current.classList.remove('ascending');
                 this.ref_landscape.current.classList.add('in-space');
                 this.ref_rocket.current.classList.add('flying');
-
-                setTimeout(() => {
-                    this.ref_container.current.style.opacity = 1;
-                }, 2000);
             }, 2700);
         });
     }

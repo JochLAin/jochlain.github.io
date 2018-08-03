@@ -35,7 +35,7 @@
         #rocket {
             position: absolute;
             top: 100%;
-            left: 50%;
+            left: 25%;
             z-index: 100;
             transform: translate(-50%, -100%);
 
@@ -46,7 +46,6 @@
             }
             &.flying {
                 top: 50%;
-                left: 25%;
                 transform: translate(-50%, -50%) rotate(90deg);
                 transition: top 1s ease-in, transform 1.5s ease-in, left 1s ease-in 1.5s;
             }
@@ -60,7 +59,6 @@
         right: 0;
         top: 0;
         width: 45%;
-        opacity: 0;
         transition: opacity 1s ease-in-out;
 
         .presentation__text {
