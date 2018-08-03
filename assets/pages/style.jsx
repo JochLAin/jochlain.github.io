@@ -1,12 +1,13 @@
 
 
+import bootstrap from "bootstrap/js/src";
 import $ from "jquery";
 import Popper from "popper.js";
-import bootstrap from "bootstrap/js/src";
 import toastr from "toastr";
 
-import "@stylesheets";
 import "toastr/build/toastr.min.css";
+import "@stylesheets/reboot";
+import "@stylesheets";
 import '@fortawesome/fontawesome-free/js/fontawesome';
 import '@fortawesome/fontawesome-free/scss/fontawesome';
 import '@fortawesome/fontawesome-free/js/brands';

@@ -72,7 +72,6 @@ export default class Navigation extends Component {
     }
 
     refreshMenu = () => {
-        const anchor = this.anchor;
         const menu = [...this.state.menu];
         let current = 0;
         for (let index in menu) {
@@ -91,10 +90,6 @@ export default class Navigation extends Component {
             menu[index].position = document.getElementById(menu[index].anchor).getBoundingClientRect();
         }
         this.setState({ menu });
-    }
-
-    get anchor() {
-        return (document.URL.split('#').length > 1) ? document.URL.split('#')[1] : null;
     }
 
     set top(top) {

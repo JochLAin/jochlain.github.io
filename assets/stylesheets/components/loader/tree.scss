@@ -1,0 +1,55 @@
+@import "../../color";
+
+.tree {
+    height: 25rem;
+    width: 10rem;
+    position: relative;
+
+    &__trunk {
+        height: 15rem;
+        width: 3rem;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        background: $brown-700;
+        transform: translateX(-50%);
+        box-shadow: 0 0 2rem $color-shadow;
+
+        // &:before {
+        //     content: '';
+        //     position: absolute;
+        //     bottom: 0;
+        //     left: 0;
+        //     border-left: 1rem solid transparent;
+        //     border-right: 1rem solid transparent;
+        //     border-bottom: 1rem solid $brown-700;
+        //     transform: translateX(-50%);
+        //     box-shadow: 0 0 2rem $color-shadow;
+        // }
+
+        // &:after {
+        //     content: '';
+        //     position: absolute;
+        //     bottom: 0;
+        //     right: 0;
+        //     border-left: 1rem solid transparent;
+        //     border-right: 1rem solid transparent;
+        //     border-bottom: 1rem solid $brown-700;
+        //     transform: translateX(50%);
+        //     box-shadow: 0 0 2rem $color-shadow;
+        // }
+    }
+
+    &__foliage {
+        height: 15rem;
+        width: 15rem;
+        position: absolute;
+        bottom: 7.5rem;
+        left: 50%;
+        background: $green-700;
+        border-radius: 50%;
+        transform: translateX(-50%);
+        box-shadow: 0 0 2rem $color-shadow;
+    }
+
+}

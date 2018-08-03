@@ -10,7 +10,6 @@ $directions: ('top', 'right', 'bottom', 'left');
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/root";
 @import "~bootstrap/scss/print";
-@import "~bootstrap/scss/reboot";
 @import "~bootstrap/scss/type";
 @import "~bootstrap/scss/images";
 @import "~bootstrap/scss/code";
@@ -287,3 +286,10 @@ $directions: ('top', 'right', 'bottom', 'left');
 .w-100vw { width: 100vw !important; }
 .mw-100vw { min-width: 100vw !important; }
 .Mw-100vw { max-width: 100vw !important; }
+
+/////////////////////////////////////////////////////////////////////////////
+//                              Shadow Helper                              //
+/////////////////////////////////////////////////////////////////////////////
+.shadow {
+    box-shadow: 0 0 2rem $color-shadow;
+}
