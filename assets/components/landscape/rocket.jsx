@@ -59,7 +59,7 @@ export class RocketConfiguration extends Component {
     render() {
         if (!this.state.configuring) {
             return ReactDOM.createPortal(
-                <button type="button" className="btn btn-outline-light btn-sm position-absolute right-3 top-3" onClick={() => this.setState({ configuring: true })}>
+                <button type="button" className="d-none d-md-block btn btn-outline-light btn-sm position-absolute right-3 top-3" onClick={() => this.setState({ configuring: true })}>
                     <span className="fas fa-cog fa-fw" />
                 </button>,
                 document.body

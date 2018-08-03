@@ -14,14 +14,16 @@
             display: flex;
             position: relative;
             transform: translateY(calc(-100% + 100vh));
-            transition: transform 3s ease-in;
 
             &.ascending {
+                transition: transform 3s ease-in;
+
                 .landscape__comet {
                     top: -500%;
                 }
             }
             &.to-space {
+                transition: transform 3s ease-in;
                 transform: translateY(0);
             }
             &.in-space {
