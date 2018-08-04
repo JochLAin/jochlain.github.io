@@ -29,6 +29,21 @@ export default class Presentation extends Component {
                     <h2>Développeur web <small>(fullstack)</small></h2>
                     <hr/>
                     <h4>Le code aussi bien visuel que structurel.</h4>
+                    <hr/>
+                    <section className="d-flex">
+                        <a href="https://www.facebook.com/jochlain" className="d-block mx-2 text-white">
+                            <span className="fab fa-facebook fa-2x"></span>
+                        </a>
+                        <a href="https://twitter.com/JochLAin" className="d-block mx-2 text-white">
+                            <span className="fab fa-twitter fa-2x"></span>
+                        </a>
+                        <a href="https://github.com/JochLAin" className="d-block mx-2 text-white">
+                            <span className="fab fa-github fa-2x"></span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/jocelyn-faihy-421ba885/" className="d-block mx-2 text-white">
+                            <span className="fab fa-linkedin fa-2x"></span>
+                        </a>
+                    </section>
                 </article>
                 <aside className="presentation__right--arrow" />
             </section>
