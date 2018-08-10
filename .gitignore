@@ -1,4 +1,6 @@
-node_modules
-npm-debug.json
+/node_modules/
+/package-lock.json
+npm-debug.log
 
-package-lock.json
+/docker
+docker-compose.yml

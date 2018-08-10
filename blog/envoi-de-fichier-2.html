@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="robot" content="index, follow">
+        <meta name="og:site_name" content="@JochLAin on Github">
+        <meta name="og:title" content="Blog de Jocelyn Faihy">
+        <title>Blog de Jocelyn Faihy</title>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42074651-4"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){ dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', 'UA-42074651-4');
+        </script>
+    </head>
+    <body id="blog" class="bg-light" data-spy="scroll" data-target="#navbar-example2" data-offset="0">
+        <header>
+            <a id="homepage" href="/" class="text-dark">
+                <h1>
+                    <b class="mx-2">Jocelyn</b>
+                    <span class="fas fa-rocket fa-fw fa-2x"></span>
+                    <b class="mx-2">Faihy</b>
+                </h1>
+            </a>
+            <a href="/blog.html">
+                <aside class="separator"></aside>
+            </a>
+        </header>
+        <article class="blog container">
+            <nav class="navigation navigation--dark">
+                <section class="navigation__item">
+                    <a href="/blog/envoi-de-fichier-1.html" class="navigation__link">
+                        <span class="navigation__label mr-2">L'envoi de fichier</span>
+                        <span class="far fa-circle"></span>
+                    </a>
+                </section>
+                <section class="navigation__item active">
+                    <a href="/blog/envoi-de-fichier-2.html" class="navigation__link">
+                        <span class="navigation__label mr-2">L'affichage</span>
+                        <span class="fas fa-circle"></span>
+                    </a>
+                </section>
+                <section class="navigation__item">
+                    <a href="/blog/envoi-de-fichier-3.html" class="navigation__link">
+                        <span class="navigation__label mr-2">La gestion en BDD</span>
+                        <span class="far fa-circle"></span>
+                    </a>
+                </section>
+                <section class="navigation__item">
+                    <a href="/blog/envoi-de-fichier-4.html" class="navigation__link">
+                        <span class="navigation__label mr-2">Le champs de formulaire</span>
+                        <span class="far fa-circle"></span>
+                    </a>
+                </section>
+            </nav>
+            <article class="blog__article">
+                <h2>L'affichage (2/4)</h2>
+                <p>
+                    Dans <a href="/blog/envoi-de-fichier-1.html">l'article précédent</a>, nous avons vu comment envoyer le fichier au serveur, dans celui-ci nous allons nous pencher sur son affichage.
+                </p>
+                <hr />
+                <p>
+                    Tout d'abord j'ai commencé par créer un composant <a href="https://reactjs.org" target="_blank">React</a> pour gérer l'affichage.<br />
+                    Le composant pourra avoir comme propriétés :
+                    <ul>
+                        <li>
+                            <a href="https://developer.mozilla.org/fr/docs/Web/HTML/Element/input#attr-accept" target="_blank"><b class="text-dark">accept</b></a>:
+                            le type de fichier accepté
+                        </li>
+                        <li>
+                            <a href="https://developer.mozilla.org/fr/docs/Web/HTML/Element/input#attr-multiple" target="_blank">multiple</a>:
+                            détermine si plusieurs fichiers peuvent être envoyé au serveur
+                        </li>
+                        <li>
+                            <b class="text-dark">chunk</b>: détermine si le tronçonnage de fichier doit être utilisé
+                        </li>
+                        <li>
+                            <b class="text-dark">chunk_size</b>: détermine la taille d'un tronçon (en octet)
+                        </li>
+                        <li>
+                            <b class="text-dark">url</b>: sur quelle URL le fichier doit être envoyé
+                        </li>
+                        <li>
+                            <b class="text-dark">files</b>: un tableau de fichiers avec lesquelles le composant sera initialisé.<br />
+                            Par exemple quand le champs est déjà rempli.
+                        </li>
+                        <li>
+                            <a href="https://developer.mozilla.org/fr/docs/Web/HTML/Element/Input/file" target="_blank">input</a>: l'input de type file sur lequel les fichiers sont assignés
+                        </li>
+                        <li>
+                            <b class="text-dark">onSuccess</b>: fonction appelé lors de la réussite de l'envoi
+                        </li>
+                        <li>
+                            <b class="text-dark">onRemove</b>: fonction appelé lors de la suppression d'un fichier<br />
+                            Par exemple quand on doit supprimer le fichier sur le serveur.
+                        </li>
+                    </ul>
+                    Comme vous pouvez le voir, on retrouve des propriétés du <i>manager</i> dans le <i>composant</i>.<br />
+                    Cela pour une raison très simple, car c'est le <i>composant</i> qui va venir intialiser le <i>manager</i>.
+                </p>
+                <pre class="blog__article__code"><!--
+                --><aside class="blog__article__code--filename">assets/components/uploader.jsx</aside><!--
+                --><code class="blog__article__code--content jsx"><!--
+-->import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
+import Classnames from "classnames";
+import uuid from "uuid";
+import UploadManager from '@managers/uploader'
+
+export default class Uploader extends Component {
+    static propTypes = {
+        accept: PropTypes.string,
+        multiple: PropTypes.bool,
+        chunk: PropTypes.bool,
+        chunk_size: PropTypes.number,
+        url: PropTypes.string,
+        files: PropTypes.arrayOf(
+            PropTypes.object({
+                // Identifiant du fichier en BDD
+                id: PropTypes.number,
+                // Chemin vers le fichier
+                path: PropTypes.string,
+                // Nom du fichier
+                content: PropTypes.string,
+                // Taille du fichier
+                filesize: PropTypes.number,
+            })
+        ),
+        onSuccess: PropTypes.func,
+        onRemove: PropTypes.func,
+    };
+
+    static defaultProps = {
+        accept: 'image/*',
+        multiple: false,
+        chunk: false,
+        chunk_size: 1000000,
+        url: "/upload/",
+    };
+
+    // Le state par défaut
+    state = { files: this.props.files || [] };
+
+    // Le manager qui gère toute la logique d'envoie au serveur 
+    manager = new UploadManager(this.props);
+}<!--
+                --></code><!--
+            --></pre>
+                <p>
+                    Une fois le composant initialisé, j'ai ajouté ce qu'il doit afficher.<br />
+                    Je me suis contenté pour l'instant d'un bouton pour ajouter un fichier et d'une preview avec un bouton de suppression pour les fichiers présents.<br />
+                    Vous pouvez le modifier à votre goût.
+                </p>
+                <pre class="blog__article__code"><!--
+                --><aside class="blog__article__code--filename">assets/components/uploader.jsx</aside><!--
+                --><code class="blog__article__code--content jsx"><!--
+-->// ...
+
+export default class Uploader extends Component {
+    // ...
+
+    // Les références vers nos noeuds HTML
+    ref_container = React.createRef();
+    ref_input = React.createRef();
+
+    render() {
+        return &lt;Fragment&gt;
+            {/* Pour les fichiers déjà existants */}
+            {!!this.state.files.length && (
+                &lt;Fragment&gt;
+                    {this.state.files.map(file =&gt; {
+                        return &lt;article key={uuid.v4()} className="mb-2"&gt;
+                            &lt;img
+                                src={file.path} alt={file.content}
+                                height="100%" width="100%"
+                                style={{ maxHeight:"100%", maxWidth:"100%" }}
+                            /&gt;
+                            &lt;button type="button" className="btn btn-danger btn-block" onClick={() =&gt; this.onRemove(file)}&gt;
+                                Supprimer le fichier
+                            &lt;/button&gt;
+                        &lt;/article&gt;
+                    })}
+                &lt;/Fragment&gt;
+            )}
+            {/* Si on a pas de fichiers ou si on peut toujours en ajouter */}
+            {(!this.state.files.length || this.props.multiple) && (
+                &lt;Fragment&gt;
+                    &lt;button type="button" className="btn btn-outline-primary btn-block" onClick={this.onAdd}&gt;
+                        À partir de vos dossiers
+                    &lt;/button&gt;
+                &lt;/Fragment&gt;
+            )}
+            {/* L'input qui permettra à l'utilisateur de choisir ses fichiers */}
+            {(ReactDOM.createPortal(
+                &lt;input ref={this.ref_input} type="file" accept={this.props.accept} multiple={this.props.multiple} hidden /&gt;,
+                document.body
+            ))}
+        &lt;/Fragment&gt;;
+    }
+}<!--
+                --></code><!--
+            --></pre>
+                <p>
+                    Une fois l'affichage codé, j'ai mis en place les interactions possibles avec l'utilisateur :
+                    <ul>
+                        <li>L'ajout d'un nouveau fichier</li>
+                        <li>La suppression d'un fichier</li>
+                    </ul>
+                    Pour cela j'ai mis dans le <code>state</code> de notre composant la liste des fichiers envoyés.<br />
+                    Aussi, ici j'utilise la bibliothèque <a href="https://github.com/CodeSeven/toastr" target="_blank">Toastr</a> qui permet d'afficher des notifications sur le côté de l'écran.
+                </p>
+                <pre class="blog__article__code"><!--
+                --><aside class="blog__article__code--filename">assets/components/uploader.jsx</aside><!--
+                --><code class="blog__article__code--content jsx"><!--
+-->// ...
+
+export default class Uploader extends Component {
+    // ...
+
+    componentDidMount() {
+        this.ref_input.current.addEventListener('change', () => {
+            this.manager.upload(this.ref_input.current)
+            .then((params) => {
+                // Lorsque l'envoi a réussi
+                // Affichage d'un message à l'utilisateur
+                toastr.success("Le serveur a reçu le fichier.");
+                if (this.props.multiple) {
+                    // Ajout des fichiers aux fichiers déjà existants
+                    const files = this.state.files.concat(
+                        params.map(upload => upload.response)
+                    );
+
+                    // Mis à jour de l'affichage
+                    this.setState({ files });
+                } else {
+                    // Mis à jour de l'affichage avec le fichier envoyé
+                    this.setState({ files: [params.response] });
+                }
+            }, () => {
+                // Lorsque l'envoi a échoué
+                // Affichage d'un message à l'utilisateur
+                toastr.error("Une erreur est survenu durant l'envoi du fichier.");
+            })
+            .catch(() => {
+                // Lorsqu'une erreur est survenue
+                // Affichage d'un message à l'utilisateur
+                toastr.error("Une erreur est survenu durant l'envoi du fichier.");
+            });
+        });
+    }
+
+    // Lorsque l'utilisateur clique sur le bouton d'ajout
+    onAdd = () => {
+        // Au clic sur le bouton on simule un clic sur l'input
+        this.ref_input.current.click();
+    }
+
+    // Lorsque l'utilisateur clique sur le bouton de suppression
+    onRemove = (file) => {
+        // Appel du callback
+        if (this.props.onRemove) {
+            this.props.onRemove(file);
+        }
+
+        // Supprimer le fichiers des fichiers affichés
+        const files = [...this.state.files];
+        files.splice(files.indexOf(file), 1);
+        this.setState({ files });
+    }
+}<!--
+                --></code><!--
+            --></pre>
+                <p>
+                    Pour des raisons de simplicité pour la suite on va ajouter une méthode dans le manager pour créer un uploader.<br/>
+                    Ce qui nous permettra ensuite d'appeler cette méthode avec React compilé.
+                </p>
+                <pre class="blog__article__code"><!--
+                --><aside class="blog__article__code--filename">assets/managers/uploader.jsx</aside><!--
+                --><code class="blog__article__code--content js"><!--
+-->// ...
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Uploader from '@components/uploader';
+
+export default class UploaderManager {
+    static create = (container, props) => {
+        ReactDOM.render(
+            &lt;Uploader {...props} /&gt;,
+            container
+        );
+    }
+
+    // ...
+}<!--
+                --></code><!--
+            --></pre>
+                <p>
+                    Comme dans <a href="/blog/envoi-de-fichier-1.html">l'article précédent</a> voici quelques exemples d'intégration.
+                </p>
+                <pre class="blog__article__code"><!--
+                --><aside class="blog__article__code--filename">templates/index.html</aside><!--
+                --><code class="blog__article__code--content html"><!--
+-->&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+    &lt;head&gt;
+        &lt;title&gt;Test uploader&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div id="upload-container"&gt;&lt;/div&gt;
+        &lt;script type="text/javascript" src="path/to/script.js"&gt;&lt;/script&gt;
+        &lt;script type="text/javascript"&gt;
+            document.addEventListener('load', function () {
+                var container = document.getElementById('upload-container');
+
+                // Envoi simple
+                UploadManager.create(container, {
+                    url: '/upload/',
+                    files: [{
+                        id: 12,
+                        path: '/cdn/path_to_file.png',
+                        content: 'path_to_file.png',
+                        filesize: 10000,
+                    }]
+                });
+
+                // Envoi multiple
+                UploadManager.create(container, {
+                    url: '/upload/',
+                    multiple: true,
+                });
+
+                // Envoi avec tronçonnage
+                UploadManager.create(container, {
+                    url: '/upload/',
+                    accept: 'image/*',
+                    chunk: true,
+                    chunk_size: 1000000,
+                    onSuccess: function () {
+                        console.log('Le tranfert est terminé avec succès');
+                    },
+                    onError: function () {
+                        console.log('Le tranfert est terminé avec une erreur');
+                    }
+                });
+            });
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;<!--
+                --></code><!--
+            --></pre>
+                <footer class="d-flex align-items-center justify-content-around">
+                    <a href="/blog/envoi-de-fichier-1.html">
+                        <article class="d-flex align-items-center justify-content-center">
+                            <section class="mx-1">
+                                <span class="fas fa-arrow-left"></span>
+                            </section>
+                            <section class="mx-1">
+                                Partie 1 : L'envoi au serveur
+                            </section>
+                        </article>
+                    </a>
+                    <a href="/blog/envoi-de-fichier-3.html">
+                        <article class="d-flex align-items-center justify-content-center">
+                            <section class="mx-1">
+                                Partie 3 : La gestion en base de données
+                            </section>
+                            <section class="mx-1">
+                                <span class="fas fa-arrow-right"></span>
+                            </section>
+                        </article>
+                    </a>
+                </footer>
+            </article>
+        </article>
+        <footer class="bg-dark text-light text-center">
+            <small>Jocelyn Faihy <sup><span class="far fa-copyright"></span></sup> - All rights reserved - 2018</small>
+        </footer>
+        <script type="text/javascript" src="/js/style.js"></script>
+    </body>
+</html>

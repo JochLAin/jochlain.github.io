@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="robot" content="index, follow">
+        <meta name="og:site_name" content="@JochLAin on Github">
+        <meta name="og:title" content="Blog de Jocelyn Faihy">
+        <title>Blog de Jocelyn Faihy</title>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42074651-4"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){ dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', 'UA-42074651-4');
+        </script>
+    </head>
+    <body id="blog" class="bg-light" data-spy="scroll" data-target="#navbar-example2" data-offset="0">
+        <header>
+            <a id="homepage" href="/" class="text-dark">
+                <h1>
+                    <b class="mx-2">Jocelyn</b>
+                    <span class="fas fa-rocket fa-fw fa-2x"></span>
+                    <b class="mx-2">Faihy</b>
+                </h1>
+            </a>
+            <a href="/blog.html">
+                <aside class="separator"></aside>
+            </a>
+        </header>
+        <article class="blog container">
+            <nav class="navigation navigation--dark">
+                <section class="navigation__item">
+                    <a href="/blog/envoi-de-fichier-1.html" class="navigation__link">
+                        <span class="navigation__label mr-2">L'envoi de fichier</span>
+                        <span class="far fa-circle"></span>
+                    </a>
+                </section>
+                <section class="navigation__item">
+                    <a href="/blog/envoi-de-fichier-2.html" class="navigation__link">
+                        <span class="navigation__label mr-2">L'affichage</span>
+                        <span class="far fa-circle"></span>
+                    </a>
+                </section>
+                <section class="navigation__item">
+                    <a href="/blog/envoi-de-fichier-3.html" class="navigation__link">
+                        <span class="navigation__label mr-2">La gestion en BDD</span>
+                        <span class="far fa-circle"></span>
+                    </a>
+                </section>
+                <section class="navigation__item active">
+                    <a href="/blog/envoi-de-fichier-4.html" class="navigation__link">
+                        <span class="navigation__label mr-2">Le champs de formulaire</span>
+                        <span class="fas fa-circle"></span>
+                    </a>
+                </section>
+            </nav>
+            <article class="blog__article">
+                <h2>Le champs de formulaire (4/4)</h2>
+                <p>
+                    Vous avez maintenant toutes les billes en main pour un système d'envoi de fichier sur votre projet.<br />
+                    Seulement, c'est une galère à mettre en place quand on veut par exemple gérer la photo de profil d'un compte utilisateur<br />
+                    Ici on va voir comment simplifier l'intégration de notre <i>uploader</i> au sein d'un <a href="https://symfony.com/doc/current/forms.html" target="_blank">formulaire Symfony</a>.
+                </p>
+                <hr />
+                <p>
+                    Pour commencer il faut préparer un nouveau champs de formulaire qui héritera d'un champs de type <a href="https://symfony.com/doc/current/reference/forms/types/entity.html" target="_blank">Entity</a>.<br />
+                    Je n'ai pas encore assez expérimenté la surcharge de formulaire en Symfony, j'ai tenté de suivre le <a href="http://symfony.com/doc/current/form/create_form_type_extension.html" target="_blank">cookbook Symfony</a> sans succès, donc le moyen logique que j'ai utilisé est d'hériter directement du champs <a href="http://api.symfony.com/4.1/Symfony/Bridge/Doctrine/Form/Type/EntityType.html" target="_blank">EntityType</a>.
+                </p>
+                <pre class="blog__article__code"><!--
+                --><aside class="blog__article__code--filename">src/Form/Extension/FileType.php</aside><!--
+                --><code class="blog__article__code--content php"><!--
+-->&lt;?php
+
+namespace App\Form\Extension;
+
+use App\Entity\File;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\Form;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class FileType extends EntityType
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'upload';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'upload';
+    }
+}<!--
+                --></code><!--
+            --></pre>
+                <p>
+                    L'étape suivante est de savoir:
+                    <ul>
+                        <li>Quelles seront les options qu'il faudra pouvoir passer ?</li>
+                        <li>Quelles sont les variables du champs ?</li>
+                    </ul>
+                    Donc reprenons l'un après l'autre les paramètres et propriétés possibles de notre manager
+                    <ul>
+                        <li><b>accept:</b> cette propriété peut être variable, on l'ajoute aux options de notre champs</li>
+                        <li><b>multiple:</b> cette propriété est déjà présente dans le champs <i>EntityType</i></li>
+                        <li><b>chunk:</b>  cette propriété peut être variable mais ne sera pas forcément différentes pour chaque formulaire, on l'ajoute aux options de notre champs avec une valeur par défaut pour ne plus s'en soucier</li>
+                        <li><b>chunk_size:</b> pareil que la propriété précédente</li>
+                        <li><b>url:</b> cette propriété peut être variable, on l'ajoute aux options de notre champs</li>
+                        <li><b>files:</b> se seront les fichiers qui seront déjà existante, on l'ajoute aux options de notre champs</li>
+                        <li><b>input:</b> on utilisera ici le composant React, donc ce n'est pas une option de notre champs</b>
+                        <li><b>container:</b> cette propriété est inconnu à la création de notre champs, elle sera rempli dynamiquement côté script JS</b>
+                        <li><b>onSuccess:</b> c'est une fonction JS, donc ce n'est pas une option de notre champs</li>
+                        <li><b>onRemove:</b> c'est une fonction JS, donc ce n'est pas une option de notre champs</li>
+                    </ul>
+                </p>
+                <pre class="blog__article__code"><!--
+                --><aside class="blog__article__code--filename">src/Form/Extension/FileType.php</aside><!--
+                --><code class="blog__article__code--content php"><!--
+-->&lt;?php
+
+// ...
+
+class FileType extends EntityType
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        // Bien penser à appeler la méthode du parent
+        parent::configureOptions($resolver);
+
+        // Ici j'ai choisi mettre des valeurs par défaut à toutes mes options
+        // Afin d'avoir un champs par défaut déjà configuré
+        $resolver->setDefaults([
+            // Le cas le plus régulier est l'envoi d'image
+            'accept' => 'image/*',
+            'choice_label' => 'id',
+            'class' => File::class,
+            'expanded' => false,
+            'multiple' => false,
+            'required' => false,
+            // Mon url d'envoi par défaut
+            'url' => '/upload/',
+            // "Filouterie" expliquée dans la suite de l'article
+            'files' => null,
+            'initialized' => false,
+        ]);
+    }
+
+    // ...
+}<!--
+                --></code><!--
+            --></pre>
+            <p>
+                Puis la question qui vient juste après est :
+                <ul>
+                    <li>Quelles éléments aurais-je besoin de passer à mon template ?</li>
+                </ul>
+                Il s'agit des propriétés que l'on a rajoutées aux options et qui ne sont pas dans la configuration du parent.
+            </p>
+                <pre class="blog__article__code"><!--
+                --><aside class="blog__article__code--filename">src/Form/Extension/FileType.php</aside><!--
+                --><code class="blog__article__code--content php"><!--
+-->&lt;?php
+
+// ...
+
+class FileType extends EntityType
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function buildView(Form\FormView $view, Form\FormInterface $form, array $options)
+    {
+        // Bien penser à appeler la méthode du parent
+        parent::buildView($view, $form, $options);
+
+        // On ajoute nos variables aux variables du parent
+        $view->vars = array_merge($view->vars, [
+            'accept' => $options['accept'],
+            'files' => $options['files'],
+            'url' => $options['url'],
+        ]);
+    }
+
+    // ...
+}<!--
+                --></code><!--
+            --></pre>
+            <p>
+                Avec la suite vient la technique, ici j'ai récupéré les informations du champs afin de remplir notre <i>uploader</i> avec ces mêmes informations mais mise au bon format avec notre <b>Normalizer</b>.
+                Pour cela j'ai mis en place un <a href="https://symfony.com/doc/current/form/dynamic_form_modification.html" target="_blank">Form Subscriber</a> qui écoute l'évènement <b>PRE_SET_DATA</b>.<br />
+                Pour son utilisation, il faut le rajouter dans notre champs de formulaire. Il est possible de faire une version plus concise en utilsant des <a href="http://php.net/manual/fr/functions.anonymous.php" target="_blank">fonctions anonymes</a> mais je trouve ça plus clair de le découper dans plusieurs fichiers.
+            </p>
+                <pre class="blog__article__code"><!--
+                --><aside class="blog__article__code--filename">src/Form/Extension/FileType.php</aside><!--
+                --><code class="blog__article__code--content php"><!--
+-->&lt;?php
+
+// ...
+use App\Subscriber\Form\FileSubscriber;
+
+class FileType extends EntityType
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(Form\FormBuilderInterface $builder, array $options)
+    {
+        parent::buildForm($builder, $options);
+        $builder->addEventSubscriber(new FileSubscriber());
+    }
+
+    // ...
+}<!--
+                --></code><!--
+            --></pre>
+                <pre class="blog__article__code"><!--
+                --><aside class="blog__article__code--filename">src/Subscriber/Form/FileSubscriber.php</aside><!--
+                --><code class="blog__article__code--content php"><!--
+-->&lt;?php
+
+namespace App\Subscriber\Form;
+
+use App\Serializer\Normalizer\FileNormalizer;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Serializer\Serializer;
+
+class FileSubscriber implements EventSubscriberInterface
+{
+    protected $serializer;
+
+    public function __construct()
+    {
+        $this->serializer = new Serializer([new FileNormalizer()], []);
+    }
+
+    public static function getSubscribedEvents()
+    {
+        return [
+            FormEvents::PRE_SET_DATA => 'onPreSetData',
+        ];
+    }
+
+    public function onPreSetData(FormEvent $event)
+    {
+        $form = $event->getForm();
+        $data = $event->getData();
+        $options = $form->getConfig()->getOptions();
+    }
+}<!--
+                --></code><!--
+            --></pre>
+            <p>
+                Maintenant nous avons notre subscriber, malheureusement il ne fait pas grand chose pour le moment.<br />
+                Donc, que doit-il faire ?
+            </p>
+            <p>
+                C'est ici que nos deux options de <i>"filou"</i> ajoutées précédemment vont être utilisées :
+                <ul>
+                    <li>La première, <b>initialized</b>, va nous permettre de surcharger le champs tout en évitant la boucle infini</li>
+                    <li>Quant à la deuxième, <b>files</b>, elle contiendra la liste des fichiers sérialisée</li>
+                </ul>
+            </p>
+            <pre class="blog__article__code"><!--
+                --><aside class="blog__article__code--filename">src/Subscriber/Form/FileSubscriber.php</aside><!--
+                --><code class="blog__article__code--content php"><!--
+-->&lt;?php
+
+// ...
+use App\Form\Extension\FileType;
+use Doctrine\ORM\EntityRepository;
+
+class FileSubscriber implements EventSubscriberInterface
+{
+    // ...
+
+    public function onPreSetData(FormEvent $event)
+    {
+        // ...
+
+        // Si on a des données et que le champs n'est pas encore initialisé
+        if ($data && !$options['initialized']) {
+            // On va venir surcharger le champs actuel avec les nouvelles options
+            $form->getParent()->add($form->getName(), FileType::class, array_merge($options, [
+                // On met le champs en état initialisé pour éviter la boucle infini
+                'initialized' => true,
+                // On ajoute les données présentes et sérialisées
+                'files' => $this->serializer->normalize($data),
+                // On ajoute un query_builder pour la validation
+                // car si la valeur n'est pas présente dans les choix
+                // alors le formulaire remonte une erreur
+                'query_builder' => function (EntityRepository $repository) use ($data) {
+                    $query = $repository->createQueryBuilder('f');
+                    if (is_array($data)) {
+                        $query->where('f.id IN(:ids)')->setParameter('ids', array_map(function ($file) {
+                            return $file->getId();
+                        }, $data));
+                    } else {
+                        $query->where('f.id = ?1')->setParameter(1, $data->getId());
+                    }
+
+                    return $query;
+                },
+            ]));
+
+            // On re-set les datas à notre champs 
+            $form->getParent()->get($form->getName())->setData($data);
+        } elseif (!$options['initialized']) {
+            // S'il n'a pas de donnée alors on supprime les choix pour éviter une trop grande charge
+            // Et on met le champs en état initialisé pour éviter la boucle infini
+            $form->getParent()->add($form->getName(), FileType::class, array_merge($options, [
+                'initialized' => true,
+                'choices' => [],
+            ]));
+        }
+    }
+}<!--
+                --></code><!--
+            --></pre>
+            <p>
+                Nous voilà presque prêt, il ne nous manque qu'une dernière question à se poser :<br/>
+                Comment notre champs doit-il apparaître dans notre page ?
+            </p>
+            <p>
+                Pour répondre à cette question, nous allons rajouter notre champs au <a href="https://symfony.com/doc/current/form/form_customization.html" target="_blank">form_theme Symfony</a>.
+            </p>
+            <pre class="blog__article__code"><!--
+                --><aside class="blog__article__code--filename">config/packages/twig.yaml</aside><!--
+                --><code class="blog__article__code--content yaml"><!--
+-->twig:
+    # ...
+    form_themes:
+        # ...
+        - 'Form/upload.html.twig'
+<!--
+                --></code><!--
+            --></pre>
+            <pre class="blog__article__code"><!--
+                --><aside class="blog__article__code--filename">templates/Form/upload.html.twig</aside><!--
+                --><code class="blog__article__code--content twig"><!--
+-->{% use "bootstrap_4_layout.html.twig" %}
+
+{% block upload_widget %}
+    {# Notre container qui affichera l'uploader #}
+    &lt;article id="{{ id }}-container" class="form-group"&gt;&lt;/article&gt;
+    {# Notre champs de sélection d'entité #}
+    &lt;select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %} hidden&gt;
+        {% if multiple and files|default(false) %}
+            {% for index in files %}
+                &lt;option value="{{ files[index].id }}" selected&gt;{{ files[index].id }}&lt;/option&gt;
+            {% endfor %}
+        {% elseif files|default(false) %}
+            &lt;option value="{{ files.id }}" selected&gt;{{ files.id }}&lt;/option&gt;
+        {% endif %}
+    &lt;/select&gt;
+    &lt;script type="text/javascript"&gt;
+        $(document).ready(function () {
+            var container = document.getElementById('{{ id }}-container');
+            var multiple = {{ multiple|json_encode|raw }};
+            var select = document.getElementById('{{ id }}');
+
+            // Pour les valeurs twig à afficher j'aime beaucoup utilisé le filtre "default"
+            // Il permet d'assigner une valeur si la variable n'existe pas et nous évite
+            // par la même occasion les erreurs d'inattention 
+            Uploader.create(container, {
+                accept: "{{ accept|default('image/*') }}",
+                url: "{{ url|default('/upload/') }}",
+                multiple: multiple,
+                chunk: {{ chunk|default(false)||json_encode|raw }},
+                chunk_size: {{ chunk_size|default(1000000)|raw }},
+                {% if multiple and files|default(false) %}
+                    files: {{ files|json_encode|raw }},
+                {% elseif files|default(false) %}
+                    files: [{{ files|json_encode|raw }}],
+                {% endif %}
+                onSuccess: function (params) {
+                    if (multiple) {
+                        for (let index in params) {
+                            $(select).append('&lt;option value="' + params[index].file.id + '"&gt;' + params[index].file.id + '&lt;/option&gt;');
+                            select.value.push(params[index].file.id);
+                        }
+                    } else {
+                        $(select).append('&lt;option value="' + params.file.id + '"&gt;' + params.file.id + '&lt;/option&gt;');
+                        select.value = params.file.id;
+                    }
+                },
+            });
+        });
+    &lt;/script&gt;
+{% endblock upload_widget %}<!--
+                --></code><!--
+            --></pre>
+            <p>
+                Comme pour les parties précédentes, je vous laisse avec un exemple d'intégration. 
+            </p>
+            <pre class="blog__article__code"><!--
+                --><aside class="blog__article__code--filename">src/Form/Type/ProfileType.php</aside><!--
+                --><code class="blog__article__code--content php"><!--
+-->&lt;php
+
+namespace App\Form\Type;
+
+use App\Entity\Member;
+use App\Form\Extension as AppExtensionType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class ProfileType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('email', Type\TextType::class, [
+                'label' => 'Email',
+            ])
+            ->add('username', Type\TextType::class, [
+                'label' => 'Nom d\'utilisateur',
+            ])
+            ->add('bio', Type\TextareaType::class, [
+                'label' => 'Biographie',
+            ])
+            ->add('website', Type\TextType::class, [
+                'label' => 'Site web',
+            ])
+            ->add('photo', AppExtensionType\FileType::class, [
+                'label' => 'Photo de profil',
+                'url' => '/upload/',
+                'required' => false,
+            ])
+        ;
+    }
+
+    public function getBlockPrefix()
+    {
+        return 'profile';
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'crud' => 'create',
+            'context' => 'profile',
+            'data_class' => Member::class,
+        ]);
+    }
+}
+
+<!--
+                --></code><!--
+            --></pre>
+            <p>
+                Et voilà, c'est terminé pour ce tutoriel, qui n'en est pas totalement un.<br />
+                J'espère que cet article vous aura plu mais surtout vous aura aidé.<br />
+                Da bizou.
+            </p>
+            </article>
+        </article>
+        <footer class="bg-dark text-light text-center">
+            <small>Jocelyn Faihy <sup><span class="far fa-copyright"></span></sup> - All rights reserved - 2018</small>
+        </footer>
+        <script type="text/javascript" src="/js/style.js"></script>
+    </body>
+</html>
