@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="robot" content="index, follow">
+        <meta name="og:site_name" content="@JochLAin on Github">
+        <meta name="og:title" content="Blog de Jocelyn Faihy">
+        <title>Blog de Jocelyn Faihy</title>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42074651-4"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){ dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', 'UA-42074651-4');
+        </script>
+    </head>
+    <body id="blog" class="bg-light" data-spy="scroll" data-target="#navbar-example2" data-offset="0">
+        <header>
+            <a id="homepage" href="/" class="text-dark">
+                <h1>
+                    <b class="mx-2">Jocelyn</b>
+                    <span class="fas fa-rocket fa-fw fa-2x"></span>
+                    <b class="mx-2">Faihy</b>
+                </h1>
+            </a>
+            <a href="/blog.html">
+                <aside class="separator"></aside>
+            </a>
+        </header>
+        <article class="blog container">
+            <nav class="navigation navigation--dark">
+                <section class="navigation__item active">
+                    <a href="/blog/imbrication-formulaire-1.html" class="navigation__link">
+                        <span class="navigation__label mr-2">Préparation de la BDD et du formulaire</span>
+                        <span class="fas fa-circle"></span>
+                    </a>
+                </section>
+                <section class="navigation__item">
+                    <a href="/blog/imbrication-formulaire-2.html" class="navigation__link">
+                        <span class="navigation__label mr-2">L'affichage du formulaire</span>
+                        <span class="fas fa-circle"></span>
+                    </a>
+                </section>
+                <section class="navigation__item">
+                    <a href="/blog/imbrication-formulaire-3.html" class="navigation__link">
+                        <span class="navigation__label mr-2">L'ajout et la suppression</span>
+                        <span class="fas fa-circle"></span>
+                    </a>
+                </section>
+            </nav>
+            <article class="blog__article">
+                <h2>L'imbrication de formulaire (1/3)</h2>
+                <p>
+                    Dans cette partie nous allons voir le code côté serveur jusqu'à l'affichage.<br />
+                    Elle est assez concise car peu d'éléments sont à expliquer.
+                </p>
+                <hr />
+                <p>
+                    Mon premier article traitait de ce sujet (que de souvenir...). Depuis mes méthodes ont bien évolué. Elles sont notament bien plus maintenable.<br />
+                    Je vais vous faire découvrir dans cette article ma dernière manière de faire. Commençons sans plus attendre.
+                </p>
+                <p>
+                    Pour cette exercice je vais prendre l'exemple d'un calendrier avec des évènements récurrent à la semaine.<br />
+                    C'est-à-dire que l'on va définir par exemple, chaque dimanche matin je vais chercher le petit-déjeuner.
+                </p>
+                <p>
+                    Commençons par créer notre entité.
+                </p>
+                <pre class="blog__article__code"><!--
+                --><aside class="blog__article__code--filename">src/Entity/RecurringEvent.php</aside><!--
+                --><code class="blog__article__code--content php"><!--
+-->&lt;?php
+
+namespace App\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Table(name="weekly_recurring_event")
+ * @ORM\Entity
+ */
+class WeeklyRecurringEvent
+{
+    /**
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $content;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $day;
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setContent(string $content)
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    public function setDay(int $day)
+    {
+        $this->day = $day;
+
+        return $this;
+    }
+
+    public function getDay()
+    {
+        return $this->day;
+    }
+}<!--
+                --></code><!--
+            --></pre>
+                <p>
+                    Voilà tout pour ce qui est de notre base de donnée.<br/>
+                    Passons aux formulaires.
+                </p>
+                <pre class="blog__article__code"><!--
+                --><aside class="blog__article__code--filename">src/Form/Type/CalendarType.php</aside><!--
+                --><code class="blog__article__code--content php"><!--
+-->&lt;?php
+
+namespace App\Form\Type;
+
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class CalendarType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add('days', Type\CollectionType::class, [
+            'entry_type' => DayType::class,
+            'entry_options' => [
+                // Tips to know where we are
+                'crud' => $options['crud'],
+                'context' => $options['context'],
+            ],
+            'allow_add' => false,
+            'allow_delete' => false,
+            'by_reference' => false,
+            'mapped' => false,
+        ]);
+    }
+
+    public function getBlockPrefix()
+    {
+        return 'calendar';
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            // Tips to know where we are
+            'crud' => 'create',
+            'context' => 'calendar',
+        ]);
+    }
+}<!--
+                --></code><!--
+            --></pre>
+                <pre class="blog__article__code"><!--
+                --><aside class="blog__article__code--filename">src/Form/Type/DayType.php</aside><!--
+                --><code class="blog__article__code--content php"><!--
+-->&lt;?php
+
+namespace App\Form\Type;
+
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class DayType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('day', Type\ChoiceType::class, [
+                'label' => 'Jour de la semaine',
+                'read_only' =>'true',
+                'choices' => [
+                    0 => 'Lundi',
+                    1 => 'Mardi',
+                    2 => 'Mercredi',
+                    3 => 'Jeudi',
+                    4 => 'Vendredi',
+                    5 => 'Samedi',
+                    6 => 'Dimanche',
+                ],
+            ])
+            ->add('events', Type\CollectionType::class, [
+                'entry_type' => EventType::class,
+                'entry_options' => [
+                    // Tips to know where we are
+                    'crud' => $options['crud'],
+                    'context' => $options['context'],
+                ],
+                'allow_add' => false,
+                'allow_delete' => false,
+                'by_reference' => false,
+                'mapped' => false,
+            ])
+        ;
+    }
+
+    public function getBlockPrefix()
+    {
+        return 'day';
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            // Tips to know where we are
+            'crud' => 'create',
+            'context' => 'day',
+        ]);
+    }
+}<!--
+                --></code><!--
+            --></pre>
+                <pre class="blog__article__code"><!--
+                --><aside class="blog__article__code--filename">src/Form/Type/EventType.php</aside><!--
+                --><code class="blog__article__code--content php"><!--
+-->&lt;?php
+
+namespace App\Form\Type;
+
+use App\Entity\WeeklyRecurringEvent;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class EventType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add('content', Type\TextType::class, [
+            'label' => 'Contenu',
+        ]);
+    }
+
+    public function getBlockPrefix()
+    {
+        return 'event';
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            // Tips to know where we are
+            'crud' => 'create',
+            'context' => 'event',
+            'data_class' => WeeklyRecurringEvent::class,
+        ]);
+    }
+}<!--
+                --></code><!--
+            --></pre>
+                <p>
+                    Nous avons maintenant notre base et nos formulaires. Il ne nous manque plus que le controller et le formattage des données pour terminer cette partie.
+                </p>
+                <pre class="blog__article__code"><!--
+                --><aside class="blog__article__code--filename">src/Controller/CalendarController.php</aside><!--
+                --><code class="blog__article__code--content php"><!--
+-->&lt;?php
+
+namespace App/Controller;
+
+use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\ControllerTrait;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\HttpFoundation\Request;
+
+/** @Route("/calendar", name="calendar_") */
+class CalendarController implements ContainerAwareInterface
+{
+    use ControllerTrait;
+    use ContainerAwareTrait;
+
+    /**
+     * @Route("/crud/", name="crud")
+     * @Method({"GET","POST"})
+     */
+    public function crudAction(EntityManagerInterface $em, Request $request)
+    {
+        $repository = $em->getRepostory(WeeklyRecurringEvent::class);
+        $form = $this->createForm(CalendarType::class, [ 'days' => $repository->findByDays() ]);
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $data = $form->getData();
+                foreach ($data['days'] as $day) {
+                    foreach ($day['events'] as $event) {
+                        $event->setDay($day['day']);
+                        $em->persist($event);
+                    }
+                }
+                // /!\ Attention : Utilisation des ressources en cas de nombreuses sauvegarde
+                $em->flush();
+            }
+        }
+
+        return $this->render('calendar.html.twig', [ 'form' => $form->createView() ]);
+    }
+}<!--
+                --></code><!--
+            --></pre>
+                <pre class="blog__article__code"><!--
+                --><aside class="blog__article__code--filename">src/Repository/WeeklyRecurringEventRepository.php</aside><!--
+                --><code class="blog__article__code--content php"><!--
+-->&lt;?php
+
+namespace App/Repository;
+
+use Doctrine\ORM\EntityRepository;
+
+class WeeklyRecurringEventRepository extends EntityRepository
+{
+    public function findByDays()
+    {
+        return [[
+            'day' => 0,
+            'events' => $this->findByDay(0),
+        ], [
+            'day' => 1,
+            'events' => $this->findByDay(1),
+        ], [
+            'day' => 2,
+            'events' => $this->findByDay(2),
+        ], [
+            'day' => 3,
+            'events' => $this->findByDay(3),
+        ], [
+            'day' => 4,
+            'events' => $this->findByDay(4),
+        ], [
+            'day' => 5,
+            'events' => $this->findByDay(5),
+        ], [
+            'day' => 6,
+            'events' => $this->findByDay(6),
+        ]];
+    }
+}<!--
+                --></code><!--
+            --></pre>
+                <p>
+                    Nous voilà fin prêt pour l'affichage de notre template avec notre formulaire.
+                    Ce que nous verrons dans la prochaine partie
+                </p>
+                <footer class="d-flex align-items-center justify-content-around">
+                    <article></article>
+                    <a href="/blog/imbrication-formulaire-2.html">
+                        <article class="d-flex align-items-center justify-content-center">
+                            <section class="mx-1">
+                                Partie 2 : Affichage du formulaire
+                            </section>
+                            <section class="mx-1">
+                                <span class="fas fa-arrow-right"></span>
+                            </section>
+                        </article>
+                    </a>
+                </footer>
+            </article>
+        </article>
+        <footer class="bg-dark text-light text-center">
+            <small>Jocelyn Faihy <sup><span class="far fa-copyright"></span></sup> - All rights reserved - 2018</small>
+        </footer>
+        <script type="text/javascript" src="/js/style.js"></script>
+    </body>
+</html>
