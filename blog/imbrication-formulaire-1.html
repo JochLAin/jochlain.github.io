@@ -321,7 +321,7 @@ class CalendarController implements ContainerAwareInterface
                 $data = $form->getData();
                 foreach ($data['days'] as $day) {
                     foreach ($day['events'] as $event) {
-                        $event->setDay($day['day']);
+                        $event->setDay($day['index']);
                         $em->persist($event);
                     }
                 }
@@ -349,25 +349,25 @@ class WeeklyRecurringEventRepository extends EntityRepository
     public function findByDays()
     {
         return [[
-            'day' => 0,
+            'index' => 0,
             'events' => $this->findByDay(0),
         ], [
-            'day' => 1,
+            'index' => 1,
             'events' => $this->findByDay(1),
         ], [
-            'day' => 2,
+            'index' => 2,
             'events' => $this->findByDay(2),
         ], [
-            'day' => 3,
+            'index' => 3,
             'events' => $this->findByDay(3),
         ], [
-            'day' => 4,
+            'index' => 4,
             'events' => $this->findByDay(4),
         ], [
-            'day' => 5,
+            'index' => 5,
             'events' => $this->findByDay(5),
         ], [
-            'day' => 6,
+            'index' => 6,
             'events' => $this->findByDay(6),
         ]];
     }

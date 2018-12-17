@@ -97,7 +97,7 @@
 {# Template d'affichage pour un jour #}
 {% macro renderFormDay(form) %}
     &lt;article id="{{ form.vars.id }}" class="entry-day"&gt;
-        {{ form_row(form.day) }}
+        {{ form_row(form.index) }}
         {# ... #}
     &lt;/article&gt;
 {% endmacro %}<!--
@@ -116,7 +116,7 @@
 {# Template d'affichage pour un jour #}
 {% macro renderFormDay(form) %}
     &lt;article id="{{ form.vars.id }}" class="entry-day"&gt;
-        {{ form_row(form.day) }}
+        {{ form_row(form.index) }}
         &lt;fieldset id="fieldset-event" data-prototype="{{ _self.renderFormEvent(form.events)|escape }}"&gt;
             &lt;legend&gt;
                 &lt;h3&gt;Évènements&lt;/h3&gt;
