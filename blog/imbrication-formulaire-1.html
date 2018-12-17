@@ -68,7 +68,7 @@
                     Commençons par créer notre entité.
                 </p>
                 <pre class="blog__article__code"><!--
-                --><aside class="blog__article__code--filename">src/Entity/RecurringEvent.php</aside><!--
+                --><aside class="blog__article__code--filename">src/Entity/WeeklyRecurringEvent.php</aside><!--
                 --><code class="blog__article__code--content php"><!--
 -->&lt;?php
 
@@ -290,6 +290,8 @@ class EventType extends AbstractType
 
 namespace App/Controller;
 
+use App\Entity\WeeklyRecurringEvent;
+use App\Form\Type\CalendarType;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
