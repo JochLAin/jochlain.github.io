@@ -1,0 +1,28 @@
+@import "components/timeline/table";
+@import "./components/footer";
+@import "./utility";
+
+html, body, #__next {
+  box-sizing: border-box;
+  min-width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  --bg-body: #fff;
+  --text-body: #212529;
+
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text-body);
+  background-color: var(--bg-body);
+
+  &.skin--dark {
+    --bg-body: #212529;
+    --text-body: #fff;
+  }
+}
