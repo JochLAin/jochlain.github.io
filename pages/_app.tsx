@@ -12,11 +12,11 @@ export default function App({ Component, pageProps }: AppProps) {
     );
 
     Object.assign(store, {
-        setLocale: (locale) => {
+        setLocale: (locale: string) => {
             document.body.parentElement.lang = locale;
             setLocale(locale);
         },
-        translate: (message, parameters, domain) => {
+        translate: (message: string, parameters = {}, domain: string) => {
             return translate(message, parameters, domain, locale);
         },
     });
