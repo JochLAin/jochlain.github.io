@@ -13,7 +13,9 @@ export default function App({ Component, pageProps }: AppProps) {
 
     Object.assign(store, {
         setLocale: (locale: string) => {
-            document.body.parentElement.lang = locale;
+            if (document?.body?.parentElement) {
+                document.body.parentElement.lang = locale;
+            }
             setLocale(locale);
         },
         translate: (message: string, parameters = {}, domain: string) => {
