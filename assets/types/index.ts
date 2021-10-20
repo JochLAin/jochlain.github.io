@@ -1,6 +1,6 @@
 
 export interface ExperienceInterface {
-    readonly kind: 'grade'|'job'|'both',
+    readonly kind: string,
     readonly grade ?: string,
     readonly info ?: string,
     readonly job ?: string,
