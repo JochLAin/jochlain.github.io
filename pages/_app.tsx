@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import type { AppProps } from 'next/app'
 import Head from "next/head";
 import MainContext from "../assets/context";
 import translate from "../assets/utils/translate";
 import "../stylesheets/index.scss";
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps }: AppProps) {
     const [locale, setLocale] = useState('fr');
     const store = Object.assign(
         { locale },
