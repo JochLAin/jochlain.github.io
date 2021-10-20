@@ -1,4 +1,3 @@
-
 export interface ExperienceInterface {
     readonly kind: string,
     readonly grade ?: string,
