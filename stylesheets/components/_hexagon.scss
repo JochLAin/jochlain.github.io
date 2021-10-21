@@ -8,7 +8,7 @@ $hexagon-height: $hexagon-s * 1em;
 $hexagon-width: $hexagon-d * 1em;
 $hexagon-gutter: 2px;
 $hexagon-border-height: $hexagon-b * 1em;
-$hexagon-padding-y: calc(#{math.div($hexagon-border-height, 2)} + #{$hexagon-gutter});
+$hexagon-padding-y: calc(#{math.div($hexagon-border-height, 2)} + #{math.div($hexagon-gutter, 2)});
 
 .hexagon {
   --hexagon-color-background: var(--body-bg);
@@ -16,6 +16,7 @@ $hexagon-padding-y: calc(#{math.div($hexagon-border-height, 2)} + #{$hexagon-gut
   --hexagon-animation-duration: 500ms;
   --hexagon-animation-delay: 0ms;
 
+  box-sizing: border-box;
   position: relative;
   display: block;
   width: $hexagon-width;
@@ -23,6 +24,8 @@ $hexagon-padding-y: calc(#{math.div($hexagon-border-height, 2)} + #{$hexagon-gut
   margin: $hexagon-padding-y $hexagon-gutter;
   background-color: var(--hexagon-color-background);
   color: var(--hexagon-color-text);
+  border: 1px solid var(--hexagon-color-text) / 0;
+  border-radius: 3px;
   text-align: center;
   vertical-align: middle;
   transition: all 0.2s linear, opacity 0s, transform 0s;
@@ -39,18 +42,19 @@ $hexagon-padding-y: calc(#{math.div($hexagon-border-height, 2)} + #{$hexagon-gut
     content: "";
     border-left: math.div($hexagon-width, 2) solid transparent;
     border-right: math.div($hexagon-width, 2) solid transparent;
+    border-radius: 0;
     transition: all 0.2s linear;
     z-index: 0;
   }
 
   &::before {
     bottom: calc(100% - 1px);
-    border-bottom: calc(#{$hexagon-border-height} + 1px) solid var(--hexagon-color-background);
+    border-bottom: calc(#{$hexagon-border-height}) solid var(--hexagon-color-background);
   }
 
   &::after {
     top: calc(100% - 1px);
-    border-top: calc(#{$hexagon-border-height} + 1px) solid var(--hexagon-color-background);
+    border-top: calc(#{$hexagon-border-height}) solid var(--hexagon-color-background);
   }
 
   &.rotate {
@@ -67,6 +71,7 @@ $hexagon-padding-y: calc(#{math.div($hexagon-border-height, 2)} + #{$hexagon-gut
   }
 
   &-grid {
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     flex-wrap: wrap;

@@ -32,9 +32,9 @@ const HEXAGONS = {
     amazon: <Hexagon color="#222b3a" text="#f19100" icon="fab fa-amazon" />,
     microsoft: <Hexagon color="#666" icon="fab fa-microsoft" />,
 
-    euro: <Hexagon color="#9e3a79" icon="far fa-euro-sign" />,
-    sterling: <Hexagon color="#bf3a43" icon="far fa-sterling-sign" />,
-    dollar: <Hexagon color="#1d8650" icon="far fa-dollar-sign" />,
+    // euro: <Hexagon color="#9e3a79" icon="far fa-euro-sign" />,
+    // sterling: <Hexagon color="#bf3a43" icon="far fa-sterling-sign" />,
+    // dollar: <Hexagon color="#1d8650" icon="far fa-dollar-sign" />,
     bitcoin: <Hexagon color="#c7a032" icon="fab fa-btc" />,
     ethereum: <Hexagon color="#5f628c" icon="fab fa-ethereum" />,
 
@@ -47,7 +47,6 @@ const HEXAGONS = {
         <span className={`fas fa-circle fa-fw`} style={{ position: 'absolute', top: 0, left: '50%', transform: 'translate(-80%)', color: 'rgba(223, 0, 26)' }} />
         <span className={`fas fa-circle fa-fw`} style={{ position: 'absolute', top: 0, left: '50%', transform: 'translate(-30%)', color: 'rgba(234, 150, 26, .5)' }} />
         <span className={`fas fa-circle fa-fw`} style={{ position: 'absolute', top: 0, left: '50%', transform: 'translate(-80%)', color: 'rgba(223, 0, 26, .5)' }} />
-        {/*<span className={`fas fa-circle fa-fw`} style={{ fontSize: '.5em' }} />*/}
     </Hexagon>,
     visa: <Hexagon color="#004a85" icon="fab fa-cc-visa" />,
     amex: <Hexagon color="#0169c5" icon="fab fa-cc-amex" />,
