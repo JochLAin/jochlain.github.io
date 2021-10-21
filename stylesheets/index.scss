@@ -1,10 +1,11 @@
-@import "components/timeline/table";
+@import "./components/hero";
 @import "./components/footer";
+@import "./components/timeline/table";
 @import "./utility";
 
 html, body, #__next {
   box-sizing: border-box;
-  min-width: 100vw;
+  min-width: 100%;
   min-height: 100vh;
   margin: 0;
 }
@@ -14,15 +15,39 @@ html {
 }
 
 body {
-  --bg-body: #fff;
-  --text-body: #212529;
+  --body-bg: #{$color-white};
+  --body-text: #{$color-gray-900};
+  --body-yiq-alpha: #{rgba($color-gray-900, .3)};
 
-  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   color: var(--text-body);
   background-color: var(--bg-body);
 
   &.skin--dark {
-    --bg-body: #212529;
-    --text-body: #fff;
+    --body-bg: #{$color-gray-900};
+    --body-text: $color-white;
+    --body-yiq-alpha: rgba($color-white, .3);
   }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: .5rem;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.2;
+  color: inherit;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
 }

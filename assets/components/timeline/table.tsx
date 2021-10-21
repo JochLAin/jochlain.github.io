@@ -7,7 +7,7 @@ export default function TimelineTable(props: TimelineTableProps) {
     const main = useMain();
 
     return <article className="tlt-wrapper">
-        <h2 className="tlt-title">{main.translate('Graduations && Experiences', {}, 'timeline')}</h2>
+        <h3 className="tlt-title">{main.translate('Graduations && Experiences', {}, 'timeline')}</h3>
         <div className="tlt">
             <TimelineTableGraph {...props} />
             <TimelineTableLegend {...props} />
@@ -118,13 +118,12 @@ export function TimelineTableLegend(props: TimelineTableProps) {
             // ;
             // const title = `${start} → ${end}`;
 
-            return <li key={`exp-${idx}`} title={exp.info}>
+            return <li key={`exp-${idx}`}>
                 <span className="fa-li" style={{ color: exp.color }}><span className="fas fa-square" /></span>
                 {exp.grade && (
                     <p>
                         <i>{main.translate(exp.grade, {}, 'timeline')}</i>
-                        {exp.info && <small className="fal fa-circle-info fa-fw ms-1 text-muted" />}
-                        {/*{exp.info && <small className="text-muted">{main.translate(exp.info, {}, 'timeline')}</small>}*/}
+                        {exp.info && <small title={main.translate(exp.info, {}, 'timeline')} className="fal fa-circle-info fa-fw ms-1 text-muted" />}
                     </p>
                 )}
                 {exp.grade && exp.job && <hr />}

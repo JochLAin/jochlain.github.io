@@ -1,3 +1,4 @@
+import CATALOG_HERO_FR from "../translations/hero.fr.json";
 import CATALOG_MESSAGE_FR from "../translations/messages.fr.json";
 import CATALOG_TIMELINE_FR from "../translations/timeline.fr.json";
 import CATALOG_MESSAGE_EN from "../translations/messages.en.json";
@@ -7,8 +8,8 @@ export const MONTHES = ['January', 'February', 'March', 'April', 'May', 'June', 
 
 export const EXPERIENCES = [{
     kind: 'grade',
-    grade: 'Bachelor IST EE',
-    info: 'Industrial Sciences and Techniques Electronic Engineering option',
+    grade: 'Bac IST EE',
+    info: 'Industrial Sciences and Techniques - Electronic Engineering option',
     icon: 'graduation-cap',
     color: '#f44336',
     start: new Date(2008, 9),
@@ -58,7 +59,7 @@ export const EXPERIENCES = [{
 }, {
     kind: 'grade',
     grade: 'Web development',
-    info: 'Self learning',
+    info: 'Self-taught learning',
     icon: 'graduation-cap',
     color: '#cddc39',
     start: new Date(2013, 10),
@@ -83,6 +84,7 @@ export const EXPERIENCES = [{
 
 export const TRANSLATION_CATALOGS = {
     fr: {
+        hero: CATALOG_HERO_FR,
         messages: CATALOG_MESSAGE_FR,
         timeline: CATALOG_TIMELINE_FR,
     },
