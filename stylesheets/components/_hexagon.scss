@@ -1,0 +1,166 @@
+@use "sass:math";
+
+$hexagon-s: 3.5;
+$hexagon-d: 2 * math.div($hexagon-s, (2 * math.tan(math.div(math.$pi, 6))));
+$hexagon-b: math.sqrt(math.pow($hexagon-s, 2) - math.pow(math.div($hexagon-d, 2), 2));
+
+$hexagon-height: $hexagon-s * 1em;
+$hexagon-width: $hexagon-d * 1em;
+$hexagon-gutter: 2px;
+$hexagon-border-height: $hexagon-b * 1em;
+$hexagon-padding-y: calc(#{math.div($hexagon-border-height, 2)} + #{$hexagon-gutter});
+
+.hexagon {
+  --hexagon-color-background: var(--body-bg);
+  --hexagon-color-text: var(--body-color);
+  --hexagon-animation-duration: 500ms;
+  --hexagon-animation-delay: 0ms;
+
+  position: relative;
+  display: block;
+  width: $hexagon-width;
+  height: $hexagon-height;
+  margin: $hexagon-padding-y $hexagon-gutter;
+  background-color: var(--hexagon-color-background);
+  color: var(--hexagon-color-text);
+  text-align: center;
+  vertical-align: middle;
+  transition: all 0.2s linear, opacity 0s, transform 0s;
+  animation-delay: var(--hexagon-animation-delay);
+  animation-duration: var(--hexagon-animation-duration);
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
+
+  &::before,
+  &::after {
+    position: absolute;
+    left: 0;
+    width: 0;
+    content: "";
+    border-left: math.div($hexagon-width, 2) solid transparent;
+    border-right: math.div($hexagon-width, 2) solid transparent;
+    transition: all 0.2s linear;
+    z-index: 0;
+  }
+
+  &::before {
+    bottom: calc(100% - 1px);
+    border-bottom: calc(#{$hexagon-border-height} + 1px) solid var(--hexagon-color-background);
+  }
+
+  &::after {
+    top: calc(100% - 1px);
+    border-top: calc(#{$hexagon-border-height} + 1px) solid var(--hexagon-color-background);
+  }
+
+  &.rotate {
+    animation-name: hexagon-rotate;
+  }
+  &.shine {
+    animation-name: hexagon-shine;
+  }
+  &.scale {
+    animation-name: hexagon-scale;
+  }
+  &.turn {
+    animation-name: hexagon-turn;
+  }
+
+  &-grid {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: $hexagon-padding-y 0;
+  }
+
+  > * {
+    font-size: $hexagon-height;
+    line-height: $hexagon-height;
+    z-index: 1;
+  }
+}
+
+@mixin hexagon-row($idx: 1) {
+  $count: $idx + .5;
+  .hexagon-grid {
+    width: calc(#{$hexagon-width * $count} + #{$hexagon-gutter * 2 * $count} + 1px);
+
+    .hexagon:nth-child(#{$idx * 2}n + #{$idx + 1}) {
+      margin-left: calc(#{math.div($hexagon-width, 2)} + #{$hexagon-gutter * 2});
+    }
+  }
+}
+
+@mixin hexagon-grid($start: 1, $end: 5) {
+  @for $idx from $start through $end {
+    $count: $idx + .5;
+    $min: calc(#{$hexagon-width * $count} + #{$hexagon-gutter * 2 * $count});
+    $max: calc(#{$hexagon-width * ($count + 1)} + #{$hexagon-gutter * 2 * ($count + 1)});
+
+    @if ($idx == $end) {
+      @media (min-width: $min) {
+        @include hexagon-row($idx);
+      }
+    }
+    @else {
+      @media (min-width: $min) and (max-width: $max) {
+        @include hexagon-row($idx);
+      }
+    }
+  }
+}
+
+@keyframes hexagon-shine {
+  25% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  75% {
+    opacity: 1;
+  }
+}
+
+@keyframes hexagon-rotate {
+  25% {
+    transform: rotate(0deg);
+    z-index: 100;
+  }
+  75% {
+    transform: rotate(360deg);
+    z-index: 100;
+  }
+  75.00001% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes hexagon-scale {
+  25% {
+    transform: scale(1);
+    z-index: 250;
+  }
+  50% {
+    transform: scale(1.45);
+    z-index: 250;
+  }
+  75% {
+    transform: scale(1);
+    z-index: 250;
+  }
+}
+
+@keyframes hexagon-turn {
+  25% {
+    transform: rotateY(0deg);
+    z-index: 100;
+  }
+  75% {
+    transform: rotateY(360deg);
+    z-index: 100;
+  }
+  75.00001% {
+    transform: rotateY(0deg);
+  }
+}
