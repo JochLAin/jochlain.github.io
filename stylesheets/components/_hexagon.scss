@@ -11,10 +11,14 @@ $hexagon-border-height: $hexagon-b * 1em;
 $hexagon-padding-y: calc(#{math.div($hexagon-border-height, 2)} + #{math.div($hexagon-gutter, 2)});
 
 .hexagon {
+  --hexagon-animation-delay: 0ms;
+  --hexagon-animation-duration: 500ms;
+  --hexagon-border-height: #{$hexagon-border-height};
   --hexagon-color-background: var(--body-bg);
   --hexagon-color-text: var(--body-color);
-  --hexagon-animation-duration: 500ms;
-  --hexagon-animation-delay: 0ms;
+  --hexagon-gutter: #{$hexagon-gutter};
+  --hexagon-height: #{$hexagon-height};
+  --hexagon-width: #{$hexagon-width};
 
   box-sizing: border-box;
   position: relative;

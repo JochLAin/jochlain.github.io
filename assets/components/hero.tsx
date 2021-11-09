@@ -1,6 +1,12 @@
 import React, { CSSProperties, cloneElement, useEffect, useMemo, useState } from "react";
 import useMain from "../hooks/useMain";
 
+let debounce_timeout: number|undefined;
+const debounce = (callback: Function, delay: number = 150) => {
+    if (debounce_timeout) window.clearTimeout(debounce_timeout);
+    debounce_timeout = window.setTimeout(callback, delay);
+};
+
 const HEXAGONS = {
     html: <Hexagon color="#dd4b25" icon="fab fa-html5" />,
     css: <Hexagon color="#2449d8" icon="fab fa-css3-alt" />,
@@ -54,35 +60,67 @@ const HEXAGONS = {
     stripe: <Hexagon color="#5e56f2" icon="fab fa-stripe" />,
 };
 
+const HEXAGON_COMPONENTS = [...Object.values(HEXAGONS)];
+const HEXAGON_DEFAULTS = [...HEXAGON_COMPONENTS, ...HEXAGON_COMPONENTS, ...HEXAGON_COMPONENTS, ...HEXAGON_COMPONENTS, ...HEXAGON_COMPONENTS, ...HEXAGON_COMPONENTS].map((hexagon, idx) => cloneElement(hexagon, { key: `hexagon-${idx}` }));
+
 export default function Hero() {
     const main = useMain();
-    const hexagons = useMemo(() => {
-        const hexagons = [...Object.values(HEXAGONS)];
-        let contents = [...hexagons, ...hexagons, ...hexagons];
-        for (let idx = 1; idx < contents.length; idx++) {
-            const rdm = Math.floor(Math.random() * idx);
-            [contents[idx], contents[rdm]] = [contents[rdm], contents[idx]];
-        }
-        return contents;
+    const [hexagons, setHexagons] = useState(HEXAGON_DEFAULTS);
+
+    useEffect(() => {
+        const onResize = () => {
+            debounce(() => {
+                const { clientHeight: client_height, clientWidth: client_width } = document.documentElement;
+                const hexagon = document.querySelector('.hero-wrapper .hexagon');
+                if (hexagon) {
+                    const style = window.getComputedStyle(hexagon);
+                    const style_font_size = Number(style.getPropertyValue('font-size').replace(/(r?em|px)$/, ''));
+                    const style_border_height = Number(style.getPropertyValue('--hexagon-border-height').replace(/(r?em|px)$/, ''));
+                    const style_gutter = Number(style.getPropertyValue('--hexagon-height').replace(/(r?em|px)$/, ''));
+                    const style_height = Number(style.getPropertyValue('--hexagon-height').replace(/(r?em|px)$/, ''));
+                    const style_width = Number(style.getPropertyValue('--hexagon-width').replace(/(r?em|px)$/, ''));
+
+                    const offset_y = style_border_height * style_font_size / 2;
+                    const hexagon_height = (style_height + style_border_height) * style_font_size + style_gutter * 2;
+                    const hexagon_width = style_width * style_font_size + style_gutter;
+
+                    const nb_hexagon = Math.floor(client_width / hexagon_width) * Math.floor((client_height - offset_y * 2) / hexagon_height);
+                    const tmp = [...HEXAGON_COMPONENTS, ...HEXAGON_COMPONENTS, ...HEXAGON_COMPONENTS, ...HEXAGON_COMPONENTS, ...HEXAGON_COMPONENTS, ...HEXAGON_COMPONENTS].slice(0, nb_hexagon);
+                    for (let idx = 1; idx < tmp.length; idx++) {
+                        const rdm = Math.floor(Math.random() * idx);
+                        [tmp[idx], tmp[rdm]] = [tmp[rdm], tmp[idx]];
+                    }
+
+                    setHexagons(tmp.map((hexagon) => cloneElement(hexagon, { key: `hexagon-${Math.random().toString(36).slice(2, 9)}` })));
+                }
+            });
+        };
+
+        window.addEventListener('resize', onResize);
+        onResize();
+
+        return () => {
+            window.removeEventListener('resize', onResize);
+        };
     }, []);
 
     return <article className="hero-wrapper">
         <div className={`hero-back`}>
             <div className="hexagon-grid">
-                {hexagons.map((hexagon, idx) => cloneElement(hexagon, { key: `hexagon-${idx}` }))}
+                {hexagons}
             </div>
         </div>
-        {/*<div className="hero bg-green">*/}
-        {/*    <h1>Jocelyn Faihy</h1>*/}
-        {/*    <h2>{main.translate('Web developer (fullstack)', {}, 'hero')}</h2>*/}
-        {/*    <blockquote>*/}
-        {/*        Le code aussi bien visuel que structurel.*/}
-        {/*    </blockquote>*/}
-        {/*    <footer>*/}
-        {/*        <span className="fab fa-github fa-2x fa-fw" />*/}
-        {/*        <span className="fab fa-linkedin fa-2x fa-fw" />*/}
-        {/*    </footer>*/}
-        {/*</div>*/}
+        <div className="hero bg-green">
+            <h1>Jocelyn Faihy</h1>
+            <h2>{main.translate('Web developer (fullstack)', {}, 'hero')}</h2>
+            <blockquote>
+                {main.translate('Le code aussi bien visuel que structurel.', {}, 'hero')}
+            </blockquote>
+            <footer>
+                <span className="fab fa-github fa-2x fa-fw" />
+                <span className="fab fa-linkedin fa-2x fa-fw" />
+            </footer>
+        </div>
     </article>;
 }
 
@@ -105,8 +143,8 @@ const getDelay = (): number => Math.floor(Math.random() * (MAX_DELAY - MIN_DELAY
 
 function Hexagon(props: HexagonProps) {
     const [effect, setEffect] = useState<string>(EFFECTS[0]);
-    const [duration, setDuration] = useState<number>(getDuration());
-    const [delay, setDelay] = useState<number>(getDelay());
+    const [duration, setDuration] = useState<number>(0);
+    const [delay, setDelay] = useState<number>(0);
 
     useEffect(() => {
         let timeout: number;
@@ -123,7 +161,10 @@ function Hexagon(props: HexagonProps) {
             }, delay);
         };
 
+        const delay = getDelay();
+        setDelay(delay);
         refresh(delay);
+
         return () => {
             window.clearTimeout(timeout);
         }
