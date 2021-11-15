@@ -3,6 +3,12 @@ $history-cell-width: 2.5em;
 $history-cell-height: 2em;
 $history-cell-header: 1.5em;
 
+.block-tlt {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .tlt {
   width: 100%;
   display: flex;
@@ -19,6 +25,7 @@ $history-cell-header: 1.5em;
   }
 
   &-title {
+    margin-bottom: 4rem;
     text-align: center;
   }
 

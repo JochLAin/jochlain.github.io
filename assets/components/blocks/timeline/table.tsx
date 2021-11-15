@@ -5,7 +5,7 @@ import useMain from "../../../hooks/useMain";
 export default function TimelineTable() {
     const main = useMain();
 
-    return <article className="block block-tlt">
+    return <article id="timeline" className="block block-tlt">
         <h3 className="tlt-title">{main.translate('Graduations && Experiences', {}, 'timeline')}</h3>
         <div className="tlt">
             <TimelineTableGraph />

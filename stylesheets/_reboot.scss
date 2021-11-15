@@ -60,9 +60,10 @@ blockquote {
   font-family: 'Caveat', cursive;
   font-size: 2rem;
   padding-left: 1rem;
-  border-left: 5px solid #dee2e6;
+  border-left: 5px solid #adb5bd;
 }
 
 .block {
-  height: 100vh;
+  position: relative;
+  min-height: 100vh;
 }

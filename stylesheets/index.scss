@@ -1,7 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat&family=Stick+No+Bills:wght@300;500;600&display=swap');
 
 @import "./reboot";
+
+@import "./components/adventure";
+@import "./components/hexagon";
+
 @import "./components/blocks/hero";
 @import "./components/blocks/timeline/table";
 @import "./components/blocks/footer";
+
 @import "./utility";
