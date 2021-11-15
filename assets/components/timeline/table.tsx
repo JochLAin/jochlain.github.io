@@ -1,21 +1,21 @@
 import React from "react";
-import { MONTHES } from "../../constant";
+import { EXPERIENCES, MONTHES } from "../../constant";
 import useMain from "../../hooks/useMain";
-import { TimelineTableProps } from "../../types/props";
+import {date} from "../../utils/translate";
 
-export default function TimelineTable(props: TimelineTableProps) {
+export default function TimelineTable() {
     const main = useMain();
 
-    return <article className="tlt-wrapper">
+    return <article className="block block-tlt">
         <h3 className="tlt-title">{main.translate('Graduations && Experiences', {}, 'timeline')}</h3>
         <div className="tlt">
-            <TimelineTableGraph {...props} />
-            <TimelineTableLegend {...props} />
+            <TimelineTableGraph />
+            <TimelineTableLegend />
         </div>
     </article>;
 }
 
-export function TimelineTableGraph(props: TimelineTableProps) {
+export function TimelineTableGraph() {
     const main = useMain();
     const now = new Date();
 
@@ -37,7 +37,7 @@ export function TimelineTableGraph(props: TimelineTableProps) {
                     return <div
                         key={`month-${month.toLowerCase()}`}
                         className="tlt-graph-month"
-                        title={main.translate(month)}
+                        title={main.translate(month, {}, 'timeline')}
                     />;
                 })}
             </header>
@@ -48,15 +48,15 @@ export function TimelineTableGraph(props: TimelineTableProps) {
                         {MONTHES.map((label, x) => {
                             const month = x + 1;
                             const date = new Date(year, month);
-                            const experience = props.experiences.find(experience => {
+                            const experience = EXPERIENCES.find(experience => {
                                 return !(experience.kind === 'grade' && [7, 8].includes(date.getMonth()))
                                     && date.getTime() >= experience.start.getTime()
                                     && date.getTime() <= experience.end.getTime();
                             });
 
                             let color = experience?.color || '#607d8b';
-                            if (date.getTime() < props.experiences[0].start.getTime()) color = '#f8f9fa';
-                            if (date.getTime() > props.experiences[props.experiences.length -1].end.getTime()) color = '#f8f9fa';
+                            if (date.getTime() < EXPERIENCES[0].start.getTime()) color = '#e9ecef';
+                            if (date.getTime() > EXPERIENCES[EXPERIENCES.length -1].end.getTime()) color = '#e9ecef';
 
                             return <section key={`cell-${year}-${month}`} className="tlt-cell" style={{ color }}>
                                 <span className="fa-stack">
@@ -103,20 +103,12 @@ export function TimelineTableGraphLegend() {
     </footer>;
 }
 
-export function TimelineTableLegend(props: TimelineTableProps) {
+export function TimelineTableLegend() {
     const main = useMain();
 
     return <ul className="tlt-legend fa-ul">
-        {props.experiences.map((exp, idx) => {
-            // const start = main.locale === 'fr'
-            //     ? `${String(exp.start.getMonth()).padStart(2, '0')}/${String(exp.start.getFullYear())}`
-            //     : `${String(exp.start.getFullYear())}/${String(exp.start.getMonth()).padStart(2, '0')}`
-            // ;
-            // const end = main.locale === 'fr'
-            //     ? `${String(exp.end.getMonth()).padStart(2, '0')}/${String(exp.end.getFullYear())}`
-            //     : `${String(exp.end.getFullYear())}/${String(exp.end.getMonth()).padStart(2, '0')}`
-            // ;
-            // const title = `${start} → ${end}`;
+        {EXPERIENCES.map((exp, idx) => {
+            // const title = `${date(exp.start, 'yyyy-mm')} → ${date(exp.end, 'yyyy-mm')}`;
 
             return <li key={`exp-${idx}`}>
                 <span className="fa-li" style={{ color: exp.color }}><span className="fas fa-square" /></span>

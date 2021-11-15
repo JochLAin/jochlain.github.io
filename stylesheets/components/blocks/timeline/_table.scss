@@ -1,6 +1,7 @@
 $history-header-height: 6em;
 $history-cell-width: 2.5em;
 $history-cell-height: 2em;
+$history-cell-header: 1.5em;
 
 .tlt {
   width: 100%;
@@ -34,18 +35,19 @@ $history-cell-height: 2em;
     &-ordinate {
       display: flex;
       flex-direction: column;
-      padding: $history-cell-height .5em 0;
+      padding: $history-cell-header .5em 0;
     }
 
     &-year {
       display: flex;
       align-items: center;
       height: $history-cell-height;
+      line-height: $history-cell-height;
     }
     &-month {
       position: relative;
       width: $history-cell-width;
-      height: $history-cell-height;
+      height: $history-cell-header;
 
       &::before {
         position: absolute;

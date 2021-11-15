@@ -1,0 +1,10 @@
+@import "../../variables";
+@import "../hexagon";
+
+@include hexagon-grid(1, 20);
+
+.block-hexagons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

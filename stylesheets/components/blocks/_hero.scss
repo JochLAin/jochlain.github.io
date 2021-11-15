@@ -1,0 +1,64 @@
+@use "sass:math";
+
+.block-hero {
+  overflow: hidden;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+
+  blockquote {
+    margin: 2rem 0;
+    padding: 1rem;
+    font-size: 1.5rem;
+    border-left-color: var(--body-yiq-alpha);
+    border-left-style: solid;
+    border-left-width: 5px;
+  }
+
+  &-back {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex: 1 0 auto;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-front {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    height: 100%;
+    width: 45%;
+    background: rgba(#F8F9FA, .9);
+    z-index: 10;
+
+    &--slash {
+      position: absolute;
+      bottom: 0;
+      right: 100%;
+      width: 30%;
+      height: 150%;
+      overflow: hidden;
+
+      &::after {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(#F8F9FA, .9);
+        transform: rotate(8deg);
+        transform-origin: bottom left;
+        box-shadow: -1px -1px 10px -2px rgba(#000, .5);
+        content: '';
+      }
+    }
+  }
+}

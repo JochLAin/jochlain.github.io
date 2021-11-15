@@ -76,10 +76,30 @@ $hexagon-padding-y: calc(#{math.div($hexagon-border-height, 2)} + #{math.div($he
 
   &-grid {
     box-sizing: border-box;
+    position: relative;
     display: flex;
-    align-items: center;
     flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    height: 100%;
     padding: $hexagon-padding-y 0;
+    overflow: hidden;
+
+    &:empty {
+      justify-content: center;
+    }
+
+    &--loader {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #FFF;
+      color: #333;
+      font-size: 5rem;
+      z-index: 50;
+    }
   }
 
   > * {
@@ -134,11 +154,11 @@ $hexagon-padding-y: calc(#{math.div($hexagon-border-height, 2)} + #{math.div($he
 @keyframes hexagon-rotate {
   25% {
     transform: rotate(0deg);
-    z-index: 100;
+    z-index: 1;
   }
   75% {
     transform: rotate(360deg);
-    z-index: 100;
+    z-index: 1;
   }
   75.00001% {
     transform: rotate(0deg);
@@ -148,26 +168,26 @@ $hexagon-padding-y: calc(#{math.div($hexagon-border-height, 2)} + #{math.div($he
 @keyframes hexagon-scale {
   25% {
     transform: scale(1);
-    z-index: 250;
+    z-index: 2;
   }
   50% {
     transform: scale(1.45);
-    z-index: 250;
+    z-index: 2;
   }
   75% {
     transform: scale(1);
-    z-index: 250;
+    z-index: 2;
   }
 }
 
 @keyframes hexagon-turn {
   25% {
     transform: rotateY(0deg);
-    z-index: 100;
+    z-index: 1;
   }
   75% {
     transform: rotateY(360deg);
-    z-index: 100;
+    z-index: 1;
   }
   75.00001% {
     transform: rotateY(0deg);
