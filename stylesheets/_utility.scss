@@ -66,6 +66,15 @@
   color: $color-gray-600;
 }
 
+@each $name, $value in $sizes {
+  .h-#{$name} {
+    height: $value;
+  }
+  .w-#{$name} {
+    height: $value;
+  }
+}
+
 .fade {
   transition: opacity .15s linear;
   &:not(.show) {

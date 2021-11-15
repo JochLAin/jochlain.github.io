@@ -1,5 +1,5 @@
 import React from "react";
-import useMain from "../hooks/useMain";
+import useMain from "../../hooks/useMain";
 
 export default function Hero() {
     const main = useMain();

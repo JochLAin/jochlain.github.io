@@ -79,11 +79,8 @@ $hexagon-padding-y: calc(#{math.div($hexagon-border-height, 2)} + #{math.div($he
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
     width: 100%;
-    height: 100%;
     padding: $hexagon-padding-y 0;
-    overflow: hidden;
 
     &:empty {
       justify-content: center;

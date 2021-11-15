@@ -1,5 +1,9 @@
 @import "./variables";
 
+* {
+  box-sizing: border-box;
+}
+
 html, body, #__next {
   box-sizing: border-box;
   min-width: 100%;
@@ -61,8 +65,4 @@ blockquote {
 
 .block {
   height: 100vh;
-
-  &:last-of-type {
-    height: calc(100vh - #{$footer-height});
-  }
 }
