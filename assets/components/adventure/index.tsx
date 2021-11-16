@@ -1,65 +1,56 @@
-import React, { createRef, useMemo } from "react";
-import * as THREE from "three";
-import {GLTF, GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
-import { useThree } from "../../hooks/useThree";
+import React, { useRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { useGLTF } from "@react-three/drei";
+
+useGLTF.preload('/models/low_poly_cloud/scene.gltf');
+// const CLOUDS = Array(10).fill(0).map(() => [
+//     Math.random() * 500,
+//     Math.random() * 500,
+//     -300
+// ]);
+
+// Limit x [;385]
+
+const CLOUDS = [
+    [-300, -100, -300],
+    [385, -50, -300],
+];
 
 export default function Adventure() {
-    const ref_canvas = createRef<HTMLCanvasElement>();
-    useThree(ref_canvas, (scene: THREE.Scene) => {
-        const mixers: any[] = [];
-        const loader = new GLTFLoader();
-        const clock = new THREE.Clock();
+    return <Canvas>
+        <ambientLight />
+        <pointLight position={[10, 10, 10]} />
+        <React.Suspense fallback={null}>
+            <Clouds />
+        </React.Suspense>
+    </Canvas>;
+}
 
-        const load = (url: string): Promise<THREE.Object3D> => new Promise((resolve) => {
-            loader.load(url, (gltf: GLTF) => {
-                const model = gltf.scene.children[0];
-                const animation = gltf.animations[0];
-                if (animation) {
-                    const mixer = new THREE.AnimationMixer(model);
-                    const action = mixer.clipAction(animation);
-                    mixers.push(mixer);
-                    action.play();
-                }
+function Clouds() {
+    const { scene } = useGLTF('/models/low_poly_cloud/scene.gltf');
 
-                resolve(model);
-            });
-        });
+    return <>
+        {CLOUDS.map((position, idx) => {
+            return <Cloud
+                key={`cloud-${idx}`}
+                scene={scene.clone()}
+                position={position}
+            />;
+        })}
+    </>;
+}
 
-        {
-            // const textureLoader = new THREE.TextureLoader();
-            // scene.background = textureLoader.load('https://threejsfundamentals.org/threejs/resources/images/daikanyama.jpg');
-        }
-        {
-            const light = new THREE.DirectionalLight(0xFFFFFF, 1);
-            light.position.set(-1, 2, 4);
-            scene.add(light);
-        }
+function Cloud(props) {
+    const ref_cloud = useRef();
 
-        load('/models/low_poly_cloud/scene.gltf').then((model: THREE.Object3D) => {
-            model.scale.set(0.005, 0.005, 0.005);
-            const positions = [
-                new THREE.Vector3(-0.5, -0.5, 0),
-                new THREE.Vector3(0, -0.5, 0),
-                new THREE.Vector3(0.5, -0.5, 0),
-                new THREE.Vector3(-0.5, 0, 0),
-                new THREE.Vector3(0, 0, 0),
-                new THREE.Vector3(0.5, 0, 0),
-                new THREE.Vector3(-0.5, 0.5, 0),
-                new THREE.Vector3(0, 0.5, 0),
-                new THREE.Vector3(0.5, 0.5, 0),
-            ];
-            for (let idx = 0; idx < positions.length; idx++) {
-                const clone = model.clone();
-                clone.position.copy(positions[idx]);
-                scene.add(clone);
-            }
-        });
+    // useFrame(() => {
+    //     if (ref_cloud.current) {
+    //         ref_cloud.current.position.x -= 1;
+    //         if (ref_cloud.current.position.x < -600) {
+    //             ref_cloud.current.position.x = 600;
+    //         }
+    //     }
+    // });
 
-        return () => {
-            const delta = clock.getDelta();
-            mixers.forEach(mixer => mixer.update(delta));
-        };
-    });
-
-    return <canvas ref={ref_canvas} className="adventure" />;
+    return <primitive ref={ref_cloud} object={props.scene} position={props.position} />;
 }
