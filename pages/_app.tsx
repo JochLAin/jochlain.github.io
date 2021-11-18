@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import type { AppProps } from 'next/app'
 import Head from "next/head";
-import MainContext from "../assets/context";
+import MainContext from "../assets/contexts";
 import translate from "../assets/utils/translate";
 import "../stylesheets/index.scss";
 

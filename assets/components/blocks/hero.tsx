@@ -1,5 +1,5 @@
 import React from "react";
-import useMain from "../../hooks/useMain";
+import useMain from "../../hooks";
 import Adventure from "../adventure";
 
 export default function Hero() {

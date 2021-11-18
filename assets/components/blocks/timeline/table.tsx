@@ -1,6 +1,6 @@
 import React from "react";
 import { EXPERIENCES, MONTHES } from "../../../constant";
-import useMain from "../../../hooks/useMain";
+import useMain from "../../../hooks";
 
 export default function TimelineTable() {
     const main = useMain();

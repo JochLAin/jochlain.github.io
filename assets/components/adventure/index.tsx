@@ -102,7 +102,12 @@ function Clouds() {
     </>;
 }
 
-function Cloud(props) {
+interface CloudProps {
+    scene: THREE.Group,
+    position: number[],
+}
+
+function Cloud(props: CloudProps) {
     const ref_cloud = useRef();
 
     useFrame(() => {
