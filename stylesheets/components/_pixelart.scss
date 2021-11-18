@@ -1,0 +1,45 @@
+#pixel-art {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  padding: 1rem 4rem;
+  color: #bbb;
+  background-color: #585858;
+
+  h1 {
+    margin: 0;
+    font-family: 'VT323', monospace;
+    font-size: 3rem;
+    text-transform: uppercase;
+  }
+
+  #wrapper {
+    display: grid;
+    flex-grow: 1;
+    grid-template-columns: 1fr 1fr 12rem;
+    grid-template-rows: 6rem 6rem 1fr;
+    grid-template-areas:
+      "frame frame preview"
+      "layer layer preview"
+      "tool viewer setting";
+
+    &-frame {
+      grid-area: frame;
+    }
+    &-layer {
+      grid-area: layer;
+    }
+    &-tool {
+      grid-area: tool;
+    }
+    &-viewer {
+      grid-area: viewer;
+    }
+    &-preview {
+      grid-area: preview;
+    }
+    &-setting {
+      grid-area: setting;
+    }
+  }
+}

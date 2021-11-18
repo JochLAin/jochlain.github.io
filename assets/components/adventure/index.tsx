@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
+import * as THREE from "three";
 
 useGLTF.preload('/models/low_poly_cloud/scene.gltf');
 // const CLOUDS = Array(10).fill(0).map(() => [
@@ -40,7 +41,12 @@ function Clouds() {
     </>;
 }
 
-function Cloud(props) {
+interface CloudProps {
+    scene: THREE.Group,
+    position: number[],
+}
+
+function Cloud(props: CloudProps) {
     const ref_cloud = useRef();
 
     // useFrame(() => {
