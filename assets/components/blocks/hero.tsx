@@ -6,11 +6,9 @@ export default function Hero() {
     const main = useMain();
 
     return <>
-        <div className="h-100vh">
-            <Adventure />
-        </div>
         <article id="presentation" className="block block-hero">
             <div className="hero-back">
+                <Adventure />
             </div>
             <div className="hero-front">
                 <h1>Jocelyn Faihy</h1>
