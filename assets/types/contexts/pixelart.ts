@@ -1,18 +1,15 @@
-export type Layer = string[];
-export type Frame = Layer[];
-
 export interface Store {
     height: number,
     width: number,
     color: string,
     tool: string,
-    frame_idx: number,
-    frame: Frame,
-    layer_idx: number,
-    layer: Layer,
-    palette: string[],
     history: [],
-    data: Frame[],
+    frame_idx: number,
+    frame: (string|undefined)[][],
+    layer_idx: number,
+    layer: (string|undefined)[],
+    palette: string[],
+    data: (string|undefined)[][][],
 
     setHeight?: (height: number) => void,
     setWidth?: (width: number) => void,
@@ -22,5 +19,5 @@ export interface Store {
     setLayer?: (layer_idx: number) => void,
     setHistory?: (history: []) => void,
     setPalette?: (palette: string[]) => void,
-    setData?: (data: Frame[]) => void,
+    setData?: (data: (string|undefined)[][][]) => void,
 }
