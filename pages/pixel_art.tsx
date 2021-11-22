@@ -1,11 +1,32 @@
-import React, {createRef, HTMLProps, RefObject, useEffect, useMemo, useState} from "react";
+import React, { HTMLProps, RefObject, createRef, useEffect, useMemo, useState } from "react";
+import Classnames from "classnames";
 import { DEFAULT_COLOR, DEFAULT_DATA, DEFAULT_HEIGHT, DEFAULT_PALETTE, DEFAULT_TOOL, DEFAULT_WIDTH } from "../assets/constants/pixelart";
 import PixelArtContext from "../assets/contexts/pixelart";
 import { Store } from "../assets/types/contexts/pixelart";
-import {usePixelArt} from "../assets/hooks";
-import Classnames from "classnames";
 
-function useDraw(ref_canvas: RefObject<HTMLCanvasElement>, width: number, height: number, callback: (context: CanvasRenderingContext2D, width: number, height: number) => void, dependencies: any[]) {
+function useDraw(ref_canvas: RefObject<HTMLCanvasElement>, chart_width: number, chart_height: number, callback: (context: CanvasRenderingContext2D, width: number, height: number) => void, dependencies: any[]) {
+    useEffect(() => {
+        const onResize = () => {
+            if (!ref_canvas.current) return;
+            const { height, width } = ref_canvas.current.getBoundingClientRect();
+            ref_canvas.current.style['aspect-ratio'] = `${chart_width} / ${chart_height}`;
+            if (width > height) {
+                ref_canvas.current.style.height = `${height}px`;
+                ref_canvas.current.style.width = 'auto';
+            } else {
+                ref_canvas.current.style.height = 'auto';
+                ref_canvas.current.style.width = `${width}px`;
+            }
+        };
+
+        window.addEventListener('resize', onResize);
+        onResize();
+
+        return () => {
+            window.removeEventListener('resize', onResize);
+        }
+    }, [ref_canvas]);
+
     useEffect(() => {
         if (!ref_canvas.current) return;
         const canvas = ref_canvas.current;
@@ -13,11 +34,11 @@ function useDraw(ref_canvas: RefObject<HTMLCanvasElement>, width: number, height
         if (!context) return;
         context.clearRect(0, 0, canvas.width, canvas.height);
 
-        const pixel_height = Math.floor(canvas.height / height);
-        const pixel_width = Math.floor(canvas.width / width);
+        const pixel_height = Math.floor(canvas.height / chart_height);
+        const pixel_width = Math.floor(canvas.width / chart_width);
 
         callback(context, pixel_width, pixel_height);
-    }, [ref_canvas, height, width, ...dependencies]);
+    }, [ref_canvas, chart_height, chart_width, ...dependencies]);
 }
 
 export default function PixelArt() {
@@ -54,11 +75,19 @@ export default function PixelArt() {
                     <button className="btn">+</button>
                     <div id="container-frame">
                         {data.map((frame, idx) => {
-                            return <FrameCanvas
+                            const className = Classnames(idx === frame_idx && 'active');
+
+                            return <CanvasFrame
                                 key={`frame-${idx}`}
+                                className={className}
                                 layers={frame}
                                 height={height}
                                 width={width}
+                                onClick={(event) => {
+                                    event.preventDefault();
+                                    setFrame(idx);
+                                    setLayer(data[idx].length - 1);
+                                }}
                             />;
                         })}
                     </div>
@@ -72,56 +101,61 @@ export default function PixelArt() {
                         {frame.map((layer, idx) => {
                             const className = Classnames(idx === layer_idx && 'active');
 
-                            return <LayerCanvas
+                            return <CanvasLayer
                                 key={`layer-${idx}`}
                                 className={className}
                                 pixels={layer}
-                                height={store.height}
-                                width={store.width}
+                                height={height}
+                                width={width}
+                                onClick={(event) => {
+                                    event.preventDefault();
+                                    setLayer(idx);
+                                }}
                             />;
                         })}
                     </div>
                 </section>
-                <Preview />
+                <section id="wrapper-preview">
+                    <CanvasFrame
+                        layers={data[0]}
+                        height={height}
+                        width={width}
+                    />
+                </section>
+                <section id="wrapper-editor">
+                    <CanvasEditor
+                        height={height}
+                        width={width}
+                    />
+                </section>
                 <Tools />
                 <Settings />
-                <Viewer />
             </article>
         </main>
     </PixelArtContext.Provider>;
 }
 
-function FrameCanvas({ layers, height, width, ...props }: { layers: (string|undefined)[][], height: number, width: number } & HTMLProps<HTMLCanvasElement>) {
+function CanvasEditor({ layers, height, width, ...props }: { layers: (string|undefined)[][], height: number, width: number } & HTMLProps<HTMLCanvasElement>) {
     const ref_canvas = createRef<HTMLCanvasElement>();
 
-    useEffect(() => {
-        const onResize = () => {
-            if (!ref_canvas.current) return;
-            const { height, width } = ref_canvas.current.getBoundingClientRect();
-            if (width > height) {
-                ref_canvas.current.style.height = `${height}px`;
-                ref_canvas.current.style.width = 'auto';
-            } else {
-                ref_canvas.current.style.height = 'auto';
-                ref_canvas.current.style.width = `${width}px`;
-            }
-        };
+    useDraw(ref_canvas, width, height, (context, pixel_width, pixel_height) => {
 
-        window.addEventListener('resize', onResize);
-        onResize();
+    }, []);
 
-        return () => {
-            window.removeEventListener('resize', onResize);
-        }
-    }, [ref_canvas]);
+    return <canvas ref={ref_canvas} className="pixelart-canvas" />;
+}
+
+function CanvasFrame({ layers, height, width, ...props }: { layers: (string|undefined)[][], height: number, width: number } & HTMLProps<HTMLCanvasElement>) {
+    const ref_canvas = createRef<HTMLCanvasElement>();
 
     useDraw(ref_canvas, width, height, (context, pixel_width, pixel_height) => {
-        for (let idx = 0; idx < layers.length; idx++) {
-            for (let index = 0; index < layers[idx].length; idx++) {
-                if (!layers[idx][index]) continue;
+        for (let index = 0; index < layers.length; index++) {
+            for (let idx = 0; idx < layers[index].length; idx++) {
+                const color = layers[index][idx];
+                if (!color) continue;
                 const y = Math.floor(idx / width) * pixel_height;
                 const x = (idx % width) * pixel_width;
-                context.fillStyle = layers[idx][index];
+                context.fillStyle = color;
                 context.fillRect(x, y, pixel_width, pixel_height);
             }
         }
@@ -131,87 +165,32 @@ function FrameCanvas({ layers, height, width, ...props }: { layers: (string|unde
         ref={ref_canvas}
         {...props}
         className={Classnames('pixelart-canvas', props.className)}
-        style={{ ...props.style, aspectRatio: `${width} / ${height}` }}
     />;
 }
 
-function LayerCanvas({ pixels, height, width, ...props }: { pixels: (string|undefined)[], height: number, width: number } & HTMLProps<HTMLCanvasElement>) {
+function CanvasLayer({ pixels, height, width, ...props }: { pixels: (string|undefined)[], height: number, width: number } & HTMLProps<HTMLCanvasElement>) {
     const ref_canvas = createRef<HTMLCanvasElement>();
 
     useDraw(ref_canvas, width, height, (context, pixel_width, pixel_height) => {
-        for (let idx = 0; idx < layers.length; idx++) {
-            for (let index = 0; index < layers[idx].length; idx++) {
-                if (!layers[idx][index]) continue;
-                const y = Math.floor(idx / width) * pixel_height;
-                const x = (idx % width) * pixel_width;
-                context.fillStyle = layers[idx][index];
-                context.fillRect(x, y, pixel_width, pixel_height);
-            }
-        }
-    }, [layers]);
-
-    useEffect(() => {
-        const onResize = () => {
-            if (!ref_canvas.current) return;
-            const { height, width } = ref_canvas.current.getBoundingClientRect();
-            if (width > height) {
-                ref_canvas.current.style.height = `${height}px`;
-                ref_canvas.current.style.width = 'auto';
-            } else {
-                ref_canvas.current.style.height = 'auto';
-                ref_canvas.current.style.width = `${width}px`;
-            }
-        };
-
-        window.addEventListener('resize', onResize);
-        onResize();
-
-        return () => {
-            window.removeEventListener('resize', onResize);
-        }
-    }, [ref_canvas]);
-
-    useEffect(() => {
-        if (!ref_canvas.current) return;
-        const canvas = ref_canvas.current;
-        const context = canvas.getContext('2d');
-        if (!context) return;
-        context.clearRect(0, 0, canvas.width, canvas.height);
-
-        const pixel_height = Math.floor(canvas.height / height);
-        const pixel_width = Math.floor(canvas.width / width);
-
         for (let idx = 0; idx < pixels.length; idx++) {
-            if (!pixels[idx]) continue;
+            const color = pixels[idx];
+            if (!color) continue;
             const y = Math.floor(idx / width) * pixel_height;
             const x = (idx % width) * pixel_width;
-            context.fillStyle = pixels[idx];
+            context.fillStyle = color;
             context.fillRect(x, y, pixel_width, pixel_height);
         }
-    }, [ref_canvas, pixels, height, width]);
+    }, [pixels]);
 
     return <canvas
         ref={ref_canvas}
         {...props}
         className={Classnames('pixelart-canvas', props.className)}
-        style={{ ...props.style, aspectRatio: `${width} / ${height}` }}
     />;
 }
 
 function Tools() {
     return <section id="wrapper-tool" />;
-}
-
-function Viewer() {
-    return <section id="wrapper-viewer" />;
-}
-
-function Preview() {
-    const store = usePixelArt();
-
-    return <section id="wrapper-preview">
-        <LayerCanvas pixels={store.data[0][0]} height={store.height} width={store.width} />
-    </section>;
 }
 
 function Settings() {
