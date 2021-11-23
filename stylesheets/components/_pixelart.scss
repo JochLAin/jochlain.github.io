@@ -97,10 +97,15 @@ $pixelart-color-text: #BBB;
       background: green;
     }
 
-    &-viewer {
+    &-editor {
+      display: grid;
+      place-items: center;
       grid-column: 2;
       grid-row: 3;
-      background: orange;
+
+      .pixelart-canvas {
+        background: $pixelart-color-major;
+      }
     }
 
     &-preview {
