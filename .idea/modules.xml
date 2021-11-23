@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../packages/color/.idea/color.iml" filepath="$PROJECT_DIR$/../packages/color/.idea/color.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/jochlain.localhost.iml" filepath="$PROJECT_DIR$/.idea/jochlain.localhost.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../packages/logger/.idea/logger.iml" filepath="$PROJECT_DIR$/../packages/logger/.idea/logger.iml" />
     </modules>
   </component>
 </project>
