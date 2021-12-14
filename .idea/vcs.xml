@@ -3,5 +3,6 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../packages/logger" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../pixelart.localhost" vcs="Git" />
   </component>
 </project>

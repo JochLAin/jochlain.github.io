@@ -6,5 +6,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="color" />
     <orderEntry type="module" module-name="logger" />
+    <orderEntry type="module" module-name="pixelart.localhost" />
   </component>
 </module>
