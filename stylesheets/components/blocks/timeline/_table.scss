@@ -3,112 +3,99 @@ $history-cell-width: 2.5em;
 $history-cell-height: 2em;
 $history-cell-header: 1.5em;
 
-.block-tlt {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 .tlt {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+}
 
-  &-wrapper {
-    width: 100%;
+.tlt-graph {
+  display: flex;
+  font-size: 10px;
+  margin-top: 4em;
+  margin-right: 2em;
+
+  &-abscissa {
+    align-items: flex-end;
+    display: flex;
+  }
+  &-ordinate {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
+    padding: $history-cell-header .5em 0;
   }
 
-  &-title {
-    margin-bottom: 4rem;
-    text-align: center;
-  }
-
-  &-graph {
+  &-year {
     display: flex;
-    font-size: 10px;
-    margin-top: 4em;
-    margin-right: 2em;
+    align-items: center;
+    height: $history-cell-height;
+    line-height: $history-cell-height;
+  }
+  &-month {
+    position: relative;
+    width: $history-cell-width;
+    height: $history-cell-header;
 
-    &-abscissa {
-      align-items: flex-end;
-      display: flex;
-    }
-    &-ordinate {
-      display: flex;
-      flex-direction: column;
-      padding: $history-cell-header .5em 0;
-    }
-
-    &-year {
-      display: flex;
-      align-items: center;
-      height: $history-cell-height;
-      line-height: $history-cell-height;
-    }
-    &-month {
-      position: relative;
-      width: $history-cell-width;
-      height: $history-cell-header;
-
-      &::before {
-        position: absolute;
-        left: 70%;
-        content: attr(title);
-        transform: rotate(-60deg);
-        transform-origin: bottom left;
-      }
-    }
-
-    &-table {
-      display: flex;
-      flex-direction: column;
-    }
-    &-line {
-      display: flex;
-    }
-    &-cell {
-      align-items: center;
-      display: flex;
-      justify-content: center;
-    }
-    &-legend {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 1em;
+    &::before {
+      position: absolute;
+      left: 70%;
+      content: attr(title);
+      transform: rotate(-60deg);
+      transform-origin: bottom left;
     }
   }
 
+  &-table {
+    display: flex;
+    flex-direction: column;
+  }
+  &-line {
+    display: flex;
+  }
+  &-cell {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
   &-legend {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1em;
+  }
+}
 
+.tlt-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  hr {
+    border: 1px solid #f8f9fA;
+  }
+}
+
+.tlt-list {
+  padding-left: 3rem;
+  width: 21rem;
+
+  &-item {
+    margin-bottom: 1rem;
+
+    p {
+      margin: 0;
+    }
     hr {
-      border: 1px solid #f8f9fA;
+      margin: .5rem 0;
     }
   }
+}
 
-  &-list {
-    padding-left: 3rem;
-    width: 21rem;
-
-    &-item {
-      margin-bottom: 1rem;
-
-      p {
-        margin: 0;
-      }
-      hr {
-        margin: .5rem 0;
-      }
-    }
+@media (min-width: 35rem) {
+  .tlt-graph {
+    font-size: 16px;
   }
 }
 
@@ -119,11 +106,5 @@ $history-cell-header: 1.5em;
     &-wrapper {
       height: 100vh;
     }
-  }
-}
-
-@media (min-width: 35rem) {
-  .tlt-graph {
-    font-size: 16px;
   }
 }

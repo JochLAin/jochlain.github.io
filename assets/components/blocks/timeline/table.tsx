@@ -3,15 +3,10 @@ import { EXPERIENCES, MONTHES } from "../../../constant";
 import useMain from "../../../hooks";
 
 export default function TimelineTable() {
-    const main = useMain();
-
-    return <article id="timeline" className="block block-tlt">
-        <h3 className="tlt-title">{main.translate('Graduations && Experiences', {}, 'timeline')}</h3>
-        <div className="tlt">
-            <TimelineTableGraph />
-            <TimelineTableLegend />
-        </div>
-    </article>;
+    return <div className="tlt">
+        <TimelineTableGraph />
+        <TimelineTableLegend />
+    </div>;
 }
 
 export function TimelineTableGraph() {
@@ -34,7 +29,7 @@ export function TimelineTableGraph() {
             <header className="tlt-graph-abscissa">
                 {MONTHES.map((month) => {
                     return <div
-                        key={`month-${month.toLowerCase()}`}
+                        key={`tlt-month-${month.toLowerCase()}`}
                         className="tlt-graph-month"
                         title={main.translate(month, {}, 'timeline')}
                     />;
@@ -43,7 +38,7 @@ export function TimelineTableGraph() {
             <div className="tlt-graph-table">
                 {[...Array(now.getFullYear() - 2007)].map((a, y) => {
                     const year = 2008 + y;
-                    return <section key={`year-${year}`} className="tlt-graph-line">
+                    return <section key={`tlt-year-${year}`} className="tlt-graph-line">
                         {MONTHES.map((label, x) => {
                             const month = x + 1;
                             const date = new Date(year, month);
@@ -57,7 +52,7 @@ export function TimelineTableGraph() {
                             if (date.getTime() < EXPERIENCES[0].start.getTime()) color = '#e9ecef';
                             if (date.getTime() > EXPERIENCES[EXPERIENCES.length -1].end.getTime()) color = '#e9ecef';
 
-                            return <section key={`cell-${year}-${month}`} className="tlt-cell" style={{ color }}>
+                            return <section key={`tlt-cell-${year}-${month}`} className="tlt-cell" style={{ color }}>
                                 <span className="fa-stack">
                                     {experience && (
                                         <span className={`fad fa-${experience.icon} fa-stack-1x fa-1x fa-fw`} />
@@ -109,7 +104,7 @@ export function TimelineTableLegend() {
         {EXPERIENCES.map((exp, idx) => {
             // const title = `${date(exp.start, 'yyyy-mm')} → ${date(exp.end, 'yyyy-mm')}`;
 
-            return <li key={`exp-${idx}`}>
+            return <li key={`tlt-exp-${idx}`}>
                 <span className="fa-li" style={{ color: exp.color }}><span className="fas fa-square" /></span>
                 {exp.grade && (
                     <p>

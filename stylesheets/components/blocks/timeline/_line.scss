@@ -1,0 +1,74 @@
+.tll {
+  display: flex;
+  justify-content: center;
+
+  &-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 2rem;
+    padding-left: 2rem;
+    border-left: 6px solid #e9ecef;
+  }
+
+  &-exp {
+    position: relative;
+    min-height: 5rem;
+    background-color: #e9ecef;
+  }
+
+  &-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 3rem;
+    color: #e9ecef;
+    font-size: 2rem;
+    border-radius: 50%;
+    transform: translateX(calc(-50% - 2rem - 3px));
+  }
+
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 3rem;
+    padding-left: .5rem;
+    gap: 10px;
+  }
+
+  &-date {
+    display: inline-block;
+
+    &.tll-end::before {
+      content: '➦';
+      padding-right: 10px;
+    }
+  }
+
+  &-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: .75rem;
+  }
+
+  &-badge {
+    display: inline-block;
+    padding: .375rem .5rem;
+    border-radius: .25rem;
+    color: #e9ecef;
+  }
+}
+
+@media (min-width: 50rem) {
+  .tll {
+    &-wrapper {
+      width: 50rem;
+    }
+  }
+}

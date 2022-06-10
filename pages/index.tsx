@@ -2,16 +2,16 @@ import React from 'react';
 import Head from "next/head";
 import Footer from "../assets/components/blocks/footer";
 import Hero from "../assets/components/blocks/hero";
-import TimelineTable from "../assets/components/blocks/timeline/table";
+import Timeline from "../assets/components/blocks/timeline";
 
 export default function Index() {
     return <>
         <Head>
             <title>Jochlain - Welcome</title>
         </Head>
-        <main id="main">
+        <main id="main" className="block-wrapper">
             <Hero />
-            <TimelineTable />
+            <Timeline />
             <Footer />
         </main>
     </>;

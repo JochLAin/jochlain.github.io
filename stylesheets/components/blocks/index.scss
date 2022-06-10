@@ -1,0 +1,9 @@
+@import "./hero";
+@import "./timeline";
+@import "./footer";
+
+.block-wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  scroll-snap-type: y proximity;
+}
