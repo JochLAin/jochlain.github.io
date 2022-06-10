@@ -51,7 +51,7 @@ function GridGround() {
     const NUM_HORIZONTAL_LINES = 50;
 
     // Determine the size of a grid block (square)
-    const gridBlockSize = SCREEN_HEIGHT / numHorizontalGridLines;
+    const gridBlockSize = SCREEN_HEIGHT / NUM_HORIZONTAL_LINES;
 
     const geometry = new THREE.Geometry();
     geometry.vertices.push(new THREE.Vector3(MIN_X, MAX_Y, 0));
@@ -62,7 +62,7 @@ function GridGround() {
         opacity: 0.2
     });
 
-    for (var c = 0; c <= numHorizontalGridLines; c++) {
+    for (var c = 0; c <= NUM_HORIZONTAL_LINES; c++) {
         var line = new THREE.Line(geometry, material);
         line.position.y = MAX_Y - (c * gridBlockSize);
         this.scene.add(line);
