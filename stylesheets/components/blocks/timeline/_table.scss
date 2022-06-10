@@ -86,6 +86,10 @@ $history-cell-header: 1.5em;
   }
 
   &-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
     hr {
       border: 1px solid #f8f9fA;
     }
