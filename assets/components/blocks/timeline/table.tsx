@@ -100,25 +100,27 @@ export function TimelineTableGraphLegend() {
 export function TimelineTableLegend() {
     const main = useMain();
 
-    return <ul className="tlt-legend fa-ul">
+    return <ul className="tlt-legend">
         {EXPERIENCES.map((exp, idx) => {
             // const title = `${date(exp.start, 'yyyy-mm')} → ${date(exp.end, 'yyyy-mm')}`;
 
             return <li key={`tlt-exp-${idx}`}>
-                <span className="fa-li" style={{ color: exp.color }}><span className="fas fa-square" /></span>
-                {exp.grade && (
-                    <p>
-                        <i>{main.translate(exp.grade, {}, 'timeline')}</i>
-                        {exp.info && <small title={main.translate(exp.info, {}, 'timeline')} className="fal fa-circle-info fa-fw ms-1 text-muted" />}
-                    </p>
-                )}
-                {exp.grade && exp.job && <hr />}
-                {exp.job && (
-                    <p>
-                        <b>{main.translate(exp.job, {}, 'timeline')}</b><br />
-                        <small className="text-muted">{exp.company}</small>
-                    </p>
-                )}
+                <span style={{ color: exp.color }}><span className="fas fa-square" /></span>
+                <div>
+                    {exp.grade && (
+                      <p>
+                          <i>{main.translate(exp.grade, {}, 'timeline')}</i>
+                          {exp.info && <small title={main.translate(exp.info, {}, 'timeline')} className="fal fa-circle-info fa-fw ms-1 text-muted" />}
+                      </p>
+                    )}
+                    {exp.grade && exp.job && <hr />}
+                    {exp.job && (
+                      <p>
+                          <b>{main.translate(exp.job, {}, 'timeline')}</b><br />
+                          <small className="text-muted">{exp.company}</small>
+                      </p>
+                    )}
+                </div>
             </li>
         })}
     </ul>

@@ -7,17 +7,16 @@ export default function Timeline() {
   const main = useMain();
   const [type, setType] = useState(false);
 
-  return <article id="timeline" className="block block-timeline">
+  return <article id="timeline" className={`block block-timeline ${type ? 'block-timeline--line' : 'block-timeline--table'}`}>
     <h3 className="timeline-title">
       {main.translate('Graduations && Experiences', {}, 'timeline')}<br />
-      {/*<Switch checked={type} onChange={() => setType(!type)} />*/}
+      <Switch checked={type} onChange={() => setType(!type)} />
     </h3>
     {!type ? (
       <TimelineTable />
     ) : (
       <TimelineLine />
     )}
-
   </article>;
 }
 
@@ -27,9 +26,11 @@ type SwitchProps = {
 };
 
 function Switch(props: SwitchProps) {
-  return <label className="timeline-switch">
-    <input type="checkbox" checked={props.checked} onClick={props.onChange} />
-    <span className="switch-icon far fa-grid fa-fw" />
-    <span className="switch-icon far fa-list-ul fa-fw" />
+  return <label className="switch">
+    <input type="checkbox" className="switch-input" checked={props.checked} onClick={props.onChange} />
+    <span className="switch-choices">
+      <span className="switch-icon far fa-grid fa-fw" />
+      <span className="switch-icon far fa-list-ul fa-fw" />
+    </span>
   </label>
 }

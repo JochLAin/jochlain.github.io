@@ -2,6 +2,7 @@
 
 .block-hero {
   overflow: hidden;
+  height: 200vh;
 }
 
 .hero {
@@ -22,7 +23,8 @@
   &-back {
     position: relative;
     height: 100vh;
-    background-color: #69B0CD;
+    background-color: #0052ff;
+    //background-color: #69B0CD;
 
     pointer-events: none;
     user-select: none;
@@ -73,13 +75,16 @@
   }
 }
 
-@media (min-width: 38em) {
+@media (min-width: 38.5em) {
+  .block-hero {
+    height: 100vh;
+  }
   .hero-front {
     position: absolute;
     top: 0;
     right: 0;
     align-items: flex-start;
-    width: 45%;
+    width: 55%;
     height: 100%;
     text-align: left;
     z-index: 10;
@@ -91,6 +96,9 @@
 }
 
 @media (min-width: 48.75em) {
+  .hero-front {
+    width: 45%;
+  }
   .hero-front--slash::after {
     transform: rotate(-5deg);
   }

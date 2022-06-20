@@ -1,4 +1,7 @@
 .tll {
+  --tll-icon-padding: 1rem;
+  --tll-icon-size: 2rem;
+
   display: flex;
   justify-content: center;
 
@@ -6,14 +9,15 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-left: 2rem;
-    padding-left: 2rem;
+    margin-left: var(--tll-icon-size);
+    padding-left: var(--tll-icon-size);
     border-left: 6px solid #e9ecef;
   }
 
   &-exp {
     position: relative;
-    min-height: 5rem;
+    width: 21rem;
+    max-width: 100%;
     background-color: #e9ecef;
   }
 
@@ -24,21 +28,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 3rem;
-    height: 3rem;
+    width: calc(var(--tll-icon-size) + var(--tll-icon-padding) * 2);
+    height: calc(var(--tll-icon-size) + var(--tll-icon-padding) * 2);
     color: #e9ecef;
-    font-size: 2rem;
+    font-size: var(--tll-icon-size);
     border-radius: 50%;
-    transform: translateX(calc(-50% - 2rem - 3px));
+    transform: translateX(calc(-50% - var(--tll-icon-padding) * 2 - 3px));
   }
 
   &-header {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: flex-start;
-    height: 3rem;
-    padding-left: .5rem;
+    height: calc(var(--tll-icon-size) + var(--tll-icon-padding) * 2);
+    padding: var(--tll-icon-padding);
     gap: 10px;
+    list-style: none;
   }
 
   &-date {
@@ -54,7 +60,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: .75rem;
+    padding: var(--tll-icon-padding);
   }
 
   &-badge {
@@ -62,6 +68,12 @@
     padding: .375rem .5rem;
     border-radius: .25rem;
     color: #e9ecef;
+  }
+}
+
+@media (min-width: 35rem) {
+  .tll {
+    font-size: 16px;
   }
 }
 

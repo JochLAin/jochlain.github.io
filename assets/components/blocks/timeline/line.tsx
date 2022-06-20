@@ -27,12 +27,14 @@ export default function TimelineLine() {
             <span className="tll-badge" style={{ backgroundColor: exp.color || '#607d8b' }}>
               {label}
             </span>
-            {start && (
-              <span className="tll-date tll-start">{start}</span>
-            )}
-            {end && end !== start && (
-              <span className="tll-date tll-end">{end}</span>
-            )}
+            <span>
+              {start && (
+                <span className="tll-date tll-start">{start}</span>
+              )}
+              {end && end !== start && (
+                <span className="tll-date tll-end">{end}</span>
+              )}
+            </span>
           </header>
           <div className="tll-info">
             {exp.grade && (

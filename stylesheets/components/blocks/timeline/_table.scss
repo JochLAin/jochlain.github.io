@@ -9,11 +9,11 @@ $history-cell-header: 1.5em;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  font-size: 10px;
 }
 
 .tlt-graph {
   display: flex;
-  font-size: 10px;
   margin-top: 4em;
   margin-right: 2em;
 
@@ -69,8 +69,26 @@ $history-cell-header: 1.5em;
 
 .tlt-legend {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  flex: 1 0 auto;
+  flex-flow: column wrap;
+  align-content: center;
+  justify-content: center;
+  width: 100%;
+  height: calc(100vh - (7rem + 38.5rem) - 1rem);
+  margin-top: 2rem;
+  gap: 10px 0;
+  font-size: 13px;
+  list-style: none;
+
+  li {
+    display: flex;
+    gap: 5px;
+  }
+
+  p {
+    i { line-height: 1rem; }
+    b { line-height: 1.25rem; }
+  }
 
   hr {
     border: 1px solid #f8f9fA;
@@ -95,6 +113,10 @@ $history-cell-header: 1.5em;
 
 @media (min-width: 35rem) {
   .tlt-graph {
+    font-size: 16px;
+  }
+  .tlt-legend {
+    margin-top: 1rem;
     font-size: 16px;
   }
 }

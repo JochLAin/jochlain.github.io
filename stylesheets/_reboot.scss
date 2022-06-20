@@ -26,7 +26,7 @@ body {
   color: var(--text-body);
   background-color: var(--bg-body);
 
-  &.skin--dark {
+  &.dark {
     --body-bg: #{$color-gray-900};
     --body-text: $color-white;
     --body-yiq-alpha: rgba($color-white, .3);
