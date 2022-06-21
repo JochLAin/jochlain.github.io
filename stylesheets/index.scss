@@ -6,3 +6,10 @@
 @import "./components/hexagon";
 
 @import "./utility";
+
+.icon-text {
+  display: inline-flex;
+  align-items: center;
+  line-height: 2em;
+  gap: 3px;
+}

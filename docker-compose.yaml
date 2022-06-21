@@ -1,8 +1,9 @@
 services:
     app:
-        image: "node:14"
+        image: "node:16"
         container_name: "${APP_NAME}-app"
         volumes: ["./:/home/docker"]
+        environment: ["FA_KIT_AUTH_TOKEN=${FA_KIT_AUTH_TOKEN}"]
         working_dir: "/home/docker"
         ports: ["127.0.0.1:48200:3000"]
         networks: ["proxy"]

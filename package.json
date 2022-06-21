@@ -1,7 +1,7 @@
 {
   "name": "jochlain.github.io",
   "version": "0.0.0",
-  "description": "HTML Editor in React",
+  "description": "My personal website",
   "main": "index.js",
   "private": true,
   "scripts": {
@@ -12,13 +12,20 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@react-three/drei": "^7.22.0",
-    "@react-three/fiber": "^7.0.19",
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/pro-duotone-svg-icons": "^6.1.1",
+    "@fortawesome/pro-light-svg-icons": "^6.1.1",
+    "@fortawesome/pro-regular-svg-icons": "^6.1.1",
+    "@fortawesome/pro-solid-svg-icons": "^6.1.1",
+    "@fortawesome/pro-thin-svg-icons": "^6.1.1",
+    "@fortawesome/react-fontawesome": "^0.1.18",
+    "@react-three/drei": "^9.13.2",
+    "@react-three/fiber": "^8.0.27",
     "classnames": "^2.3.1",
-    "next-transpile-modules": "^9.0.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "three": "^0.134.0"
+    "next": "^12.1.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "three": "^0.141.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.13.0",
@@ -44,12 +51,13 @@
     "@babel/preset-typescript": "^7.15.0",
     "@types/next": "^9.0.0",
     "@types/node": "^16.11.7",
-    "@types/react": "^17.0.27",
-    "@types/react-dom": "^17.0.9",
+    "@types/react": "^18.0.4",
+    "@types/react-dom": "^18.0.5",
     "@types/three": "^0.134.0",
     "@typescript-eslint/parser": "^4.33.0",
+    "babel-plugin-macros": "^3.1.0",
     "intl-messageformat": "^9.9.3",
-    "next": "^11.1.2",
+    "next-transpile-modules": "^9.0.0",
     "sass": "^1.42.1",
     "typescript": "^4.4.3"
   },

@@ -1,4 +1,6 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { duotone, regular } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { EXPERIENCES, MONTHES } from "../../../constant";
 import useMain from "../../../hooks";
 
@@ -55,9 +57,9 @@ export function TimelineTableGraph() {
                             return <section key={`tlt-cell-${year}-${month}`} className="tlt-cell" style={{ color }}>
                                 <span className="fa-stack">
                                     {experience && (
-                                        <span className={`fad fa-${experience.icon} fa-stack-1x fa-1x fa-fw`} />
+                                        <FontAwesomeIcon icon={experience.icon} fixedWidth size="1x" className="fa-stack-1x" />
                                     )}
-                                    <span className="far fa-square fa-stack-1x fa-2x fa-fw" />
+                                    <FontAwesomeIcon icon={regular('square')} fixedWidth size="2x" className="fa-stack-1x" />
                                 </span>
                             </section>;
                         })}
@@ -75,24 +77,24 @@ export function TimelineTableGraphLegend() {
     return <footer className="tlt-graph-legend">
         <div className="icon-text">
             <span className="fa-stack">
-                <span className="fas fa-graduation-cap fa-stack-1x fa-fw" />
-                <span className="far fa-square fa-stack-1x fa-2x fa-fw" />
+                <FontAwesomeIcon icon={duotone('graduation-cap')} fixedWidth size="1x" className="fa-stack-1x" />
+                <FontAwesomeIcon icon={regular('square')} fixedWidth size="2x" className="fa-stack-1x" />
             </span>
-            {main.translate('Graduation', {}, 'timeline')}
+            <span>{main.translate('Graduation', {}, 'timeline')}</span>
         </div>
         <div className="icon-text">
             <span className="fa-stack">
-                <span className="fas fa-flask fa-stack-1x fa-1x fa-fw" />
-                <span className="far fa-square fa-stack-1x fa-2x fa-fw" />
+                <FontAwesomeIcon icon={duotone('flask')} fixedWidth size="1x" className="fa-stack-1x" />
+                <FontAwesomeIcon icon={regular('square')} fixedWidth size="2x" className="fa-stack-1x" />
             </span>
-            {main.translate('Experience', {}, 'timeline')}
+            <span>{main.translate('Experience', {}, 'timeline')}</span>
         </div>
         <div className="icon-text">
             <span className="fa-stack">
-                <span className="fas fa-star-half-alt fa-stack-1x fa-1x fa-fw" />
-                <span className="far fa-square fa-stack-1x fa-2x fa-fw" />
+                <FontAwesomeIcon icon={duotone('star-half-alt')} fixedWidth size="1x" className="fa-stack-1x" />
+                <FontAwesomeIcon icon={regular('square')} fixedWidth size="2x" className="fa-stack-1x" />
             </span>
-            {main.translate('Apprenticeship', {}, 'timeline')}
+            <span>{main.translate('Apprenticeship', {}, 'timeline')}</span>
         </div>
     </footer>;
 }

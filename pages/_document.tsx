@@ -10,10 +10,10 @@ export default class MyDocument extends Document {
         return (
             <Html>
                 <Head>
-                    <script src={`https://kit.fontawesome.com/${process.env.FA_KIT_TOKEN}.js`} crossOrigin="anonymous" />
                 </Head>
                 <body>
                     <Main />
+                    {/*<script src={`https://kit.fontawesome.com/${process.env.FA_KIT_TOKEN}.js`} crossOrigin="anonymous" defer />*/}
                     <NextScript />
                 </body>
             </Html>

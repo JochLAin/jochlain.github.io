@@ -23,7 +23,8 @@
     "skipLibCheck": true,
     "strictNullChecks": true,
     "strict": true,
-    "suppressImplicitAnyIndexErrors": true
+    "suppressImplicitAnyIndexErrors": true,
+    "incremental": true
   },
   "exclude": [
     "node_modules"

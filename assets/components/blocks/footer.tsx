@@ -7,7 +7,7 @@ export default function Footer() {
             <HexagonGrid />
         </div>
         <small className="copyright">
-            JOCELYN FAIHY — 2018 – {new Date().getFullYear()}
+            JOCELYN FAIHY — {new Date().getFullYear()}
         </small>
     </footer>
 }

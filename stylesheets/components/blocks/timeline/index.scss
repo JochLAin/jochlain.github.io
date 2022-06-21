@@ -1,12 +1,6 @@
 @import "./line";
 @import "./table";
 
-.block-timeline {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 .timeline {
   &-wrapper {
     width: 100%;
@@ -14,11 +8,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-  }
-
-  &-title {
-    margin: 2rem;
-    text-align: center;
   }
 
   &-switch {
