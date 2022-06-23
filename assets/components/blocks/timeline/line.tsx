@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { EXPERIENCES } from "../../../constant";
 import useMain from "../../../hooks";
@@ -21,7 +22,7 @@ export default function TimelineLine() {
 
         return <section key={`tll-exp-${idx}`} className="tll-exp">
           <span className="tll-icon" style={{ backgroundColor: exp.color || '#607d8b' }}>
-            <span className={`fad fa-${exp.icon} fa-fw`} />
+            <FontAwesomeIcon icon={exp.icon} fixedWidth />
           </span>
           <header className="tll-header">
             <span className="tll-badge" style={{ backgroundColor: exp.color || '#607d8b' }}>

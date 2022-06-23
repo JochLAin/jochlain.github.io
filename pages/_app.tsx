@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import type { AppProps } from 'next/app'
 import Head from "next/head";
 import MainContext from "../assets/contexts";
@@ -23,9 +23,14 @@ export default function App({ Component, pageProps }: AppProps) {
         },
     });
 
+    useEffect(() => {
+        import("bootstrap");
+    }, []);
+
     return <>
         <Head>
             <title>Jochlain - GitHub</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
         <MainContext.Provider value={store}>
             <Component {...pageProps} />

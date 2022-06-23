@@ -1,11 +1,33 @@
-@import "./reboot";
-@import "./components/form";
+@import "./variables";
 
-@import "./components/adventure";
-@import "./components/blocks";
-@import "./components/hexagon";
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/containers";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/tables";
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/transitions";
+@import "~bootstrap/scss/offcanvas";
+@import "~bootstrap/scss/helpers";
+@import "~bootstrap/scss/utilities/api";
 
-@import "./utility";
+@import "../assets/components/blocks/index";
+
+body {
+  --body-bg: #{$white};
+  --body-text: #{$gray-900};
+  --body-yiq-alpha: #{rgba($gray-900, .3)};
+
+  color: var(--text-body);
+  background-color: var(--bg-body);
+
+  &.dark {
+    --body-bg: #{$gray-900};
+    --body-text: $white;
+    --body-yiq-alpha: rgba($white, .3);
+  }
+}
 
 .icon-text {
   display: inline-flex;

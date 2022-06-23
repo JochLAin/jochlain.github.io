@@ -1,3 +1,5 @@
+@import "../../../../stylesheets/variables";
+
 .tll {
   --tll-icon-padding: 1rem;
   --tll-icon-size: 2rem;
@@ -71,13 +73,13 @@
   }
 }
 
-@media (min-width: 35rem) {
+@include media-breakpoint-up('md') {
   .tll {
     font-size: 16px;
   }
 }
 
-@media (min-width: 50rem) {
+@include media-breakpoint-up('xl') {
   .tll {
     &-wrapper {
       width: 50rem;

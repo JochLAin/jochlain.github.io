@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { brands } from "@fortawesome/fontawesome-svg-core/import.macro";
 import React from "react";
 import useMain from "../../hooks";
 
@@ -16,7 +18,7 @@ export default function Hero() {
                 </blockquote>
                 <footer>
                     <a href="https://github.com/jochlain" target="_blank" rel="noreferrer noopener">
-                        <span className="fab fa-github fa-2x fa-fw" />
+                        <FontAwesomeIcon icon={brands('github')} size="2x" fixedWidth />
                     </a>
                     <span className="fab fa-linkedin fa-2x fa-fw" />
                 </footer>

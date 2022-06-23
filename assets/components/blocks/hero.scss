@@ -3,6 +3,24 @@
 .block-hero {
   overflow: hidden;
   height: 200vh;
+
+  h1 {
+    font-size: 5rem;
+    font-weight: 600;
+  }
+
+  h2 {
+    font-size: 3.5rem;
+    font-weight: 600;
+  }
+
+  blockquote {
+    margin: 2rem 0;
+    padding: 0 0 0 1rem;
+    font-family: Caveat,cursive;
+    font-size: 2rem;
+    border-left: 5px solid var(--body-yiq-alpha);
+  }
 }
 
 .hero {
@@ -10,15 +28,6 @@
   flex-direction: column;
   justify-content: center;
   height: 100%;
-
-  blockquote {
-    margin: 2rem 0;
-    padding: 1rem;
-    font-size: 1.5rem;
-    border-left-color: var(--body-yiq-alpha);
-    border-left-style: solid;
-    border-left-width: 5px;
-  }
 
   &-back {
     position: relative;
@@ -95,7 +104,7 @@
   }
 }
 
-@media (min-width: 48.75em) {
+@media (min-width: 50em) {
   .hero-front {
     width: 45%;
   }
@@ -104,7 +113,7 @@
   }
 }
 
-@media (min-width: 78em) {
+@media (min-width: 81.25em) {
   .hero-front--slash::after {
     transform: rotate(-8deg);
   }

@@ -1,11 +1,11 @@
-import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { duotone, regular } from "@fortawesome/fontawesome-svg-core/import.macro";
+import { duotone, regular, solid } from "@fortawesome/fontawesome-svg-core/import.macro";
+import React from "react";
 import { EXPERIENCES, MONTHES } from "../../../constant";
 import useMain from "../../../hooks";
 
 export default function TimelineTable() {
-    return <div className="tlt">
+    return <div className="tlt row shadow">
         <TimelineTableGraph />
         <TimelineTableLegend />
     </div>;
@@ -15,7 +15,7 @@ export function TimelineTableGraph() {
     const main = useMain();
     const now = new Date();
 
-    return <div className="tlt-graph">
+    return <div className="tlt-graph col-12 col-xl-8 d-flex justify-content-center">
         <aside className="tlt-graph-ordinate">
             {[...Array(now.getFullYear() - 2007)].map((a, y) => {
                 const year = 2008 + y;
@@ -102,12 +102,12 @@ export function TimelineTableGraphLegend() {
 export function TimelineTableLegend() {
     const main = useMain();
 
-    return <ul className="tlt-legend">
+    return <ul className="tlt-legend col-12 col-sm-4 bg-body">
         {EXPERIENCES.map((exp, idx) => {
             // const title = `${date(exp.start, 'yyyy-mm')} → ${date(exp.end, 'yyyy-mm')}`;
 
             return <li key={`tlt-exp-${idx}`}>
-                <span style={{ color: exp.color }}><span className="fas fa-square" /></span>
+                <FontAwesomeIcon icon={solid('square')} style={{ color: exp.color }} />
                 <div>
                     {exp.grade && (
                       <p>
@@ -115,7 +115,6 @@ export function TimelineTableLegend() {
                           {exp.info && <small title={main.translate(exp.info, {}, 'timeline')} className="fal fa-circle-info fa-fw ms-1 text-muted" />}
                       </p>
                     )}
-                    {exp.grade && exp.job && <hr />}
                     {exp.job && (
                       <p>
                           <b>{main.translate(exp.job, {}, 'timeline')}</b><br />
@@ -123,7 +122,7 @@ export function TimelineTableLegend() {
                       </p>
                     )}
                 </div>
-            </li>
+            </li>;
         })}
-    </ul>
+    </ul>;
 }

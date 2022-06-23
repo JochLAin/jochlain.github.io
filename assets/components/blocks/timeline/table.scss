@@ -1,23 +1,9 @@
+@import "../../../../stylesheets/variables";
+
 $history-header-height: 6em;
 $history-cell-width: 2.5em;
 $history-cell-height: 2em;
 $history-cell-header: 1.5em;
-
-.block-timeline--table {
-  .block-actions {
-    *:nth-child(1) {
-      background-color: skyblue;
-      color: white;
-    }
-    *:nth-child(2) {
-      background-color: #AAA;
-      color: white;
-    }
-
-    *:last-child {
-    }
-  }
-}
 
 .tlt {
   display: flex;
@@ -25,14 +11,13 @@ $history-cell-header: 1.5em;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
-  width: 100%;
 }
 
 .tlt-graph {
   display: flex;
   margin-top: 4em;
-  margin-right: 2em;
   font-size: 10px;
+  transition: font-size 250ms ease-in;
 
   &-abscissa {
     align-items: flex-end;
@@ -86,23 +71,19 @@ $history-cell-header: 1.5em;
 }
 
 .tlt-legend {
-  position: absolute;
-  top: 0;
-  left: 100%;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+  margin: 0;
   padding: 1rem;
-  gap: 10px;
   background-color: #FFF;
   list-style: none;
+  box-shadow: -0.5rem 0 0.5rem rgba(0, 0, 0, 0.15);
 
   li {
     display: flex;
     gap: 5px;
-    margin-bottom: 10px;
   }
 
   p {
@@ -135,14 +116,31 @@ $history-cell-header: 1.5em;
   height: 100vh;
 }
 
-@media (min-width: 35rem) {
-  .tlt-graph {
-    font-size: 13px;
+@include media-breakpoint-up('sm') {
+  .tlt {
+    &-graph {
+      font-size: 14px;
+    }
+    &-legend {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      padding-right: 0;
+    }
   }
 }
 
-@media (min-width: 50rem) {
-  .tlt-graph {
-    font-size: 16px;
+@include media-breakpoint-up('xl') {
+  .tlt {
+    &-graph {
+      font-size: 16px;
+    }
+    &-legend {
+      position: relative;
+      right: auto;
+      padding-right: var(--bs-gutter-x);
+      box-shadow: none;
+    }
   }
 }

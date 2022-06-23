@@ -1,5 +1,5 @@
-@import "../../variables";
-@import "../hexagon";
+@use "../../../stylesheets/variables" as *;
+@use "../hexagon/index" as *;
 
 .block-footer {
   display: flex;

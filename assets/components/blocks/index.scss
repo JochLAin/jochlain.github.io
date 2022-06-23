@@ -1,6 +1,6 @@
-@import "./hero";
-@import "./timeline";
-@import "./footer";
+@forward "footer";
+@forward "hero";
+@forward "timeline";
 
 .block-wrapper {
   display: flex;
@@ -9,6 +9,7 @@
 }
 
 .block {
+  position: relative;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
