@@ -25,5 +25,9 @@
   "Web & mobile developer": "Développeur web et mobile",
   "Web developer": "Développeur web",
   "Web development": "Développement web",
-  "Self-taught learning": "Formation en autodidacte"
+  "Self-taught learning": "Formation en autodidacte",
+  "display": {
+    "table": "Tableau",
+    "list": "Liste"
+  }
 }

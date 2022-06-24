@@ -2,7 +2,6 @@ import React from "react";
 import { duotone } from "@fortawesome/fontawesome-svg-core/import.macro";
 import Hexagon from "./components/hexagon";
 
-const now = new Date();
 export const MONTHES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 export const EXPERIENCES = [{
@@ -78,7 +77,7 @@ export const EXPERIENCES = [{
     icon: duotone('flask'),
     color: '#ff5722',
     start: new Date(2018, 11),
-    end: now,
+    end: new Date(),
 }];
 
 // @ts-ignore

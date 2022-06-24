@@ -11,7 +11,6 @@ export const TRANSLATION_CATALOGS = {
     },
 };
 
-
 const translate = (key: string, parameters = {}, domain: string = 'messages', locale: string = 'fr'): string|(string|void)[]|void => {
     const message = TRANSLATION_CATALOGS?.[locale.toLowerCase()]?.[domain.toLowerCase()]?.[key];
     if (!message) return key;

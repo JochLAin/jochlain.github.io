@@ -7,6 +7,8 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
+        env:
+          FA_KIT_AUTH_TOKEN: "${{secrets.FA_KIT_AUTH_TOKEN}}"
         strategy:
             matrix:
                 node-version: [14.x]
