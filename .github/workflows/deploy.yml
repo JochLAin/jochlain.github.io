@@ -7,8 +7,6 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
-        env:
-          FA_KIT_AUTH_TOKEN: "${{secrets.FA_KIT_AUTH_TOKEN}}"
         strategy:
             matrix:
                 node-version: [14.x]
@@ -19,6 +17,10 @@ jobs:
               uses: actions/setup-node@v2
               with:
                   node-version: ${{ matrix.node-version }}
+            - name: Config fort awesome
+              run: npm config set "@fortawesome:registry" https://npm.fontawesome.com/
+            - name: Set secrets
+              run: npm config set "//npm.fontawesome.com/:_authToken" "${{secrets.FA_KIT_AUTH_TOKEN}}"
             - name: Install packages
               run: npm ci
             - name: Build project

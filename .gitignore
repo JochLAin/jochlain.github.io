@@ -2,4 +2,4 @@
 npm-debug.log
 
 /.next/
-/.env.local
+.env.local
