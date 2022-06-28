@@ -20,7 +20,7 @@ jobs:
             - name: Install packages
               run: |
                 npm config set "@fortawesome:registry" https://npm.fontawesome.com/
-                npm config set "//npm.fontawesome.com/:_authToken" ${{ secrets.FA_KIT_AUTH_TOKEN }}
+                npm config set "//npm.fontawesome.com/:_authToken" ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
                 npm ci
             - name: Build project
               run: npm run build
