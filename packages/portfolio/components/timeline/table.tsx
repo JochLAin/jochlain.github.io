@@ -1,36 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { duotone, regular, solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import React from "react";
-import { EXPERIENCES, MONTHES } from "../../../constant";
-import useMain from "../../../hooks";
-import translate from "../../../utils/translate";
+import { EXPERIENCES, MONTHES } from "../../constants";
+import useMain from "../../../../assets/hooks";
 
 export default function TimelineTable() {
     return <div className="tlt">
-        <div className="row">
-            <TimelineTableGraph />
-            <TimelineTableLegend />
-        </div>
-        <nav className="tlt-navbar navbar">
-            <ul className="navbar-nav">
-                <li className="nav-item">
-                    <a href="#!" className="nav-link">
-                        <>
-                            <FontAwesomeIcon icon={duotone('grid')} />
-                            {translate('display.table', {}, 'timeline')}
-                        </>
-                    </a>
-                </li>
-                <li className="nav-item">
-                    <a href="#!" className="nav-link">
-                        <>
-                            <FontAwesomeIcon icon={duotone('list-ul')} />
-                            {translate('display.list', {}, 'timeline')}
-                        </>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+        <TimelineTableGraph />
+        <TimelineTableLegend />
     </div>;
 }
 

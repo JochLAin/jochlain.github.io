@@ -24,7 +24,11 @@
     "strictNullChecks": true,
     "strict": true,
     "suppressImplicitAnyIndexErrors": true,
-    "incremental": true
+    "incremental": true,
+    "paths": {
+      "@adventure/*": ["./packages/adventure/*"],
+      "@portfolio/*": ["./packages/portfolio/*"]
+    }
   },
   "exclude": [
     "node_modules"
