@@ -1,7 +1,6 @@
-
 import { duotone } from "@fortawesome/fontawesome-svg-core/import.macro";
 
-export const MONTHES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+export const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 export const EXPERIENCES = [{
   kind: 'grade',

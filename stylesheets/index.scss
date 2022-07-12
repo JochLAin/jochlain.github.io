@@ -3,13 +3,13 @@
 html,
 body,
 #__next {
-  overflow: hidden;
   width: 100vw;
   height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
-main,
-section {
+article {
   width: 100vw;
   height: 100vh;
 }
@@ -61,13 +61,36 @@ h3 {
 }
 
 main {
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-flow: column nowrap;
+  flex: none;
+  transform: scale(100%);
+  transform-origin: top left;
+  transition: transform 150ms ease-in;
   overflow: auto;
   scroll-snap-type: y mandatory;
 
-  article {
+  section {
+    display: flex;
+    flex: none;
+    overflow: auto;
+    scroll-snap-align: start;
+  }
+
+  > section {
+    flex-direction: row;
     scroll-snap-type: x mandatory;
+
+    > section {
+      flex-direction: column;
+      scroll-snap-type: y mandatory;
+    }
+  }
+
+  article {
+    position: relative;
 
     nav {
       position: absolute;
@@ -83,32 +106,35 @@ main {
       }
     }
   }
+}
 
-  article,
-  section {
-    display: flex;
-    flex-direction: row;
-    flex: none;
-    height: 100vh;
+body.overview {
+  padding: 1rem;
+
+  &, #__next {
     overflow: auto;
-    scroll-snap-align: start;
   }
 
-  &.overview {
-    width: auto;
-    height: auto;
+  main {
     gap: 5rem;
-    transform: scale(10%);
     overflow: visible;
+    transform: scale(20%);
 
     section {
       gap: 5rem;
       overflow: visible;
     }
-
-    > section {
-      width: auto;
-      height: auto;
-    }
   }
+}
+
+.btn-fullscreen {
+  position: fixed;
+  top: .5rem;
+  right: .5rem;
+  padding: .5rem;
+  background-color: rgba(#CCC, .3);
+  color: #CCC;
+  border: none;
+  border-radius: 50%;
+  z-index: 150;
 }

@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { duotone, regular, solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import React from "react";
-import { EXPERIENCES, MONTHES } from "../../constants";
+import { EXPERIENCES, MONTHS } from "../../constants";
 import useMain from "../../../../assets/hooks";
 
 export default function TimelineTable() {
@@ -29,7 +29,7 @@ export function TimelineTableGraph() {
         </aside>
         <div className="tlt-graph-content">
             <header className="tlt-graph-abscissa">
-                {MONTHES.map((month) => {
+                {MONTHS.map((month) => {
                     return <div
                         key={`tlt-month-${month.toLowerCase()}`}
                         className="tlt-graph-month"
@@ -41,7 +41,7 @@ export function TimelineTableGraph() {
                 {[...Array(now.getFullYear() - 2007)].map((a, y) => {
                     const year = 2008 + y;
                     return <section key={`tlt-year-${year}`} className="tlt-graph-line">
-                        {MONTHES.map((label, x) => {
+                        {MONTHS.map((label, x) => {
                             const month = x + 1;
                             const date = new Date(year, month);
                             const experience = EXPERIENCES.find(experience => {
