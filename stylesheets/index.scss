@@ -60,7 +60,7 @@ h3 {
   text-align: center;
 }
 
-main {
+.layout {
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -72,18 +72,19 @@ main {
   overflow: auto;
   scroll-snap-type: y mandatory;
 
-  section {
+  .screen {
     display: flex;
     flex: none;
+    min-width: 100vw;
     overflow: auto;
     scroll-snap-align: start;
   }
 
-  > section {
+  > .screen {
     flex-direction: row;
     scroll-snap-type: x mandatory;
 
-    > section {
+    > .screen {
       flex-direction: column;
       scroll-snap-type: y mandatory;
     }
@@ -115,12 +116,12 @@ body.overview {
     overflow: auto;
   }
 
-  main {
+  .layout {
     gap: 5rem;
     overflow: visible;
     transform: scale(20%);
 
-    section {
+    .screen {
       gap: 5rem;
       overflow: visible;
     }

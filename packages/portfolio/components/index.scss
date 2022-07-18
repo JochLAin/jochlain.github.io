@@ -1,2 +1,29 @@
 @forward "hero";
 @forward "timeline";
+
+#presentation {
+  background-color: #FFF;
+  background-image: url("/waves.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  mix-blend-mode: hard-light;
+  //background-blend-mode: screen;
+
+  h1 {
+    font-size: 5rem;
+    font-weight: 600;
+  }
+
+  h2 {
+    font-size: 3.5rem;
+    font-weight: 600;
+  }
+
+  blockquote {
+    margin: 2rem 0;
+    padding: 0 0 0 1rem;
+    font-family: Caveat, cursive;
+    font-size: 2rem;
+    border-left: 5px solid var(--body-yiq-alpha);
+  }
+}

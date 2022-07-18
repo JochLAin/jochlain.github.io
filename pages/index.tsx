@@ -2,7 +2,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { duotone } from "@fortawesome/fontawesome-svg-core/import.macro";
 import React, {SyntheticEvent, useEffect} from 'react';
 import Head from "next/head";
-import Portfolio from "@portfolio/components";
+import Layout, { Screen } from "../assets/components/layout";
+import { Presentation } from "@portfolio/components";
 
 export default function Index() {
     useEffect(() => {
@@ -27,40 +28,44 @@ export default function Index() {
         <Head>
             <title>Jochlain - Blob des internets</title>
         </Head>
-        <button type="button" className="btn-fullscreen" onClick={onClickFullscreen}>
-            <FontAwesomeIcon icon={duotone('up-right-and-down-left-from-center')} />
-        </button>
         <main>
-            <section>
-                <section>
-                    <article style={{ backgroundColor: '#F55' }} />
-                </section>
-                <section>
-                    <article style={{ backgroundColor: '#F88' }} />
-                </section>
-            </section>
-            <section>
-                <section>
-                    <article style={{ backgroundColor: '#5F5' }} />
-                </section>
-                <section>
-                    <article style={{ backgroundColor: '#8F8' }} />
-                </section>
-            </section>
-            <section>
-                <section>
-                    <article style={{ backgroundColor: '#44F' }} />
-                </section>
-                <section>
-                    <article style={{ backgroundColor: '#77F' }} />
-                </section>
-                <section>
-                    <article style={{ backgroundColor: '#AAF' }} />
-                </section>
-            </section>
-            <section>
-                <article style={{ backgroundColor: '#333' }} />
-            </section>
+            <button type="button" className="btn-fullscreen" onClick={onClickFullscreen}>
+                <FontAwesomeIcon icon={duotone('up-right-and-down-left-from-center')} />
+            </button>
+            <Layout>
+                <Screen id="screen-1">
+                    <Screen id="presentation">
+                        <Presentation />
+                    </Screen>
+                    <Screen id="aventure">
+                        <article style={{ backgroundColor: '#F88' }} />
+                    </Screen>
+                </Screen>
+                <Screen id="screen-2">
+                    <Screen id="timeline">
+                        <article style={{ backgroundColor: '#5F5' }} />
+                    </Screen>
+                    <Screen id="timetable">
+                        <article style={{ backgroundColor: '#8F8' }} />
+                    </Screen>
+                </Screen>
+                <Screen id="screen-3">
+                    <Screen id="projects">
+                        <article style={{ backgroundColor: '#44F' }} />
+                    </Screen>
+                    <Screen id="pixelart">
+                        <article style={{ backgroundColor: '#77F' }} />
+                    </Screen>
+                    <Screen id="translator">
+                        <article style={{ backgroundColor: '#AAF' }} />
+                    </Screen>
+                </Screen>
+                <Screen id="screen-4">
+                    <Screen id="references">
+                        <article style={{ backgroundColor: '#333' }} />
+                    </Screen>
+                </Screen>
+            </Layout>
         </main>
     </>;
 }
