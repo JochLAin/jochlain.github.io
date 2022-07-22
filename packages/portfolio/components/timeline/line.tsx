@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { EXPERIENCES } from "../../../../assets/constant";
-import useMain from "../../../../assets/hooks";
+import useMain from "@assets/hooks/useMain";
 
 export default function TimelineLine() {
   const main = useMain();

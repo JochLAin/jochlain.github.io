@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useMain from "../../../../assets/hooks";
+import useMain from "@assets/hooks/useMain";
 import TimelineLine from "./line";
 import TimelineTable from "./table";
 

@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { brands } from "@fortawesome/fontawesome-svg-core/import.macro";
 import React from "react";
-import useMain from "../../../assets/hooks";
+import useMain from "@assets/hooks/useMain";
 
 export default function Hero() {
     const main = useMain();

@@ -32,7 +32,7 @@ export default function Index() {
             <button type="button" className="btn-fullscreen" onClick={onClickFullscreen}>
                 <FontAwesomeIcon icon={duotone('bars-staggered')} />
             </button>
-            <Layout>
+            <div className="layout">
                 <Screen id="screen-1">
                     <Screen id="presentation">
                         <Presentation />
@@ -65,7 +65,7 @@ export default function Index() {
                         <article style={{ backgroundColor: '#333' }} />
                     </Screen>
                 </Screen>
-            </Layout>
+            </div>
         </main>
     </>;
 }

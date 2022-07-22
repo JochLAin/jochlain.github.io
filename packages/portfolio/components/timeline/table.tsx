@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { duotone, regular, solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import React from "react";
 import { EXPERIENCES, MONTHS } from "../../constants";
-import useMain from "../../../../assets/hooks";
+import useMain from "@assets/hooks/useMain";
 
 export default function TimelineTable() {
     return <div className="tlt">

@@ -1,0 +1,122 @@
+@custom-media --xxs-only (width <= 360px);
+@custom-media --xxs-above (width >= 360px);
+@custom-media --xxs-below (width <= 360px);
+@custom-media --xxs-phone (--xxs-only) and (--portrait);
+
+@custom-media --xs-only (360px <= width <= 480px);
+@custom-media --xs-above (width >= 480px);
+@custom-media --xs-below (width <= 480px);
+@custom-media --xs-phone (--xs-only) and (--portrait);
+
+@custom-media --sm-only (480px <= width <= 576px);
+@custom-media --sm-above (width >= 576px);
+@custom-media --sm-below (width <= 576px);
+@custom-media --sm-phone (--sm-only) and (--portrait);
+
+@custom-media --md-only (576px <= width <= 768px);
+@custom-media --md-above (width >= 768px);
+@custom-media --md-below (width <= 768px);
+@custom-media --md-phone (--md-only) and (--portrait);
+
+@custom-media --lg-only (768px <= width <= 1024px);
+@custom-media --lg-above (width >= 1024px);
+@custom-media --lg-below (width <= 1024px);
+@custom-media --lg-phone (--lg-only) and (--portrait);
+
+@custom-media --xl-only (1024px <= width <= 1440px);
+@custom-media --xl-above (width >= 1440px);
+@custom-media --xl-below (width <= 1440px);
+@custom-media --xl-phone (--xl-only) and (--portrait);
+
+@custom-media --xxl-only (1440px <= width <= 1920px);
+@custom-media --xxl-above (width >= 1920px);
+@custom-media --xxl-below (width <= 1920px);
+@custom-media --xxl-phone (--xxl-only) and (--portrait);
+
+.layout {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-flow: column nowrap;
+  flex: none;
+  transform: scale(100%);
+  transform-origin: top left;
+  transition: transform 150ms ease-in;
+  overflow: auto;
+  scroll-snap-type: y mandatory;
+
+  > .screen {
+    flex-direction: row;
+    scroll-snap-type: x mandatory;
+
+    > .screen {
+      flex-direction: column;
+      scroll-snap-type: y mandatory;
+    }
+  }
+  article {
+    position: relative;
+    max-width: 100vw;
+    height: 100%;
+
+    nav {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      height: 100vh;
+      display: flex;
+      flex-flow: row nowrap;
+
+      menu li a {
+        display: inline-flex;
+        gap: .5rem;
+      }
+    }
+  }
+}
+
+.screen {
+  display: flex;
+  flex: none;
+  height: 100vh;
+  width: 100vw;
+  overflow: auto;
+  scroll-snap-align: start;
+}
+
+body.overview {
+  padding: 1rem;
+  overflow: auto;
+
+  .layout {
+    gap: 5rem;
+    overflow: visible;
+    transform: scale(20%);
+
+    .screen {
+      gap: 5rem;
+      overflow: visible;
+    }
+  }
+}
+
+@media (--sm-above) {
+  .layout article {
+    width: 540px;
+  }
+}
+@media (--md-above) {
+  .layout article {
+    width: 720px;
+  }
+}
+@media (--lg-above) {
+  .layout article {
+    width: 960px;
+  }
+}
+@media (--xl-above) {
+  .layout article {
+    width: 1320px;
+  }
+}

@@ -1,12 +1,16 @@
-const postcssJitProps = require('postcss-jit-props');
-const OpenProps = require('open-props');
-
 module.exports = {
   plugins: [
-    postcssJitProps({
-      files: [
-        require('open-props/style'),
-      ]
-    }),
+    "postcss-flexbugs-fixes",
+    ["postcss-preset-env", {
+      "autoprefixer": {
+        "flexbox": "no-2009"
+      },
+      "stage": 3,
+      "features": {
+        "custom-properties": false
+      }
+    }],
+    ["postcss-jit-props", require('open-props')],
+    "postcss-custom-media",
   ],
 };

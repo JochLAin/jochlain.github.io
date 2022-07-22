@@ -27,6 +27,7 @@
     "suppressImplicitAnyIndexErrors": true,
     "incremental": true,
     "paths": {
+      "@assets/*": ["./assets/*"],
       "@adventure/*": ["./packages/adventure/*"],
       "@portfolio/*": ["./packages/portfolio/*"]
     }

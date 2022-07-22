@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import type { AppProps } from 'next/app'
 import Head from "next/head";
-import MainContext from "../assets/contexts";
-import translate from "../assets/utils/translate";
-import "../stylesheets/index.css";
+import { MainContext } from "@assets/hooks/useMain";
+import translate from "@assets/utils/translate";
+import "../stylesheets/index.scss";
 
 export default function App({ Component, pageProps }: AppProps) {
     const [locale, setLocale] = useState('fr');
@@ -24,12 +24,12 @@ export default function App({ Component, pageProps }: AppProps) {
     });
 
     useEffect(() => {
-        import("bootstrap");
+        setLocale(document.documentElement.lang);
     }, []);
 
     return <>
         <Head>
-            <title>Jochlain - GitHub</title>
+            <title>Jochlain - Blob des internets</title>
             <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
         <MainContext.Provider value={store}>
