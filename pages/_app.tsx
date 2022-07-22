@@ -13,8 +13,8 @@ export default function App({ Component, pageProps }: AppProps) {
 
     Object.assign(store, {
         setLocale: (locale: string) => {
-            if (document?.body?.parentElement) {
-                document.body.parentElement.lang = locale;
+            if (document?.documentElement) {
+                document.documentElement.lang = locale;
             }
             setLocale(locale);
         },
@@ -24,7 +24,8 @@ export default function App({ Component, pageProps }: AppProps) {
     });
 
     useEffect(() => {
-        setLocale(document.documentElement.lang);
+        document.documentElement.lang = locale;
+        setLocale(locale);
     }, []);
 
     return <>
