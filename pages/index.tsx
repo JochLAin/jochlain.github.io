@@ -37,34 +37,34 @@ export default function Index() {
                     <Screen id="presentation">
                         <Presentation />
                     </Screen>
-                    <Screen id="aventure">
-                        <article style={{ backgroundColor: '#F88' }} />
-                    </Screen>
+                    {/*<Screen id="aventure">*/}
+                    {/*    <article style={{ backgroundColor: '#F88' }} />*/}
+                    {/*</Screen>*/}
                 </Screen>
-                <Screen id="screen-2">
-                    <Screen id="timeline">
-                        <article style={{ backgroundColor: '#5F5' }} />
-                    </Screen>
-                    <Screen id="timetable">
-                        <article style={{ backgroundColor: '#8F8' }} />
-                    </Screen>
-                </Screen>
-                <Screen id="screen-3">
-                    <Screen id="projects">
-                        <article style={{ backgroundColor: '#44F' }} />
-                    </Screen>
-                    <Screen id="pixelart">
-                        <article style={{ backgroundColor: '#77F' }} />
-                    </Screen>
-                    <Screen id="translator">
-                        <article style={{ backgroundColor: '#AAF' }} />
-                    </Screen>
-                </Screen>
-                <Screen id="screen-4">
-                    <Screen id="references">
-                        <article style={{ backgroundColor: '#333' }} />
-                    </Screen>
-                </Screen>
+                {/*<Screen id="screen-2">*/}
+                {/*    <Screen id="timeline">*/}
+                {/*        <article style={{ backgroundColor: '#5F5' }} />*/}
+                {/*    </Screen>*/}
+                {/*    <Screen id="timetable">*/}
+                {/*        <article style={{ backgroundColor: '#8F8' }} />*/}
+                {/*    </Screen>*/}
+                {/*</Screen>*/}
+                {/*<Screen id="screen-3">*/}
+                {/*    <Screen id="projects">*/}
+                {/*        <article style={{ backgroundColor: '#44F' }} />*/}
+                {/*    </Screen>*/}
+                {/*    <Screen id="pixelart">*/}
+                {/*        <article style={{ backgroundColor: '#77F' }} />*/}
+                {/*    </Screen>*/}
+                {/*    <Screen id="translator">*/}
+                {/*        <article style={{ backgroundColor: '#AAF' }} />*/}
+                {/*    </Screen>*/}
+                {/*</Screen>*/}
+                {/*<Screen id="screen-4">*/}
+                {/*    <Screen id="references">*/}
+                {/*        <article style={{ backgroundColor: '#333' }} />*/}
+                {/*    </Screen>*/}
+                {/*</Screen>*/}
             </div>
         </main>
     </>;
