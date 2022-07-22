@@ -30,7 +30,7 @@ export default function Index() {
         </Head>
         <main>
             <button type="button" className="btn-fullscreen" onClick={onClickFullscreen}>
-                <FontAwesomeIcon icon={duotone('up-right-and-down-left-from-center')} />
+                <FontAwesomeIcon icon={duotone('bars-staggered')} />
             </button>
             <Layout>
                 <Screen id="screen-1">

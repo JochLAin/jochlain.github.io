@@ -1,4 +1,6 @@
-@forward "../packages/portfolio/components";
+@forward "open-props/style";
+@forward "open-props/normalize";
+@forward "open-props/buttons";
 
 html,
 body,
@@ -130,12 +132,12 @@ body.overview {
 
 .btn-fullscreen {
   position: fixed;
-  top: .5rem;
-  right: .5rem;
-  padding: .5rem;
-  background-color: rgba(#CCC, .3);
-  color: #CCC;
+  top: 2rem;
+  right: 2rem;
+  background-color: transparent;
+  color: #FFF;
+  font-size: 2rem;
   border: none;
-  border-radius: 50%;
+  transform: rotateY(180deg);
   z-index: 150;
 }
