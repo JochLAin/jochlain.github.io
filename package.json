@@ -37,7 +37,8 @@
     "open-props": "^1.4.3",
     "postcss-jit-props": "^1.0.7",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "rfs": "^9.0.6"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.18.6",

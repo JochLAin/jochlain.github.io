@@ -1,3 +1,47 @@
+@use "../node_modules/rfs/scss" as *;
+
+@custom-media --xxs-only (width <= 360px);
+@custom-media --xxs-above (width >= 360px);
+@custom-media --xxs-below (width <= 360px);
+@custom-media --xxs-phone (--xxs-only) and (--portrait);
+
+@custom-media --xs-only (360px <= width <= 480px);
+@custom-media --xs-above (width >= 480px);
+@custom-media --xs-below (width <= 480px);
+@custom-media --xs-phone (--xs-only) and (--portrait);
+
+@custom-media --sm-only (480px <= width <= 576px);
+@custom-media --sm-above (width >= 576px);
+@custom-media --sm-below (width <= 576px);
+@custom-media --sm-phone (--sm-only) and (--portrait);
+
+@custom-media --md-only (576px <= width <= 768px);
+@custom-media --md-above (width >= 768px);
+@custom-media --md-below (width <= 768px);
+@custom-media --md-phone (--md-only) and (--portrait);
+
+@custom-media --lg-only (768px <= width <= 1024px);
+@custom-media --lg-above (width >= 1024px);
+@custom-media --lg-below (width <= 1024px);
+@custom-media --lg-phone (--lg-only) and (--portrait);
+
+@custom-media --xl-only (1024px <= width <= 1440px);
+@custom-media --xl-above (width >= 1440px);
+@custom-media --xl-below (width <= 1440px);
+@custom-media --xl-phone (--xl-only) and (--portrait);
+
+@custom-media --xxl-only (1440px <= width <= 1920px);
+@custom-media --xxl-above (width >= 1920px);
+@custom-media --xxl-below (width <= 1920px);
+@custom-media --xxl-phone (--xxl-only) and (--portrait);
+
+@custom-media --rfs (width >= 1200px);
+
+$h1-font-size: 7rem;
+$h2-font-size: 3rem;
+$h3-font-size: 2rem;
+$blockquote-font-size: 1.75rem;
+
 *,
 *::before,
 *::after {
@@ -7,4 +51,32 @@
 html,
 body {
   margin: 0;
+}
+
+h1 {
+  font-size: rfs-fluid-value($h1-font-size);
+}
+h2 {
+  font-size: rfs-fluid-value($h2-font-size);
+}
+h3 {
+  font-size: rfs-fluid-value($h3-font-size);
+}
+blockquote {
+  font-size: rfs-fluid-value($blockquote-font-size);
+}
+
+@media (--rfs) {
+  h1 {
+    font-size: $h1-font-size;
+  }
+  h2 {
+    font-size: $h2-font-size;
+  }
+  h3 {
+    font-size: $h3-font-size;
+  }
+  blockquote {
+    font-size: $blockquote-font-size;
+  }
 }
