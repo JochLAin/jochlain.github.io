@@ -14,8 +14,7 @@ export default function Portfolio() {
 }
 
 export function Presentation() {
-  // const content = useTypeWriting(['Web', 'Fullstack', 'Backend', 'Frontend', 'Symfony', 'React', 'HTML / CSS / JS', 'PHP', 'SCSS']);
-  const content = useTypeWriting(['HTML / CSS / JS']);
+  const content = useTypeWriting(['Web', 'Fullstack', 'Backend', 'Frontend', 'Symfony', 'React', 'HTML / CSS / JS', 'PHP', 'SCSS']);
   const main = useMain();
 
   return <article>
