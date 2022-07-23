@@ -1,4 +1,4 @@
-@use "../node_modules/rfs/scss" as *;
+@use "~rfs/scss" as *;
 
 @custom-media --xxs-only (width <= 360px);
 @custom-media --xxs-above (width >= 360px);

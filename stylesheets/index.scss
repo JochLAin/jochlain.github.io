@@ -1,6 +1,7 @@
-@import "./reboot";
-@import "./layout";
-@import "../packages/portfolio";
+@forward "./reboot";
+@forward "./layout";
+@forward "../packages/portfolio";
+@use "~rfs/scss" as *;
 
 html,
 body,

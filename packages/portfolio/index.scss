@@ -1,3 +1,5 @@
+@use "~rfs/scss" as *;
+
 @keyframes blink {
   30% {
     opacity: 1;
@@ -59,7 +61,7 @@
   }
 
   blockquote {
-    margin: var(--size-7) 0;
+    margin: #{rfs-fluid-value(2rem)} 0;
     padding-bottom: var(--size-3);
     font-family: Caveat, cursive;
     border-left: 5px solid var(--body-yiq-alpha);
@@ -97,6 +99,15 @@
   }
 }
 
+@media (orientation: landscape) and (max-height: 756px) {
+  #presentation {
+    article {
+      align-items: flex-start;
+      text-align: start;
+    }
+  }
+}
+
 @media (--sm-above) {
   #presentation {
     h2 {
@@ -112,11 +123,10 @@
   }
 }
 
-@media (orientation: landscape) and (max-height: 756px) {
+@media (--rfs) {
   #presentation {
-    article {
-      align-items: flex-start;
-      text-align: start;
+    blockquote {
+      margin: 2rem 0;
     }
   }
 }
