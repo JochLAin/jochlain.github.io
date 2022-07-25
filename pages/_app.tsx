@@ -21,9 +21,19 @@ export default function App({ Component, pageProps }: AppProps) {
         translate: (message: string, parameters = {}, domain: string) => {
             return translate(message, parameters, domain, locale);
         },
+        date: (date?: Date, format: string = 'yyyy-mm-dd') => {
+            if (!date) return '';
+
+            return translate(format, {
+                day: String(date.getDate()).padStart(2, '0'),
+                month: String(date.getMonth()).padStart(2, '0'),
+                year: String(date.getFullYear()).padStart(4, '0'),
+            }, 'dates');
+        },
     });
 
     useEffect(() => {
+        const locale = localStorage.getItem('locale') || 'fr';
         document.documentElement.lang = locale;
         setLocale(locale);
     }, []);
@@ -32,6 +42,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <Head>
             <title>Jochlain - Blob des internets</title>
             <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
+            <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@0,700;1,700&family=Caveat&family=Edu+NSW+ACT+Foundation:wght@400;500;700&display=swap" rel="stylesheet" />
         </Head>
         <MainContext.Provider value={store}>
             <Component {...pageProps} />

@@ -9,7 +9,20 @@
   transition: transform 150ms ease-in;
   overflow: auto;
   scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
 
+.screen {
+  display: flex;
+  flex: none;
+  height: 100vh;
+  width: 100vw;
+  overflow: auto;
+  scroll-snap-align: start;
+  scroll-behavior: smooth;
+}
+
+.layout {
   > .screen {
     flex-direction: row;
     scroll-snap-type: x mandatory;
@@ -19,10 +32,12 @@
       scroll-snap-type: y mandatory;
     }
   }
+
   article {
     position: relative;
     max-width: 100vw;
     height: 100%;
+    margin: 0 auto;
 
     nav {
       position: absolute;
@@ -38,15 +53,6 @@
       }
     }
   }
-}
-
-.screen {
-  display: flex;
-  flex: none;
-  height: 100vh;
-  width: 100vw;
-  overflow: auto;
-  scroll-snap-align: start;
 }
 
 body.overview {

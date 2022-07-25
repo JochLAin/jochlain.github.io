@@ -1,4 +1,6 @@
 @use "~rfs/scss" as *;
+@forward "components/timeline/line";
+@forward "./components/timeline/table";
 
 @keyframes blink {
   30% {
@@ -12,7 +14,7 @@
   }
 }
 
-#presentation {
+#hero {
   align-items: center;
   background-color: #FFF;
   background-image: var(--gradient-8);
@@ -63,7 +65,7 @@
   blockquote {
     margin: #{rfs-fluid-value(2rem)} 0;
     padding-bottom: var(--size-3);
-    font-family: Caveat, cursive;
+    //font-family: Caveat, cursive;
     border-left: 5px solid var(--body-yiq-alpha);
   }
 
@@ -100,7 +102,7 @@
 }
 
 @media (orientation: landscape) and (max-height: 756px) {
-  #presentation {
+  #hero {
     article {
       align-items: flex-start;
       text-align: start;
@@ -109,7 +111,7 @@
 }
 
 @media (--sm-above) {
-  #presentation {
+  #hero {
     h2 {
       flex-direction: row;
 
@@ -124,7 +126,7 @@
 }
 
 @media (--rfs) {
-  #presentation {
+  #hero {
     blockquote {
       margin: 2rem 0;
     }

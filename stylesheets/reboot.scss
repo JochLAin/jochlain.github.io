@@ -50,7 +50,12 @@ $blockquote-font-size: 1.75rem;
 
 html,
 body {
+  --body-bg: #FFF;
+  --body-text: #000;
+
   margin: 0;
+  color: var(--body-text);
+  background-color: var(--body-bg);
 }
 
 h1 {

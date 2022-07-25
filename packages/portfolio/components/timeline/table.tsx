@@ -5,10 +5,10 @@ import { EXPERIENCES, MONTHS } from "../../constants";
 import useMain from "@assets/hooks/useMain";
 
 export default function TimelineTable() {
-    return <div className="tlt">
+    return <article className="tlt">
         <TimelineTableGraph />
         <TimelineTableLegend />
-    </div>;
+    </article>;
 }
 
 export function TimelineTableGraph() {

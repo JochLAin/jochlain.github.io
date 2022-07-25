@@ -4,12 +4,14 @@ export interface MainInterface {
     locale: string,
     setLocale: Function,
     translate: Function,
+    date: Function,
 }
 
 export const MainContext = createContext<MainInterface>({
-    locale: 'en',
+    locale: 'fr',
     setLocale: () => {},
     translate: (message: string) => message,
+    date: (date: Date) => date.toLocaleString(),
 });
 
 export default function useMain(): MainInterface {

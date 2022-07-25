@@ -3,7 +3,7 @@ import { duotone } from "@fortawesome/fontawesome-svg-core/import.macro";
 import React, {SyntheticEvent, useEffect} from 'react';
 import Head from "next/head";
 import Layout, { Screen } from "../assets/components/layout";
-import { Presentation } from "@portfolio/components";
+import { Hero, TimelineLine, TimelineTable } from "@portfolio/components";
 
 export default function Index() {
     useEffect(() => {
@@ -32,23 +32,23 @@ export default function Index() {
             <button type="button" className="btn-fullscreen" onClick={onClickFullscreen}>
                 <FontAwesomeIcon icon={duotone('bars-staggered')} />
             </button>
-            <div className="layout">
-                <Screen id="screen-1">
-                    <Screen id="presentation">
-                        <Presentation />
+            <Layout>
+                {/*<Screen id="presentation">*/}
+                {/*    <Screen id="hero">*/}
+                {/*        <Hero />*/}
+                {/*    </Screen>*/}
+                {/*    /!*<Screen id="aventure">*!/*/}
+                {/*    /!*    <article style={{ backgroundColor: '#F88' }} />*!/*/}
+                {/*    /!*</Screen>*!/*/}
+                {/*</Screen>*/}
+                <Screen id="timeline">
+                    <Screen id="timeline-line">
+                        <TimelineLine />
                     </Screen>
-                    {/*<Screen id="aventure">*/}
-                    {/*    <article style={{ backgroundColor: '#F88' }} />*/}
+                    {/*<Screen id="timeline-table">*/}
+                    {/*    <TimelineTable />*/}
                     {/*</Screen>*/}
                 </Screen>
-                {/*<Screen id="screen-2">*/}
-                {/*    <Screen id="timeline">*/}
-                {/*        <article style={{ backgroundColor: '#5F5' }} />*/}
-                {/*    </Screen>*/}
-                {/*    <Screen id="timetable">*/}
-                {/*        <article style={{ backgroundColor: '#8F8' }} />*/}
-                {/*    </Screen>*/}
-                {/*</Screen>*/}
                 {/*<Screen id="screen-3">*/}
                 {/*    <Screen id="projects">*/}
                 {/*        <article style={{ backgroundColor: '#44F' }} />*/}
@@ -65,7 +65,7 @@ export default function Index() {
                 {/*        <article style={{ backgroundColor: '#333' }} />*/}
                 {/*    </Screen>*/}
                 {/*</Screen>*/}
-            </div>
+            </Layout>
         </main>
     </>;
 }

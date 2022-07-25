@@ -7,14 +7,14 @@ export interface ExperienceInterface {
   readonly job ?: string,
   readonly company ?: string,
   readonly color: string,
-  readonly icon: string,
+  readonly icon: any,
   readonly start: Date,
   readonly end: Date,
 }
 
 export const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-export const EXPERIENCES = [{
+export const EXPERIENCES: ExperienceInterface[] = [{
   kind: 'grade',
   grade: 'Bac IST EE',
   info: 'Industrial Sciences and Techniques - Electronic Engineering option',

@@ -1,16 +1,18 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { EXPERIENCES } from "../../constants";
 import useMain from "@assets/hooks/useMain";
+import type { ExperienceInterface } from "../../constants";
+import { EXPERIENCES } from "../../constants";
 
 export default function TimelineLine() {
   const main = useMain();
 
-  return <article className="tll">
-    <div className="tll-wrapper">
-      {EXPERIENCES.map((exp, idx) => {
-        const start = exp.start?.toLocaleDateString();
-        const end = exp.end?.toLocaleDateString();
+  return <article>
+    <h3>{main.translate('Graduations && Experiences', {}, 'timeline')}</h3>
+    <ul className="tll">
+      {EXPERIENCES.map((exp: ExperienceInterface, idx) => {
+        const start = main.date(exp.start);
+        const end = main.date(exp.end);
 
         const label = ((kind) => {
           switch (kind) {
@@ -20,15 +22,15 @@ export default function TimelineLine() {
           }
         })(exp.kind);
 
-        return <section key={`tll-exp-${idx}`} className="tll-exp">
-          <span className="tll-icon" style={{ backgroundColor: exp.color || '#607d8b' }}>
+        return <li key={`tll-exp-${idx}`} className={`tll-exp tll-${exp.kind}`} style={{ '--tll-color': exp.color || '#607d8b' }}>
+          <span className="tll-icon">
             <FontAwesomeIcon icon={exp.icon} fixedWidth />
           </span>
           <header className="tll-header">
-            <span className="tll-badge" style={{ backgroundColor: exp.color || '#607d8b' }}>
+            <span className="tll-label">
               {label}
             </span>
-            <span>
+            <span className="tll-period">
               {start && (
                 <span className="tll-date tll-start">{start}</span>
               )}
@@ -38,21 +40,24 @@ export default function TimelineLine() {
             </span>
           </header>
           <div className="tll-info">
-            {exp.grade && (
-              <p>
-                <b>{main.translate(exp.grade, {}, 'timeline')}</b>
-                {exp.info && <><br /><small className="text-muted">{main.translate(exp.info, {}, 'timeline')}</small></>}
-              </p>
+            {exp.grade && exp.info && (
+              <details>
+                <summary>{main.translate(exp.grade, {}, 'timeline')}</summary>
+                {main.translate(exp.info, {}, 'timeline')}
+              </details>
+            )}
+            {exp.grade && !exp.info && (
+              <p>{main.translate(exp.grade, {}, 'timeline')}</p>
             )}
             {exp.job && (
-              <p>
-                <b>{main.translate(exp.job, {}, 'timeline')}</b><br />
-                <small className="text-muted">{exp.company}</small>
-              </p>
+              <dl>
+                <dt>{main.translate(exp.job, {}, 'timeline')}</dt>
+                <dd>{exp.company}</dd>
+              </dl>
             )}
           </div>
-        </section>;
+        </li>;
       })}
-    </div>
+    </ul>
   </article>;
 }
