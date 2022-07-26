@@ -33,21 +33,21 @@ export default function Index() {
                 <FontAwesomeIcon icon={duotone('bars-staggered')} />
             </button>
             <Layout>
-                {/*<Screen id="presentation">*/}
-                {/*    <Screen id="hero">*/}
-                {/*        <Hero />*/}
-                {/*    </Screen>*/}
-                {/*    /!*<Screen id="aventure">*!/*/}
-                {/*    /!*    <article style={{ backgroundColor: '#F88' }} />*!/*/}
-                {/*    /!*</Screen>*!/*/}
-                {/*</Screen>*/}
+                <Screen id="presentation">
+                    <Screen id="hero">
+                        <Hero />
+                    </Screen>
+                    {/*<Screen id="aventure">*/}
+                    {/*    <article style={{ backgroundColor: '#F88' }} />*/}
+                    {/*</Screen>*/}
+                </Screen>
                 <Screen id="timeline">
                     <Screen id="timeline-line">
                         <TimelineLine />
                     </Screen>
-                    {/*<Screen id="timeline-table">*/}
-                    {/*    <TimelineTable />*/}
-                    {/*</Screen>*/}
+                    <Screen id="timeline-table">
+                        <TimelineTable />
+                    </Screen>
                 </Screen>
                 {/*<Screen id="screen-3">*/}
                 {/*    <Screen id="projects">*/}

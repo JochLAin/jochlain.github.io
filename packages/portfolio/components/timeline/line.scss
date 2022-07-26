@@ -1,15 +1,68 @@
 @use "~rfs/scss" as *;
 
 .tll {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding-inline: 5rem;
   list-style: none;
 
   .tll-exp {
+    position: relative;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 1rem 3rem;
     gap: .75rem;
+
+    &::before {
+      position: absolute;
+      inset: -1px;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      content: '';
+    }
+
+    &:not(:last-child)::before {
+      border-bottom: 3px solid;
+    }
+
+    &:nth-child(odd) {
+      flex-direction: row;
+      padding-right: 0;
+      &::before {
+        border-image: linear-gradient(to bottom right, var(--tll-color) 0%, var(--tll-color) 25%, var(--tll-color-next, transparent) 100%);
+        border-image-slice: 1;
+        border-left: 3px solid;
+      }
+    }
+    &:nth-child(even) {
+      flex-direction: row-reverse;
+      padding-left: 0;
+      &::before {
+        border-image: linear-gradient(to bottom left, var(--tll-color) 0%, var(--tll-color) 25%, var(--tll-color-next, transparent) 100%);
+        border-image-slice: 1;
+        border-right: 3px solid;
+      }
+    }
+    &:first-child {
+      &::before {
+        top: 50%;
+        height: 50%;
+      }
+    }
+    &:last-child {
+      &::before {
+        height: 50%;
+      }
+    }
   }
 
   .tll-icon {
-    position: relative;
+    position: absolute;
+    z-index: 10;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -17,95 +70,37 @@
     height: rfs-fluid-value(3rem);
     background-color: var(--tll-color);
     color: #FFF;
+    border: 3px solid #FFF;
     border-radius: 50%;
-    font-size: rfs-fluid-value(1.8rem);
+    font-size: rfs-fluid-value(1.5rem);
+  }
 
-    &::before,
-    &::after {
-      position: absolute;
-      width: 1rem;
-      height: 1rem;
-      background-color: var(--body-bg);
-      content: '';
-      left: calc(100% - .1rem);
-      border-radius: 50%;
-      z-index: 15;
-    }
-    &::before {
-      bottom: calc(50% + .15rem);
-    }
-    &::after {
-      top: calc(50% + .15rem);
-    }
+  .tll-exp:nth-child(odd) .tll-icon {
+    left: 0;
+    transform: translateX(-50%);
+  }
+  .tll-exp:nth-child(even) .tll-icon {
+    right: 0;
+    transform: translateX(50%);
   }
 
   .tll-header {
-    position: relative;
     display: flex;
-    flex-direction: column;
-    width: 13rem;
+    flex-direction: row;
     gap: 10px;
-    margin-top: .75rem;
   }
 
-  .tll-label {
-    position: relative;
+  .tll-title {
     padding: .35rem .75rem;
     border-radius: 10000rem;
     color: #FFF;
     background-color: var(--tll-color);
     font-weight: 700;
     text-transform: uppercase;
-
-    &::before,
-    &::after {
-      position: absolute;
-      content: '';
-      background-color: var(--tll-color);
-    }
-
-    &::before {
-      top: 50%;
-      right: calc(100% - .5rem);
-      width: 1.5rem;
-      height: 1rem;
-      background-color: var(--tll-color);
-      transform: translateY(-50%);
-      z-index: 13;
-    }
-
-    &::after {
-      top: 100%;
-      left: 50%;
-      width: 1rem;
-      height: 10px;
-      transform: translateX(-50%);
-    }
   }
 
   .tll-period {
-    position: relative;
-    border: 5px solid var(--tll-color);
-    border-radius: 10000rem;
-    text-align: center;
-
-    &::before,
-    &::after {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background-color: var(--body-bg);
-      content: '';
-      bottom: calc(100% + 4.5px);
-      border-radius: 50%;
-      z-index: 15;
-    }
-    &::before {
-      left: calc(50% + .1rem);
-    }
-    &::after {
-      right: calc(50% + .1rem);
-    }
+    padding-inline: 10px;
   }
 
   .tll-start + .tll-end::before {
@@ -115,54 +110,22 @@
   }
 
   .tll-info {
-    position: relative;
     display: flex;
     flex-direction: column;
-    width: 15rem;
     gap: 10px;
-    margin-top: .75rem;
 
     details {
       position: relative;
-      border: 3px solid var(--tll-color);
-      border-radius: 1rem;
       padding: .5rem .5rem 0;
 
       summary {
         position: relative;
         margin: calc(-.5rem - 2px) calc(-.5rem - 2px) 0;
         padding: .35rem .75rem;
-        background-color: var(--tll-color);
-        color: #FFF;
-        border-radius: 1rem;
-
-        &::before,
-        &::after {
-          position: absolute;
-          width: 1rem;
-          height: 1rem;
-          background-color: var(--body-bg);
-          content: '';
-          top: 50%;
-          right: calc(100% - .1rem);
-          border-radius: 50%;
-          z-index: 15;
-        }
-        &::before {
-          transform: translateY(calc(-50% - .65rem));
-        }
-        &::after {
-          transform: translateY(calc(-50% + .65rem));
-        }
       }
 
       &[open] {
         padding-bottom: .5rem;
-
-        summary {
-          border-bottom-left-radius: 0;
-          border-bottom-right-radius: 0;
-        }
       }
     }
 
@@ -170,27 +133,11 @@
       dt {
         margin: 0;
         padding: .35rem .75rem;
-        background-color: var(--tll-color);
-        color: #FFF;
-        border-radius: 1rem 1rem 0 0;
       }
       dd {
         margin: 0;
         padding: .35rem .75rem;
-        border: 3px solid var(--tll-color);
-        border-radius: 0 0 1rem 1rem;
       }
-    }
-
-    &::before {
-      position: absolute;
-      content: '';
-      right: calc(100% - 3px);
-      top: 1rem;
-      width: 1.1rem;
-      height: 1rem;
-      background-color: var(--tll-color);
-      transform: translateY(-50%);
     }
   }
 }

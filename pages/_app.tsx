@@ -43,8 +43,8 @@ export default function App({ Component, pageProps }: AppProps) {
             <title>Jochlain - Blob des internets</title>
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="preconnect" href="https://fonts.googleapis.com" />
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
-            <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@0,700;1,700&family=Caveat&family=Edu+NSW+ACT+Foundation:wght@400;500;700&display=swap" rel="stylesheet" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+            <link href="https://fonts.googleapis.com/css2?family=Abel&family=Caveat&family=Lato&display=swap" rel="stylesheet" />
         </Head>
         <MainContext.Provider value={store}>
             <Component {...pageProps} />
