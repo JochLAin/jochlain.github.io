@@ -67,6 +67,10 @@ body.overview {
     .screen {
       gap: 5rem;
       overflow: visible;
+
+      .screen {
+        overflow: hidden;
+      }
     }
   }
 }

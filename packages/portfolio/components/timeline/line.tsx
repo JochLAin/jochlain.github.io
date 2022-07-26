@@ -32,17 +32,17 @@ export default function TimelineLine() {
           <span className="tll-icon">
             <FontAwesomeIcon icon={exp.icon_light} fixedWidth />
           </span>
-          <header className="tll-header">
-            <h4 className="tll-title">{label}</h4>
-          </header>
           <div className="tll-info">
+            <h4 className="tll-title">{label}</h4>
             <span className="tll-period">
               {start && (
                 <span className="tll-date tll-start">{start}</span>
               )}
-              {end && end !== main.date(new Date()) && (
+              {end && end !== start && (end !== main.date(new Date()) ? (
                 <span className="tll-date tll-end">{end}</span>
-              )}
+              ) : (
+                <span className="tll-date tll-end">{main.translate('now')}</span>
+              ))}
             </span>
             {exp.grade && (
               <details>
