@@ -5,9 +5,14 @@ import { EXPERIENCES, MONTHS } from "../../constants";
 import useMain from "@assets/hooks/useMain";
 
 export default function TimelineTable() {
-    return <article className="tlt">
-        <TimelineTableGraph />
-        <TimelineTableLegend />
+    const main = useMain();
+
+    return <article>
+        <h3>{main.translate('Graduations && Experiences', {}, 'timeline')}</h3>
+        <div className="tlt">
+            <TimelineTableGraph />
+            <TimelineTableLegend />
+        </div>
     </article>;
 }
 

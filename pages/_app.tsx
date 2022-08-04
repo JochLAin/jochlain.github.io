@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app'
 import Head from "next/head";
 import { MainContext } from "@assets/hooks/useMain";
 import translate from "@assets/utils/translate";
+import '@fortawesome/fontawesome-svg-core/styles.css'
 import "../stylesheets/index.scss";
 
 export default function App({ Component, pageProps }: AppProps) {
