@@ -82,6 +82,11 @@ body.overview {
   }
 }
 
+@media (--sm-below) {
+  .layout article h3 {
+    padding-right: 4.75rem;
+  }
+}
 @media (--sm-above) {
   .layout article {
     width: 540px;

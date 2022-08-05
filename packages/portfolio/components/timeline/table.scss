@@ -131,16 +131,18 @@ $history-cell-header: 1.5em;
 
 }
 
+@media (--sm-below) {
+  .tlt {
+    &-legend {
+      display: none;
+    }
+  }
+}
+
 @media (--sm-above) {
   .tlt {
     &-graph {
       font-size: 14px;
-    }
-    &-legend {
-      top: 0;
-      right: 0;
-      height: 100%;
-      padding-right: 0;
     }
   }
 }
