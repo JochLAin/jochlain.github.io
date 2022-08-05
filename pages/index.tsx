@@ -3,9 +3,10 @@ import { duotone } from "@fortawesome/fontawesome-svg-core/import.macro";
 import React, {SyntheticEvent, useEffect} from 'react';
 import Head from "next/head";
 import Layout, { Screen } from "../assets/components/layout";
-import { Hero, TimelineLine, TimelineTable } from "@portfolio/components";
+import { AboutMe, Hero, Project, Skill, TimelineLine, TimelineTable } from "@portfolio/components";
 
 export default function Index() {
+
     useEffect(() => {
         const onKeyPress = (evt: KeyboardEvent) => {
             if ('Escape' === evt.key) {
@@ -33,7 +34,7 @@ export default function Index() {
                 <FontAwesomeIcon icon={duotone('bars-staggered')} />
             </button>
             <Layout>
-                <Screen id="presentation">
+                <Screen id="line-1">
                     <Screen id="hero">
                         <Hero />
                     </Screen>
@@ -41,7 +42,15 @@ export default function Index() {
                     {/*    <article style={{ backgroundColor: '#F88' }} />*/}
                     {/*</Screen>*/}
                 </Screen>
-                <Screen id="timeline">
+                <Screen id="line-2">
+                    <Screen id="about">
+                        <AboutMe />
+                    </Screen>
+                    <Screen id="skill">
+                        <Skill />
+                    </Screen>
+                </Screen>
+                <Screen id="line-3">
                     <Screen id="timeline-line">
                         <TimelineLine />
                     </Screen>
@@ -49,17 +58,17 @@ export default function Index() {
                         <TimelineTable />
                     </Screen>
                 </Screen>
-                {/*<Screen id="screen-3">*/}
-                {/*    <Screen id="projects">*/}
-                {/*        <article style={{ backgroundColor: '#44F' }} />*/}
-                {/*    </Screen>*/}
+                <Screen id="line-4">
+                    <Screen id="projects">
+                        <Project />
+                    </Screen>
                 {/*    <Screen id="pixelart">*/}
                 {/*        <article style={{ backgroundColor: '#77F' }} />*/}
                 {/*    </Screen>*/}
                 {/*    <Screen id="translator">*/}
                 {/*        <article style={{ backgroundColor: '#AAF' }} />*/}
                 {/*    </Screen>*/}
-                {/*</Screen>*/}
+                </Screen>
                 {/*<Screen id="screen-4">*/}
                 {/*    <Screen id="references">*/}
                 {/*        <article style={{ backgroundColor: '#333' }} />*/}

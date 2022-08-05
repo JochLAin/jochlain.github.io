@@ -44,6 +44,12 @@ h3 {
   text-align: center;
 }
 
+h5 {
+  display: inline-block;
+  border-bottom: 2px solid black;
+  margin-block: 0 .5rem;
+}
+
 blockquote {
   font-family: var(--font-quote);
 }

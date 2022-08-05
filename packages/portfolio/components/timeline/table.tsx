@@ -8,7 +8,7 @@ export default function TimelineTable() {
     const main = useMain();
 
     return <article>
-        <h3>{main.translate('Graduations && Experiences', {}, 'timeline')}</h3>
+        <h3>{main.translate('Graduations && Experiences')}</h3>
         <div className="tlt">
             <TimelineTableGraph />
             <TimelineTableLegend />

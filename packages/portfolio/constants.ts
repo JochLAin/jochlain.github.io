@@ -97,5 +97,14 @@ export const EXPERIENCES: ExperienceInterface[] = [{
   icon_light: light('flask'),
   color: '#ff5722',
   start: new Date(2018, 11),
+  end: new Date(2022, 9),
+}, {
+  kind: 'job',
+  job: 'Web developer',
+  company: 'Maybe you ?',
+  icon: duotone('flask'),
+  icon_light: light('flask'),
+  color: '#795548',
+  start: new Date(2022, 10),
   end: new Date(),
 }];

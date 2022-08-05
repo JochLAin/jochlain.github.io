@@ -3,13 +3,12 @@ import React from "react";
 import useMain from "@assets/hooks/useMain";
 import type { ExperienceInterface } from "../../constants";
 import { EXPERIENCES } from "../../constants";
-import {Properties} from "csstype";
 
 export default function TimelineLine() {
   const main = useMain();
 
   return <article>
-    <h3>{main.translate('Graduations && Experiences', {}, 'timeline')}</h3>
+    <h3>{main.translate('Graduations && Experiences')}</h3>
     <ul className="tll">
       {EXPERIENCES.map((exp: ExperienceInterface, idx) => {
         const start = main.date(exp.start);
@@ -28,7 +27,7 @@ export default function TimelineLine() {
           }
         })(exp.kind);
 
-        return <li key={`tll-exp-${idx}`} className={`tll-exp tll-${exp.kind}`} style={vars as Properties}>
+        return <li key={`tll-exp-${idx}`} className={`tll-exp tll-${exp.kind}`} style={vars}>
           <span className="tll-icon">
             <FontAwesomeIcon icon={exp.icon_light} fixedWidth />
           </span>
