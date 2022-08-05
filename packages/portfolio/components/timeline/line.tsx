@@ -3,6 +3,7 @@ import React from "react";
 import useMain from "@assets/hooks/useMain";
 import type { ExperienceInterface } from "../../constants";
 import { EXPERIENCES } from "../../constants";
+import { Properties } from "csstype";
 
 export default function TimelineLine() {
   const main = useMain();
@@ -27,7 +28,7 @@ export default function TimelineLine() {
           }
         })(exp.kind);
 
-        return <li key={`tll-exp-${idx}`} className={`tll-exp tll-${exp.kind}`} style={vars}>
+        return <li key={`tll-exp-${idx}`} className={`tll-exp tll-${exp.kind}`} style={vars as Properties}>
           <span className="tll-icon">
             <FontAwesomeIcon icon={exp.icon_light} fixedWidth />
           </span>
