@@ -7,13 +7,15 @@ import useMain from "@assets/hooks/useMain";
 export default function TimelineTable() {
     const main = useMain();
 
-    return <article>
+    return<>
         <h3>{main.translate('Graduations && Experiences')}</h3>
-        <div className="tlt">
-            <TimelineTableGraph />
-            <TimelineTableLegend />
-        </div>
-    </article>;
+        <article>
+            <div className="tlt">
+                <TimelineTableGraph />
+                <TimelineTableLegend />
+            </div>
+        </article>
+    </>;
 }
 
 export function TimelineTableGraph() {

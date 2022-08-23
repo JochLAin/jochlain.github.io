@@ -1,4 +1,4 @@
-import React, { UIEvent, useEffect, useMemo } from "react";
+import React, {SyntheticEvent, UIEvent, useEffect, useMemo} from "react";
 
 export default function Grid(props: { grid: string[][], components: { [key: string]: any } }) {
   const debounce = useMemo(() => {
@@ -51,12 +51,31 @@ function Line(props: { components: { [key: string]: any }, row: string[], y: num
 }
 
 function Case(props: { components: { [key: string]: any }, id: string, x: number, y: number }) {
+  const debounce = useMemo(() => {
+    let debounce_timeout: number|undefined;
+    return (callback: Function, delay: number = 150) => {
+      if (debounce_timeout) window.clearTimeout(debounce_timeout);
+      debounce_timeout = window.setTimeout(callback, delay);
+    };
+  }, []);
+
   const onClickLink = () => {
     document.body.classList.remove('overview');
   };
 
+  const onScroll = (evt: SyntheticEvent<HTMLDivElement>) => {
+    const { currentTarget: target } = evt;
+    debounce(() => {
+      if (target.scrollTop) {
+        target.querySelector('h3')?.classList.add('sticked');
+      } else {
+        target.querySelector('h3')?.classList.remove('sticked');
+      }
+    }, 30);
+  };
+
   const Component = props.components[props.id];
-  return <div id={props.id} className="screen">
+  return <div id={props.id} className="screen" onScroll={onScroll}>
     <a href={`#${props.id}`} className="screen-link" onClick={onClickLink} />
     <Component />
   </div>;
