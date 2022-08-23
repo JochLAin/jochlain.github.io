@@ -109,8 +109,6 @@ export function TimelineTableLegend() {
 
     return <ul className="tlt-legend col-12 col-sm-4 bg-body">
         {EXPERIENCES.map((exp, idx) => {
-            // const title = `${date(exp.start, 'yyyy-mm')} → ${date(exp.end, 'yyyy-mm')}`;
-
             return <li key={`tlt-exp-${idx}`}>
                 <FontAwesomeIcon icon={solid('square')} style={{ color: exp.color }} />
                 <div>
@@ -123,7 +121,7 @@ export function TimelineTableLegend() {
                     {exp.job && (
                       <p>
                           <b>{main.translate(exp.job, {}, 'timeline')}</b><br />
-                          <small className="text-muted">{exp.company}</small>
+                          <small className="text-muted">{main.translate(exp.company, {}, 'timeline')}</small>
                       </p>
                     )}
                 </div>

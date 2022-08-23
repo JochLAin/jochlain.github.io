@@ -16,8 +16,8 @@
 
 #hero {
   align-items: center;
-  background-color: #FFF;
-  background-image: var(--gradient-8);
+  background-color: #333;
+  background-image: var(--gradient-dark);
   background-size: cover;
 
   article {
@@ -71,7 +71,7 @@
 
   .navigation-hint {
     position: absolute;
-    bottom: 1rem;
+    bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
     transition: color 150ms ease-in;

@@ -70,7 +70,9 @@ h3 {
 blockquote {
   font-size: rfs-fluid-value($blockquote-font-size);
 }
-
+details summary {
+  cursor: pointer;
+}
 @media (--rfs) {
   h1 {
     font-size: $h1-font-size;

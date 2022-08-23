@@ -14,6 +14,8 @@ export interface ExperienceInterface {
 }
 
 export const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const MIN_DATE = new Date(2022, 10);
+const NOW = new Date();
 
 export const EXPERIENCES: ExperienceInterface[] = [{
   kind: 'grade',
@@ -105,6 +107,6 @@ export const EXPERIENCES: ExperienceInterface[] = [{
   icon: duotone('flask'),
   icon_light: light('flask'),
   color: '#795548',
-  start: new Date(2022, 10),
-  end: new Date(),
+  start: NOW < MIN_DATE ? MIN_DATE : NOW,
+  end: NOW < MIN_DATE ? MIN_DATE : NOW,
 }];

@@ -41,7 +41,7 @@ export default function TimelineLine() {
               {end && end !== start && (end !== main.date(new Date()) ? (
                 <span className="tll-date tll-end">{end}</span>
               ) : (
-                <span className="tll-date tll-end">{main.translate('now')}</span>
+                <span className="tll-date tll-end">{main.translate('now', {}, 'timeline')}</span>
               ))}
             </span>
             {exp.grade && (
@@ -53,7 +53,7 @@ export default function TimelineLine() {
             {exp.job && (
               <dl>
                 <dt>{main.translate(exp.job, {}, 'timeline')}</dt>
-                <dd>{exp.company}</dd>
+                <dd>{main.translate(exp.company, {}, 'timeline')}</dd>
               </dl>
             )}
           </div>

@@ -17,12 +17,21 @@
   flex: none;
   height: 100vh;
   width: 100vw;
+  background-color: #FFF;
+  background-image: var(--gradient-light);
+  background-size: cover;
   overflow: auto;
   scroll-snap-align: start;
   scroll-behavior: smooth;
 }
 
 .layout {
+  transition: transform 150ms ease-in;
+
+  .screen .screen-link {
+    display: none;
+  }
+
   > .screen {
     flex-direction: row;
     scroll-snap-type: x mandatory;
@@ -33,18 +42,18 @@
     }
   }
 
+  h3 {
+    position: sticky;
+    top: 0;
+    z-index: 10000;
+    background-color: rgba(#FFF, .2);
+  }
+
   article {
     position: relative;
     max-width: 100vw;
     height: 100%;
     margin: 0 auto;
-
-    h3 {
-      position: sticky;
-      top: 0;
-      z-index: 10000;
-      background-color: white;
-    }
 
     nav {
       position: absolute;
@@ -72,8 +81,16 @@ body.overview {
     transform: scale(20%);
 
     .screen {
+      position: relative;
       gap: 5rem;
       overflow: visible;
+
+      .screen-link {
+        position: absolute;
+        inset: 0;
+        display: block;
+        z-index: 500;
+      }
 
       .screen {
         overflow: hidden;
