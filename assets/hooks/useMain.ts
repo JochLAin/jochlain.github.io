@@ -1,6 +1,7 @@
 import { createContext, useContext } from 'react';
 
 export interface MainInterface {
+    initialize: Function,
     locale: string,
     setLocale: Function,
     translate: Function,
@@ -9,6 +10,7 @@ export interface MainInterface {
 
 export const MainContext = createContext<MainInterface>({
     locale: 'fr',
+    initialize: () => {},
     setLocale: () => {},
     translate: (message: string) => message,
     date: (date: Date) => date.toLocaleString(),

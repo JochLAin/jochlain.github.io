@@ -1,8 +1,9 @@
+import type { ExperienceInterface } from "@assets/constants";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import useMain from "@assets/hooks/useMain";
-import type { ExperienceInterface } from "../../constants";
-import { EXPERIENCES } from "../../constants";
+import { EXPERIENCES } from "@assets/constants";
 import { Properties } from "csstype";
 
 export default function TimelineLine() {

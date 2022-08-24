@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { duotone, regular, solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import React from "react";
-import { EXPERIENCES, MONTHS } from "../../constants";
+import { EXPERIENCES, MONTHS } from "@assets/constants";
 import useMain from "@assets/hooks/useMain";
 
 export default function TimelineTable() {

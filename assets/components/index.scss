@@ -1,6 +1,6 @@
 @use "~rfs/scss" as *;
-@forward "components/timeline/line";
-@forward "./components/timeline/table";
+@forward "timeline/line";
+@forward "timeline/table";
 
 @keyframes blink {
   30% {
@@ -14,7 +14,7 @@
   }
 }
 
-#hero {
+#me {
   align-items: center;
   background-color: #333;
   background-image: var(--gradient-dark);

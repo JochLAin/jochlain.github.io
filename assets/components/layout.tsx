@@ -1,4 +1,4 @@
-import React, {SyntheticEvent, UIEvent, useEffect, useMemo} from "react";
+import React, { SyntheticEvent, useEffect, useMemo } from "react";
 
 export default function Grid(props: { grid: string[][], components: { [key: string]: any } }) {
   const debounce = useMemo(() => {
@@ -12,7 +12,9 @@ export default function Grid(props: { grid: string[][], components: { [key: stri
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       debounce(() => {
-        history.replaceState({}, '', `#${entries[0].target.id}`);
+        if (!document.body.classList.contains('overview')) {
+          history.replaceState({}, '', `#${entries[0].target.id}`);
+        }
       });
     }, {
       root: null,
@@ -43,14 +45,14 @@ export default function Grid(props: { grid: string[][], components: { [key: stri
 }
 
 function Line(props: { components: { [key: string]: any }, row: string[], y: number }) {
-  return <div className="screen">
+  return <div className="line">
     {props.row.map((id, x) => {
-      return <Case key={`layout-case-${props.y}-${x}`} {...props} id={id} x={x} />;
+      return <Screen key={`layout-case-${props.y}-${x}`} {...props} id={id} x={x} />;
     })}
   </div>;
 }
 
-function Case(props: { components: { [key: string]: any }, id: string, x: number, y: number }) {
+function Screen(props: { components: { [key: string]: any }, id: string, x: number, y: number }) {
   const debounce = useMemo(() => {
     let debounce_timeout: number|undefined;
     return (callback: Function, delay: number = 150) => {
@@ -76,7 +78,7 @@ function Case(props: { components: { [key: string]: any }, id: string, x: number
 
   const Component = props.components[props.id];
   return <div id={props.id} className="screen" onScroll={onScroll}>
-    <a href={`#${props.id}`} className="screen-link" onClick={onClickLink} />
+    <a href={`#${props.id}`} className="anchor" onClick={onClickLink} />
     <Component />
   </div>;
 }

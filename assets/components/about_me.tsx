@@ -1,5 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { duotone } from "@fortawesome/fontawesome-svg-core/import.macro";
 import React from "react";
 import useMain from "@assets/hooks/useMain";
 
@@ -8,7 +6,7 @@ export default function AboutMe() {
 
   return <>
     <h3>{main.translate('About me')}</h3>
-    <article style={{ paddingInline: '2rem' }}>
+    <article>
       <p>
         Ayant commencé ma formation dans le développement logiciel puis dans le développement mobile, j'ai finalement choisi le développement web pour ma carrière car il m'offrait beaucoup plus de liberté.<br />
         Dans ce domaine depuis maintenant {(new Date()).getFullYear() - 2014} années, j'ai appris à mettre en place des projets de l'expression du besoin à la surveillance et la maintenance d'un site web.
@@ -24,7 +22,7 @@ export default function AboutMe() {
       <details>
         <summary>un réseau social de la maison : <a href="https://kozikaza.com" target="_blank" rel="noopener noreferer">Kozikaza</a> ;</summary>
         <ul>
-          <li>Symfony 2.3 à 3.4</li>
+          <li>Symfony 2.3 → 3.4</li>
           <li>Plus d'un million d'utilisateurs</li>
           <li>Performance BDD / SQL</li>
           <li>Structure maître-esclave</li>
@@ -35,6 +33,7 @@ export default function AboutMe() {
       <details>
         <summary>un gestionnaire de big data sur des plans 3D : <a href="https://kazaplan.com" target="_blank" rel="noopener noreferer">Kazaplan</a> ;</summary>
         <ul>
+          <li>Symfony 3.4 / React 16</li>
           <li>Front décorrélé du back</li>
           <li>Intranet</li>
           <li>Big data</li>
@@ -43,13 +42,14 @@ export default function AboutMe() {
       <details>
         <summary>un CMS interne pour lancer des sites vitrines à la volée ;</summary>
         <ul>
+          <li>Symfony 3.4 / React 16</li>
           <li>Gestion des différents types de contenus</li>
         </ul>
       </details>
       <details>
         <summary>un site e-commerce de vente de valises et mousses : <a href="https://rank-shop.fr" target="_blank" rel="noopener noreferer">Rank</a> ;</summary>
         <ul>
-          <li>Magento</li>
+          <li>Magento 2</li>
           <li>Thème adapté au besoin</li>
           <li>Import de produits personnalisé</li>
         </ul>
@@ -57,12 +57,12 @@ export default function AboutMe() {
       <details>
         <summary>une suite d'outil pour la gestion des ressources humaines : <a href="https://rhsuite.com" target="_blank" rel="noopener noreferer">RHSuite</a> ;</summary>
         <ul>
-          <li>Symfony 2.8 à 4.4</li>
+          <li>Symfony 2.8 → 4.4 / React 16 → 18</li>
           <li>Gestion de droits</li>
           <li>Génération de document dynamique</li>
           <li>Gestion de planning</li>
           <li>Gestion de paie</li>
-          <li>Application mobile</li>
+          <li>Application tablette relié par API</li>
         </ul>
       </details>
     </article>

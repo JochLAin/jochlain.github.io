@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import type { AppProps } from 'next/app'
 import Head from "next/head";
 import { MainContext } from "@assets/hooks/useMain";
@@ -8,16 +8,26 @@ import "../stylesheets/index.scss";
 
 export default function App({ Component, pageProps }: AppProps) {
     const [locale, setLocale] = useState('fr');
+    const rendered = useRef<boolean>(false);
     const store = Object.assign(
         { locale },
     );
 
     Object.assign(store, {
-        setLocale: (locale: string) => {
-            if (document?.documentElement) {
-                document.documentElement.lang = locale;
+        initialize: (locale: string) => {
+            if (!rendered.current) {
+                store.setLocale(locale);
             }
-            setLocale(locale);
+        },
+        setLocale: (value: string) => {
+            if (value !== locale) {
+                if (document?.documentElement) {
+                    document.documentElement.lang = value;
+                }
+                localStorage.setItem('locale', value);
+                setLocale(value);
+                history.replaceState({}, '', `/${value}`);
+            }
         },
         translate: (message: string, parameters = {}, domain: string) => {
             return translate(message, parameters, domain, locale);
@@ -34,9 +44,7 @@ export default function App({ Component, pageProps }: AppProps) {
     });
 
     useEffect(() => {
-        const locale = localStorage.getItem('locale') || 'fr';
-        document.documentElement.lang = locale;
-        setLocale(locale);
+        rendered.current = true;
     }, []);
 
     return <>
