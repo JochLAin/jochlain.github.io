@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, {SyntheticEvent, useLayoutEffect, useRef, useState} from "react";
 import useDebounce from "@assets/hooks/useDebounce";
 import useLayout, { LayoutContext } from "@assets/hooks/useLayout";
 
@@ -20,19 +20,19 @@ export default function Grid(props: { children: any, grid: string[][], component
       }
       return [0, 0];
     },
-    goDown: (y) => {
+    goDown: (y: number) => {
       if (y < props.grid.length) store.goTo(y + 1, lines[y + 1]);
     },
-    goLeft: (y, x) => {
+    goLeft: (y: number, x: number) => {
       if (x > 0) store.goTo(y, x - 1);
     },
-    goRight: (y, x) => {
+    goRight: (y: number, x: number) => {
       if (x < props.grid[y].length) store.goTo(y, x + 1);
     },
-    goUp: (y) => {
+    goUp: (y: number) => {
       if (y > 0) store.goTo(y - 1, lines[y - 1]);
     },
-    goTo: (y, x) => {
+    goTo: (y: number, x: number) => {
       setLines(lines.map((_x, _y) => _y === y ? x : _x));
       if (!fullscreen.current) store.toggle();
       setTimeout(() => {
@@ -69,7 +69,7 @@ export default function Grid(props: { children: any, grid: string[][], component
       }
     };
 
-    const onScroll = (evt) => {
+    const onScroll = (evt: WheelEvent) => {
       debounceWheel(() => {
         const screen = evt.target.matches('.screen') ? evt.target : evt.target.closest('.screen');
         const article = screen.querySelector('article');
@@ -91,17 +91,17 @@ export default function Grid(props: { children: any, grid: string[][], component
       }, 30);
     };
 
-    const onTouchStart = (evt) => {
+    const onTouchStart = (evt: TouchEvent) => {
       bufferTouchId = evt.targetTouches[0].identifier;
       bufferTouchX = evt.targetTouches[0].pageX;
       bufferTouchY = evt.targetTouches[0].pageY;
     };
 
-    const onTouchMove = (evt) => {
+    const onTouchMove = (evt: TouchEvent) => {
       evt.preventDefault();
     };
 
-    const onTouchEnd = (evt) => {
+    const onTouchEnd = (evt: TouchEvent) => {
       debounceTouchEnd(() => {
         const MIN_DELTA = 100;
         const screen = evt.target.matches('.screen') ? evt.target : evt.target.closest('.screen');
@@ -166,7 +166,7 @@ function Line(props: { components: { [key: string]: any }, current: string, row:
 
 function Screen(props: { components: { [key: string]: any }, current: string, id: string, x: number, y: number }) {
   const layout = useLayout();
-  const onClickLink = (evt) => {
+  const onClickLink = (evt: SyntheticEvent) => {
     evt.preventDefault();
     const [y, x] = layout.getCoordinates(props.id);
     layout.goTo(y, x);
