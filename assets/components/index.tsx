@@ -1,34 +1,33 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { duotone } from "@fortawesome/fontawesome-svg-core/import.macro";
 import React, { SyntheticEvent, useEffect } from "react";
-import AboutMe from "./about_me";
+import useMain from "@assets/hooks/useMain";
+import useLayout from "@assets/hooks/useLayout";
+import About from "./about";
 import Hero from "./hero";
 import Layout from "./layout";
 import Project from "./project";
 import Skill from "./skill";
 import TimelineLine from "./timeline/line";
 import TimelineTable from "./timeline/table";
-import useMain from "@assets/hooks/useMain";
 
 const COMPONENTS = {
-  about: AboutMe,
+  about: About,
   me: Hero,
   project: Project,
-  'timeline-line': TimelineLine,
-  'timeline-table': TimelineTable,
+  timeline: TimelineLine,
+  calendar: TimelineTable,
   skill: Skill,
 };
 
 const GRID = [
   ['me'],
   ['about', 'skill'],
-  ['timeline-line', 'timeline-table'],
+  ['timeline', 'calendar'],
   ['project'],
 ];
 
 export default function Index() {
-  const main = useMain();
-
   useEffect(() => {
     // Open all details for desktop
     if (document.body.clientWidth > 1200) {
@@ -38,27 +37,36 @@ export default function Index() {
     }
   }, []);
 
+  return <main>
+    <Layout components={COMPONENTS} grid={GRID}>
+      <Menu />
+    </Layout>
+  </main>;
+}
+
+function Menu() {
+  const main = useMain();
+  const layout = useLayout();
+
   const onClickFullscreen = (evt: SyntheticEvent) => {
     evt.preventDefault();
-    document.body.classList.toggle('overview');
+    console.log('click fullscreen');
+    layout.toggle();
   };
 
   const onClickLocale = (locale: string) => (evt: SyntheticEvent) => {
     evt.preventDefault();
-    document.body.classList.toggle('overview');
     main.setLocale(locale);
+    layout.toggle();
   };
 
-  return <main>
-    <aside className="menu">
-      <button type="button" onClick={onClickFullscreen}>
-        <FontAwesomeIcon icon={duotone('bars-staggered')} />
-      </button>
-      <nav>
-        <a href="/fr" onClick={onClickLocale('fr')}>Français</a>
-        <a href="/en" onClick={onClickLocale('en')}>English</a>
-      </nav>
-    </aside>
-    <Layout components={COMPONENTS} grid={GRID} />
-  </main>;
+  return <aside className="menu">
+    <button type="button" onClick={onClickFullscreen}>
+      <FontAwesomeIcon icon={duotone('bars-staggered')} />
+    </button>
+    <nav>
+      <a href="/fr" onClick={onClickLocale('fr')}>Français</a>
+      <a href="/en" onClick={onClickLocale('en')}>English</a>
+    </nav>
+  </aside>;
 }

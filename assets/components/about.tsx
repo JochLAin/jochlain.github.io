@@ -1,7 +1,7 @@
 import React from "react";
 import useMain from "@assets/hooks/useMain";
 
-export default function AboutMe() {
+export default function About() {
   const main = useMain();
 
   return <>

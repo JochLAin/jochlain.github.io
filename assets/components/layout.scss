@@ -12,6 +12,11 @@
   scroll-behavior: smooth;
 }
 
+.layout,
+.line {
+  overflow: hidden;
+}
+
 .line,
 .screen {
   display: flex;
@@ -21,7 +26,6 @@
   background-color: #FFF;
   //background-image: var(--gradient-light);
   background-size: cover;
-  overflow: auto;
   scroll-snap-align: start;
   scroll-behavior: smooth;
 }
@@ -33,6 +37,7 @@
 
 .screen {
   flex-direction: column;
+  overflow: auto;
   scroll-snap-type: y mandatory;
 }
 
@@ -110,20 +115,25 @@ body.overview {
     display: flex;
   }
 
-  .layout {
-    gap: 5rem;
+  .layout,
+  .line {
+    gap: 20vh;
     overflow: visible;
+  }
+
+  .layout {
     transform: scale(20%);
   }
+
   .line,
   .screen {
     position: relative;
-    gap: 5rem;
-    overflow: visible;
   }
+
   .screen {
     overflow: hidden;
   }
+
   .anchor {
     display: block;
   }
