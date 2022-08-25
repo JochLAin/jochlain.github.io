@@ -9,12 +9,14 @@ export default function TimelineTable() {
 
     return<>
         <h3>{main.translate('Graduations && Experiences')}</h3>
-        <article>
-            <div className="tlt">
-                <TimelineTableGraph />
-                <TimelineTableLegend />
-            </div>
-        </article>
+        <section>
+            <article>
+                <div className="tlt">
+                    <TimelineTableGraph />
+                    <TimelineTableLegend />
+                </div>
+            </article>
+        </section>
     </>;
 }
 

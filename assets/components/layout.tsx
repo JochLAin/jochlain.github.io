@@ -33,16 +33,16 @@ export default function Grid(props: { children: any, grid: string[][], component
       if (y > 0) store.goTo(y - 1, lines[y - 1]);
     },
     goTo: (y: number, x: number) => {
-      setLines(lines.map((_x, _y) => _y === y ? x : _x));
-      if (!fullscreen.current) store.toggle();
-      setTimeout(() => {
+      if (props.grid?.[y]?.[x]) {
+        setLines(lines.map((_x, _y) => _y === y ? x : _x));
+        if (!fullscreen.current) store.toggle();
         const width = document.body.clientWidth;
         const height = document.body.clientHeight;
 
         document.querySelector('.layout')?.scrollTo({ left: 0, top: height * y, behavior: 'smooth' });
         document.querySelector(`.layout .line:nth-child(${y + 1})`)?.scrollTo({ left: width * x, top: 0, behavior: 'smooth' });
         history?.replaceState({}, '', `#${props.grid[y][x]}`);
-      }, 150);
+      }
     },
     toggle: () => {
       if (!fullscreen.current) {
@@ -73,16 +73,17 @@ export default function Grid(props: { children: any, grid: string[][], component
         const target = evt.target as Element;
         const screen = target.matches('.screen') ? target : target.closest('.screen');
         if (screen) {
+          const section = screen.querySelector('section');
           const article = screen.querySelector('article');
           if (article) {
             const [y, x] = store.getCoordinates(screen.id);
 
             if ((!evt.shiftKey && evt.deltaY < 0) || (evt.shiftKey && evt.deltaX < 0)) {
-              if (screen.scrollTop === 0) {
+              if (!section || section.scrollTop === 0) {
                 store.goUp(y);
               }
             } else if ((!evt.shiftKey && evt.deltaY > 0) || (evt.shiftKey && evt.deltaX > 0)) {
-              if ((screen.scrollTop + document.body.clientHeight) >= article.offsetHeight) {
+              if (!section || (section.scrollTop + document.body.clientHeight) >= article.offsetHeight) {
                 store.goDown(y);
               }
             } else if ((evt.shiftKey && evt.deltaY < 0) || (!evt.shiftKey && evt.deltaX < 0)) {

@@ -26,19 +26,24 @@
   background-color: #FFF;
   //background-image: var(--gradient-light);
   background-size: cover;
-  scroll-snap-align: start;
-  scroll-behavior: smooth;
+  //scroll-snap-align: start;
+  //scroll-behavior: smooth;
 }
 
 .line {
   flex-direction: row;
-  scroll-snap-type: x mandatory;
+  //scroll-snap-type: x mandatory;
 }
 
 .screen {
   flex-direction: column;
-  overflow: auto;
-  scroll-snap-type: y mandatory;
+  overflow: hidden;
+  //scroll-snap-type: y mandatory;
+
+  > section {
+    height: calc(100vh - 5.75rem);
+    overflow: auto;
+  }
 }
 
 .anchor {
