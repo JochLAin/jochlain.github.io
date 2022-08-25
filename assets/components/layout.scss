@@ -1,3 +1,5 @@
+@use "~rfs/scss" as *;
+
 .layout {
   width: 100vw;
   height: 100vh;
@@ -138,25 +140,35 @@ body.overview {
   .screen {
     overflow: visible;
     padding-top: 5.75rem;
-
-    h3 {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      width: 100%;
-      font-size: 5rem !important;
-      font-weight: 400;
-      text-align: center !important;
-    }
   }
 
   .anchor {
     display: block;
   }
+
+  h3 {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    font-size: rfs-fluid-value(5rem);
+    font-weight: 400;
+    line-height: 1.2;
+    text-align: center;
+  }
 }
 
-@media (--sm-below) {
+@media (--lg-above) {
   h3 {
-    padding-right: 4.75rem;
+    text-align: center;
+  }
+}
+
+@media (--rfs) {
+  body.overview {
+    h3 {
+      font-size: 5rem;
+      line-height: 1;
+    }
   }
 }
