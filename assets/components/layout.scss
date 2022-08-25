@@ -136,7 +136,18 @@ body.overview {
   }
 
   .screen {
-    overflow: hidden;
+    overflow: visible;
+    padding-top: 5.75rem;
+
+    h3 {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      font-size: 5rem !important;
+      font-weight: 400;
+      text-align: center !important;
+    }
   }
 
   .anchor {
