@@ -26,12 +26,12 @@ export default function Hero() {
                 <a href="https://github.com/jochlain" target="_blank" rel="noreferrer noopener">
                     <FontAwesomeIcon icon={brands('github')} size="2x" fixedWidth />
                 </a>
-                <a href="@assets/components/hero" target="_blank" rel="noreferrer noopener">
+                <a href="https://www.linkedin.com/in/jocelyn-faihy-421ba885/" target="_blank" rel="noreferrer noopener">
                     <FontAwesomeIcon icon={brands('linkedin')} size="2x" fixedWidth />
                 </a>
             </footer>
         </article>
-        <a href="@assets/components/hero#timeline" className="navigation-hint-bottom">
+        <a href="#about" className="navigation-hint-bottom">
             <FontAwesomeIcon icon={regular('angle-down')} size="2x" fixedWidth />
         </a>
     </>;
