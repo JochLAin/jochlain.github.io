@@ -11,7 +11,7 @@ export interface LayoutInterface {
 }
 
 export const LayoutContext = createContext<LayoutInterface>({
-  getCoordinates: () => [],
+  getCoordinates: () => [0, 0],
   goDown: () => {},
   goLeft: () => {},
   goRight: () => {},

@@ -10,7 +10,7 @@ export default function Grid(props: { children: any, grid: string[][], component
   const debounceWheel = useDebounce();
 
   const store = {
-    getCoordinates: (id: string) => {
+    getCoordinates: (id: string): [number, number] => {
       for (let _y = 0; _y < props.grid.length; _y++) {
         for (let _x = 0; _x < props.grid[_y].length; _x++) {
           if (props.grid[_y][_x] === id) {
@@ -70,22 +70,27 @@ export default function Grid(props: { children: any, grid: string[][], component
 
     const onScroll = (evt: WheelEvent) => {
       debounceWheel(() => {
-        const screen = evt.target.matches('.screen') ? evt.target : evt.target.closest('.screen');
-        const article = screen.querySelector('article');
-        const [y, x] = store.getCoordinates(screen.id);
+        const target = evt.target as Element;
+        const screen = target.matches('.screen') ? target : target.closest('.screen');
+        if (screen) {
+          const article = screen.querySelector('article');
+          if (article) {
+            const [y, x] = store.getCoordinates(screen.id);
 
-        if ((!evt.shiftKey && evt.deltaY < 0) || (evt.shiftKey && evt.deltaX < 0)) {
-          if (screen.scrollTop === 0) {
-            store.goUp(y);
+            if ((!evt.shiftKey && evt.deltaY < 0) || (evt.shiftKey && evt.deltaX < 0)) {
+              if (screen.scrollTop === 0) {
+                store.goUp(y);
+              }
+            } else if ((!evt.shiftKey && evt.deltaY > 0) || (evt.shiftKey && evt.deltaX > 0)) {
+              if ((screen.scrollTop + document.body.clientHeight) >= article.offsetHeight) {
+                store.goDown(y);
+              }
+            } else if ((evt.shiftKey && evt.deltaY < 0) || (!evt.shiftKey && evt.deltaX < 0)) {
+              store.goLeft(y, x);
+            } else if ((evt.shiftKey && evt.deltaY > 0) || (!evt.shiftKey && evt.deltaX > 0)) {
+              store.goRight(y, x);
+            }
           }
-        } else if ((!evt.shiftKey && evt.deltaY > 0) || (evt.shiftKey && evt.deltaX > 0)) {
-          if ((screen.scrollTop + document.body.clientHeight) >= article.offsetHeight) {
-            store.goDown(y);
-          }
-        } else if ((evt.shiftKey && evt.deltaY < 0) || (!evt.shiftKey && evt.deltaX < 0)) {
-          store.goLeft(y, x);
-        } else if ((evt.shiftKey && evt.deltaY > 0) || (!evt.shiftKey && evt.deltaX > 0)) {
-          store.goRight(y, x);
         }
       }, 30);
     };
@@ -103,44 +108,52 @@ export default function Grid(props: { children: any, grid: string[][], component
     const onTouchEnd = (evt: TouchEvent) => {
       debounceTouchEnd(() => {
         const MIN_DELTA = 100;
-        const screen = evt.target.matches('.screen') ? evt.target : evt.target.closest('.screen');
-        const article = screen.querySelector('article');
-        const [y, x] = store.getCoordinates(screen.id);
-        const touch = [...evt.changedTouches].find((touch) => touch.identifier === bufferTouchId);
-        const deltaX = touch.pageX - bufferTouchX;
-        const deltaY = touch.pageY - bufferTouchY;
+        const target = evt.target as Element;
+        const screen = target.matches('.screen') ? target : target.closest('.screen');
+        if (screen) {
+          const article = screen.querySelector('article');
+          if (article) {
+            const [y, x] = store.getCoordinates(screen.id);
+            const touch = Array.from(evt.changedTouches).find((touch) => touch.identifier === bufferTouchId);
+            if (touch) {
+              const deltaX = touch.pageX - bufferTouchX;
+              const deltaY = touch.pageY - bufferTouchY;
 
-        if (Math.abs(deltaX) > Math.abs(deltaY)) {
-          if (deltaX > MIN_DELTA) {
-            store.goLeft(y, x);
-          } else if (deltaX < -MIN_DELTA) {
-            store.goRight(y, x);
-          }
-        } else {
-          if (deltaY > MIN_DELTA) {
-            if (screen.scrollTop === 0) {
-              store.goUp(y);
-            }
-          } else if (deltaY < -MIN_DELTA) {
-            if ((screen.scrollTop + document.body.clientHeight) >= article.offsetHeight) {
-              store.goDown(y);
+              if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                if (deltaX > MIN_DELTA) {
+                  store.goLeft(y, x);
+                } else if (deltaX < -MIN_DELTA) {
+                  store.goRight(y, x);
+                }
+              } else {
+                if (deltaY > MIN_DELTA) {
+                  if (screen.scrollTop === 0) {
+                    store.goUp(y);
+                  }
+                } else if (deltaY < -MIN_DELTA) {
+                  if ((screen.scrollTop + document.body.clientHeight) >= article.offsetHeight) {
+                    store.goDown(y);
+                  }
+                }
+              }
             }
           }
         }
       }, 50);
     };
 
-    const wheelEventName = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
     fullscreen.current = !document.body.classList.contains('overview');
-    window.addEventListener(wheelEventName, onScroll, { passive: false }); // modern desktop
+    window.addEventListener('wheel', onScroll, { passive: false }); // modern desktop
     window.addEventListener('touchstart', onTouchStart, { capture: false }); // mobile
     window.addEventListener('touchmove', onTouchMove, { capture: false }); // mobile
     window.addEventListener('touchend', onTouchEnd, { capture: false }); // mobile
     document.addEventListener('keyup', onKeyPress);
 
     return () => {
-      window.removeEventListener(wheelEventName, onScroll); // modern desktop
+      window.removeEventListener('wheel', onScroll); // modern desktop
+      window.removeEventListener('touchstart', onTouchStart); // mobile
       window.removeEventListener('touchmove', onTouchMove); // mobile
+      window.removeEventListener('touchend', onTouchEnd); // mobile
       document.removeEventListener('keyup', onKeyPress);
     }
   }, [store.toggle]);
@@ -155,7 +168,7 @@ export default function Grid(props: { children: any, grid: string[][], component
   </LayoutContext.Provider>;
 }
 
-function Line(props: { components: { [key: string]: any }, current: string, row: string[], y: number }) {
+function Line(props: { components: { [key: string]: any }, row: string[], y: number }) {
   return <div className="line" onScroll={(evt) => { evt.preventDefault(); }}>
     {props.row.map((id, x) => {
       return <Screen key={`layout-case-${props.y}-${x}`} {...props} id={id} x={x} />;
@@ -163,7 +176,7 @@ function Line(props: { components: { [key: string]: any }, current: string, row:
   </div>;
 }
 
-function Screen(props: { components: { [key: string]: any }, current: string, id: string, x: number, y: number }) {
+function Screen(props: { components: { [key: string]: any }, id: string, x: number, y: number }) {
   const layout = useLayout();
   const onClickLink = (evt: SyntheticEvent) => {
     evt.preventDefault();
