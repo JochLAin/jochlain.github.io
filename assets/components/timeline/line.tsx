@@ -1,7 +1,7 @@
-import type { ExperienceInterface } from "@assets/constants";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { duotone, light } from "@fortawesome/fontawesome-svg-core/import.macro";
 import React from "react";
+import type { ExperienceInterface } from "@assets/constants";
 import useMain from "@assets/hooks/useMain";
 import { EXPERIENCES } from "@assets/constants";
 import { Properties } from "csstype";
@@ -14,13 +14,26 @@ export default function TimelineLine() {
     <section>
       <article>
         <ul className="tll">
-          {EXPERIENCES.map((exp: ExperienceInterface, idx) => {
+          {EXPERIENCES.reduce((accu, exp) => {
+            if (exp.kind !== 'both') return [...accu, exp];
+            return [...accu, {
+              ...exp,
+              kind: 'grade',
+              icon: duotone('graduation-cap'),
+              icon_light: light('graduation-cap'),
+            }, {
+              ...exp,
+              kind: 'job',
+              icon: duotone('flask'),
+              icon_light: light('flask'),
+            }];
+          }, []).map((exp: ExperienceInterface, idx, exps) => {
             const start = main.date(exp.start);
             const end = main.date(exp.end);
             const vars = {
               '--tll-color': exp.color || '#607d8b',
-              '--tll-color-previous': EXPERIENCES[idx - 1]?.color,
-              '--tll-color-next': EXPERIENCES[idx + 1]?.color,
+              '--tll-color-previous': exps[idx - 1]?.color,
+              '--tll-color-next': exps[idx + 1]?.color,
             };
 
             const label = ((kind) => {
@@ -47,13 +60,13 @@ export default function TimelineLine() {
                     <span className="tll-date tll-end">{main.translate('now', {}, 'timeline')}</span>
                   ))}
               </span>
-                {exp.grade && (
+                {exp.kind === 'grade' && (
                   <details>
                     <summary>{main.translate(exp.grade, {}, 'timeline')}</summary>
                     {main.translate(exp.info, {}, 'timeline')}
                   </details>
                 )}
-                {exp.job && (
+                {exp.kind === 'job' && (
                   <dl>
                     <dt>{main.translate(exp.job, {}, 'timeline')}</dt>
                     <dd>{main.translate(exp.company, {}, 'timeline')}</dd>
