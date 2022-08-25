@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 import Head from "next/head";
 import Portfolio from "@assets/components";
 import useMain from "@assets/hooks/useMain";
@@ -6,7 +6,7 @@ import useMain from "@assets/hooks/useMain";
 export default function Index() {
     const main = useMain();
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         main.initialize('fr');
     }, [main]);
 

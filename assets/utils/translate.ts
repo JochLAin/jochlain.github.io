@@ -3,6 +3,7 @@ import CATALOG_ABOUT_FR from "../../translations/about.fr.json";
 import CATALOG_DATE_FR from "../../translations/date.fr.json";
 import CATALOG_HERO_FR from "../../translations/hero.fr.json";
 import CATALOG_MESSAGE_FR from "../../translations/messages.fr.json";
+import CATALOG_PROJECT_FR from "../../translations/project.fr.json";
 import CATALOG_TIMELINE_FR from "../../translations/timeline.fr.json";
 import CATALOG_DATE_EN from "../../translations/date.en.json";
 
@@ -11,6 +12,7 @@ export const TRANSLATION_CATALOGS = {
         about: CATALOG_ABOUT_FR,
         hero: CATALOG_HERO_FR,
         messages: CATALOG_MESSAGE_FR,
+        project: CATALOG_PROJECT_FR,
         timeline: CATALOG_TIMELINE_FR,
         dates: CATALOG_DATE_FR,
     },

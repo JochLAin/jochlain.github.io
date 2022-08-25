@@ -1,0 +1,11 @@
+{
+  "A library with a suite of tools to generate a stylesheet from javascript TemplateString": "Une librairie avec une suite d'outil qui permet de générer une feuille de style à partir des TemplateString javascript.",
+  "Sharing of variables between JS and CSS": "Partage des variables entre le JS et le CSS",
+  "Possible reduction of the size of the sources": "Possible réduction de la taille des sources",
+  "Managing translations": "Gestion des traductions",
+  "From a catalog of translations allow translation in JS.": "À partir d'un catalogue de traductions permettre la traduction en JS.",
+  "Sharing of translation catalogs between frontend and backend": "Partage des catalogues de traductions entre le front et le back",
+  "A web app that allows you to make pixel art.": "Une application web qui permet de faire du pixel art en ligne.",
+  "Layer and animation management": "Gestion des calques et animations",
+  "Export in various image formats and in CSS": "Export sous divers formats d'images et en CSS"
+}

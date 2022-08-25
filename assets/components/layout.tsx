@@ -1,4 +1,4 @@
-import React, {SyntheticEvent, useLayoutEffect, useRef, useState} from "react";
+import React, {SyntheticEvent, useEffect, useRef, useState} from "react";
 import useDebounce from "@assets/hooks/useDebounce";
 import useLayout, { LayoutContext } from "@assets/hooks/useLayout";
 
@@ -57,7 +57,7 @@ export default function Grid(props: { children: any, grid: string[][], component
     },
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     let bufferTouchId = 0;
     let bufferTouchX = 0;
     let bufferTouchY = 0;
