@@ -107,7 +107,7 @@ export default function Grid(props: { children: any, grid: string[][], component
 
     const onTouchEnd = (evt: TouchEvent) => {
       debounceTouchEnd(() => {
-        const MIN_DELTA = 100;
+        const MIN_DELTA = 40;
         const target = evt.target as Element;
         const screen = target.matches('.screen') ? target : target.closest('.screen');
         if (screen) {
