@@ -38,11 +38,10 @@ export default function Grid(props: { children: any, grid: string[][], component
       setTimeout(() => {
         const width = document.body.clientWidth;
         const height = document.body.clientHeight;
-        console.log(y, x, props.grid[y][x]);
 
-        document.querySelector('.layout').scrollTo({ left: 0, top: height * y, behavior: 'smooth' });
-        document.querySelector(`.layout .line:nth-child(${y + 1})`).scrollTo({ left: width * x, top: 0, behavior: 'smooth' });
-        history.replaceState({}, '', `#${props.grid[y][x]}`);
+        document.querySelector('.layout')?.scrollTo({ left: 0, top: height * y, behavior: 'smooth' });
+        document.querySelector(`.layout .line:nth-child(${y + 1})`)?.scrollTo({ left: width * x, top: 0, behavior: 'smooth' });
+        history?.replaceState({}, '', `#${props.grid[y][x]}`);
       }, 150);
     },
     toggle: () => {
