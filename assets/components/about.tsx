@@ -9,12 +9,12 @@ export default function About() {
     <section>
       <article>
         <p>
-          {main.translate('Having started my training in software development and then in mobile development, I finally chose web development for my career because if offered me much more freedom.', {}, 'about')}<br />
+          {main.translate('Having started my training in software development and then in mobile development, I naturally turn to web development because it offered me much more freedom.', {}, 'about')}<br />
           {main.translate('In this field for {count} years now, I have learned to set up projects from the expression of the need to the monitoring and maintenance of a website.', { count: (new Date()).getFullYear() - 2014 }, 'about')}
         </p>
         <p>
           {main.translate('Equally comfortable in the frontend as in the backend, i.e. the user interface / experience and performance.', {}, 'about')}<br />
-          {main.translate('I was able to use many languages and tools, mainly Symfony and Node for the backend and React and SCSS for the frontend.', {}, 'about')}
+          {main.translate('I master many languages and tools, mainly Symfony and Node for the backend and React and SCSS for the frontend.', {}, 'about')}
         </p>
         <p>
           {main.translate('During these experiences, I was able to accompany clients to develop', {}, 'about')} :
