@@ -10,7 +10,7 @@
   transform-origin: top left;
   transition: transform 150ms ease-in;
   overflow: auto;
-  scroll-snap-type: y mandatory;
+  //scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
   user-select: none;
 }
@@ -30,7 +30,7 @@
   //background-image: var(--gradient-light);
   background-size: cover;
   //scroll-snap-align: start;
-  //scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 .line {

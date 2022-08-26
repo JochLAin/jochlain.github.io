@@ -20,19 +20,19 @@ export default function Grid(props: { children: any, grid: string[][], component
       }
       return [0, 0];
     },
-    goDown: (y: number, smooth: boolean = true) => {
-      if (y < props.grid.length) store.goTo(y + 1, lines[y + 1], smooth);
+    goDown: (y: number) => {
+      if (y < props.grid.length) store.goTo(y + 1, lines[y + 1], true);
     },
-    goLeft: (y: number, x: number, smooth: boolean = true) => {
-      if (x > 0) store.goTo(y, x - 1, smooth);
+    goLeft: (y: number, x: number) => {
+      if (x > 0) store.goTo(y, x - 1, true);
     },
-    goRight: (y: number, x: number, smooth: boolean = true) => {
-      if (x < props.grid[y].length) store.goTo(y, x + 1, smooth);
+    goRight: (y: number, x: number) => {
+      if (x < props.grid[y].length) store.goTo(y, x + 1, true);
     },
-    goUp: (y: number, smooth: boolean = true) => {
-      if (y > 0) store.goTo(y - 1, lines[y - 1], smooth);
+    goUp: (y: number) => {
+      if (y > 0) store.goTo(y - 1, lines[y - 1], true);
     },
-    goTo: (y: number, x: number, smooth: boolean = true) => {
+    goTo: (y: number, x: number, smooth: boolean = false) => {
       if (props.grid?.[y]?.[x]) {
         setLines(lines.map((_x, _y) => _y === y ? x : _x));
         if (!fullscreen.current) store.toggle();
@@ -42,7 +42,9 @@ export default function Grid(props: { children: any, grid: string[][], component
         document.querySelector('.layout')?.scrollTo({ left: 0, top: height * y, behavior: smooth ? 'smooth' : 'auto' });
         document.querySelector(`.layout .line:nth-child(${y + 1})`)?.scrollTo({ left: width * x, top: 0, behavior: smooth ? 'smooth' : 'auto' });
         history?.replaceState({}, '', `#${props.grid[y][x]}`);
-        document.getElementById(props.grid[y][x])?.querySelector('section')?.focus();
+        setTimeout(() => {
+          document.getElementById(props.grid[y][x])?.querySelector('section')?.focus();
+        }, 80);
       }
     },
     toggle: () => {
