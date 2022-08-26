@@ -14,7 +14,7 @@ export default function TimelineLine() {
     <section>
       <article>
         <ul className="tll">
-          {EXPERIENCES.reduce((accu, exp) => {
+          {EXPERIENCES.reduce((accu: ExperienceInterface[], exp) => {
             if (exp.kind !== 'both') return [...accu, exp];
             return [...accu, {
               ...exp,

@@ -65,7 +65,7 @@ export default function Grid(props: { children: any, grid: string[][], component
 
     const onKeyUp = (evt: KeyboardEvent) => {
       const screen = document.getElementById(document.location.hash.slice(1) || 'me');
-      const [y, x] = store.getCoordinates(screen.id);
+      const [y, x] = store.getCoordinates(screen?.id || 'me');
 
       if ('Escape' === evt.key) {
         evt.preventDefault();
