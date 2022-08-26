@@ -53,6 +53,10 @@ $blockquote-font-size: 1.75rem;
   }
 }
 
+*:focus-visible {
+  outline: none;
+}
+
 html,
 body {
   --body-bg: #FFF;

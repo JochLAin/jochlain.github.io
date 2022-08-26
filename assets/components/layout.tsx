@@ -42,7 +42,7 @@ export default function Grid(props: { children: any, grid: string[][], component
         document.querySelector('.layout')?.scrollTo({ left: 0, top: height * y, behavior: smooth ? 'smooth' : 'auto' });
         document.querySelector(`.layout .line:nth-child(${y + 1})`)?.scrollTo({ left: width * x, top: 0, behavior: smooth ? 'smooth' : 'auto' });
         history?.replaceState({}, '', `#${props.grid[y][x]}`);
-        document.getElementById(props.grid[y][x]).querySelector('section')?.focus();
+        document.getElementById(props.grid[y][x])?.querySelector('section')?.focus();
       }
     },
     toggle: () => {
@@ -83,14 +83,14 @@ export default function Grid(props: { children: any, grid: string[][], component
         evt.preventDefault();
         store.goLeft(y, x);
       } else if ('ArrowDown' === evt.key) {
-        const article = screen.querySelector('article');
+        const article = screen?.querySelector('article');
         const section = screen?.querySelector('section');
         if (article && (!section || (section.scrollTop + document.body.clientHeight) >= article.offsetHeight)) {
           evt.preventDefault();
           store.goDown(y);
         }
       } else if ('ArrowUp' === evt.key) {
-        const article = screen.querySelector('article');
+        const article = screen?.querySelector('article');
         const section = screen?.querySelector('section');
         if (article && (!section || section.scrollTop === 0)) {
           evt.preventDefault();
