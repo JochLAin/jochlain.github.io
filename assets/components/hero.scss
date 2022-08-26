@@ -1,3 +1,4 @@
+@use "~rfs/scss" as *;
 
 @keyframes up-down {
   0% {
@@ -100,7 +101,7 @@
 }
 
 @media (orientation: landscape) and (max-height: 756px) {
-  #hero {
+  #me {
     article {
       align-items: flex-start;
       text-align: start;
@@ -109,7 +110,7 @@
 }
 
 @media (--sm-above) {
-  #hero {
+  #me {
     h2 {
       flex-direction: row;
 
@@ -124,7 +125,7 @@
 }
 
 @media (--rfs) {
-  #hero {
+  #me {
     blockquote {
       margin: 2rem 0;
     }
