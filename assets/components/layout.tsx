@@ -20,28 +20,29 @@ export default function Grid(props: { children: any, grid: string[][], component
       }
       return [0, 0];
     },
-    goDown: (y: number) => {
-      if (y < props.grid.length) store.goTo(y + 1, lines[y + 1]);
+    goDown: (y: number, smooth: boolean = true) => {
+      if (y < props.grid.length) store.goTo(y + 1, lines[y + 1], smooth);
     },
-    goLeft: (y: number, x: number) => {
-      if (x > 0) store.goTo(y, x - 1);
+    goLeft: (y: number, x: number, smooth: boolean = true) => {
+      if (x > 0) store.goTo(y, x - 1, smooth);
     },
-    goRight: (y: number, x: number) => {
-      if (x < props.grid[y].length) store.goTo(y, x + 1);
+    goRight: (y: number, x: number, smooth: boolean = true) => {
+      if (x < props.grid[y].length) store.goTo(y, x + 1, smooth);
     },
-    goUp: (y: number) => {
-      if (y > 0) store.goTo(y - 1, lines[y - 1]);
+    goUp: (y: number, smooth: boolean = true) => {
+      if (y > 0) store.goTo(y - 1, lines[y - 1], smooth);
     },
-    goTo: (y: number, x: number) => {
+    goTo: (y: number, x: number, smooth: boolean = true) => {
       if (props.grid?.[y]?.[x]) {
         setLines(lines.map((_x, _y) => _y === y ? x : _x));
         if (!fullscreen.current) store.toggle();
         const width = document.body.clientWidth;
         const height = document.body.clientHeight;
 
-        document.querySelector('.layout')?.scrollTo({ left: 0, top: height * y, behavior: 'smooth' });
-        document.querySelector(`.layout .line:nth-child(${y + 1})`)?.scrollTo({ left: width * x, top: 0, behavior: 'smooth' });
+        document.querySelector('.layout')?.scrollTo({ left: 0, top: height * y, behavior: smooth ? 'smooth' : 'auto' });
+        document.querySelector(`.layout .line:nth-child(${y + 1})`)?.scrollTo({ left: width * x, top: 0, behavior: smooth ? 'smooth' : 'auto' });
         history?.replaceState({}, '', `#${props.grid[y][x]}`);
+        document.getElementById(props.grid[y][x]).querySelector('section')?.focus();
       }
     },
     toggle: () => {
@@ -62,9 +63,45 @@ export default function Grid(props: { children: any, grid: string[][], component
     let bufferTouchX = 0;
     let bufferTouchY = 0;
 
-    const onKeyPress = (evt: KeyboardEvent) => {
+    const onKeyUp = (evt: KeyboardEvent) => {
+      const screen = document.getElementById(document.location.hash.slice(1) || 'me');
+      const [y, x] = store.getCoordinates(screen.id);
+
       if ('Escape' === evt.key) {
+        evt.preventDefault();
         store.toggle();
+      } else if (!evt.shiftKey && 'PageDown' === evt.key) {
+        evt.preventDefault();
+        store.goDown(y);
+      } else if (!evt.shiftKey && 'PageUp' === evt.key) {
+        evt.preventDefault();
+        store.goUp(y);
+      } else if (evt.shiftKey && 'PageDown' === evt.key) {
+        evt.preventDefault();
+        store.goRight(y, x);
+      } else if (evt.shiftKey && 'PageUp' === evt.key) {
+        evt.preventDefault();
+        store.goLeft(y, x);
+      } else if ('ArrowDown' === evt.key) {
+        const article = screen.querySelector('article');
+        const section = screen?.querySelector('section');
+        if (article && (!section || (section.scrollTop + document.body.clientHeight) >= article.offsetHeight)) {
+          evt.preventDefault();
+          store.goDown(y);
+        }
+      } else if ('ArrowUp' === evt.key) {
+        const article = screen.querySelector('article');
+        const section = screen?.querySelector('section');
+        if (article && (!section || section.scrollTop === 0)) {
+          evt.preventDefault();
+          store.goUp(y);
+        }
+      } else if ('ArrowRight' === evt.key) {
+        evt.preventDefault();
+        store.goRight(y, x);
+      } else if ('ArrowLeft' === evt.key) {
+        evt.preventDefault();
+        store.goLeft(y, x);
       }
     };
 
@@ -148,14 +185,14 @@ export default function Grid(props: { children: any, grid: string[][], component
     window.addEventListener('touchstart', onTouchStart, { capture: false }); // mobile
     window.addEventListener('touchmove', onTouchMove, { capture: false }); // mobile
     window.addEventListener('touchend', onTouchEnd, { capture: false }); // mobile
-    document.addEventListener('keyup', onKeyPress);
+    document.addEventListener('keyup', onKeyUp);
 
     return () => {
       window.removeEventListener('wheel', onScroll); // modern desktop
       window.removeEventListener('touchstart', onTouchStart); // mobile
       window.removeEventListener('touchmove', onTouchMove); // mobile
       window.removeEventListener('touchend', onTouchEnd); // mobile
-      document.removeEventListener('keyup', onKeyPress);
+      document.removeEventListener('keyup', onKeyUp);
     }
   }, [store.toggle]);
 
@@ -182,7 +219,7 @@ function Screen(props: { components: { [key: string]: any }, id: string, x: numb
   const onClickLink = (evt: SyntheticEvent) => {
     evt.preventDefault();
     const [y, x] = layout.getCoordinates(props.id);
-    layout.goTo(y, x);
+    layout.goTo(y, x, false);
   };
 
   const Component = props.components[props.id];

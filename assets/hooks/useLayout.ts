@@ -2,11 +2,11 @@ import { createContext, useContext } from "react";
 
 export interface LayoutInterface {
   getCoordinates: (id: string) => [number, number],
-  goDown: (y: number) => void,
-  goLeft: (y: number, x: number) => void,
-  goRight: (y: number, x: number) => void,
-  goUp: (y: number) => void,
-  goTo: (y: number, x: number) => void,
+  goDown: (y: number, smooth: boolean) => void,
+  goLeft: (y: number, x: number, smooth: boolean) => void,
+  goRight: (y: number, x: number, smooth: boolean) => void,
+  goUp: (y: number, smooth: boolean) => void,
+  goTo: (y: number, x: number, smooth: boolean) => void,
   toggle: () => void,
 }
 

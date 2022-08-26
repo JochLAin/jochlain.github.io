@@ -13,11 +13,10 @@ export default function About() {
           {main.translate('In this field for {count} years now, I have learned to set up projects from the expression of the need to the monitoring and maintenance of a website.', { count: (new Date()).getFullYear() - 2014 }, 'about')}
         </p>
         <p>
-          {main.translate('Equally comfortable in the frontend as in the backend, i.e. the user interface / experience and performance.', {}, 'about')}<br />
-          {main.translate('I master many languages and tools, mainly Symfony and Node for the backend and React and SCSS for the frontend.', {}, 'about')}
+          {main.translate('Equally comfortable in the frontend as in the backend, i.e. the user interface / experience and performance, I master many languages and tools, mainly Symfony and Node for the backend and React and SCSS for the frontend.', {}, 'about')}<br />
         </p>
         <p>
-          {main.translate('During these experiences, I was able to accompany clients to develop', {}, 'about')} :
+          {main.translate('Below are some examples of work in which I was able to participate during my experiences', {}, 'about')} :
         </p>
         <details>
           <summary>{main.translate('a social network for the house', {}, 'about')} : <a href="https://kozikaza.com" target="_blank" rel="noopener noreferer">Kozikaza</a> ;</summary>

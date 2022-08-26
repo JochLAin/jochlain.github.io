@@ -28,8 +28,8 @@ export default function TimelineLine() {
               icon_light: light('flask'),
             }];
           }, []).map((exp: ExperienceInterface, idx, exps) => {
-            const start = main.date(exp.start);
-            const end = main.date(exp.end);
+            const start = main.date(exp.start, 'yyyy-mm');
+            const end = main.date(exp.end, 'yyyy-mm');
             const vars = {
               '--tll-color': exp.color || '#607d8b',
               '--tll-color-previous': exps[idx - 1]?.color,
