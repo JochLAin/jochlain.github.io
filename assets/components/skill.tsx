@@ -49,9 +49,9 @@ export default function Skill() {
           <section>
             <h4>{main.translate('OS')}</h4>
             <SkillRate label="Debian (Linux)" rate={5} icon={brands('linux')} color="#000" />
-            <SkillRate label="Fedora (Linux)" rate={3} icon={brands('fedora')} color="#294172" />
-            <SkillRate label="Ubuntu (Linux)" rate={3} icon={brands('ubuntu')} color="#d24413" />
             <SkillRate label="Windows" rate={4} icon={brands('windows')} color="#00a4e3" />
+            <SkillRate label="Ubuntu (Linux)" rate={3} icon={brands('ubuntu')} color="#d24413" />
+            <SkillRate label="Fedora (Linux)" rate={3} icon={brands('fedora')} color="#294172" />
             <SkillRate label="Mac" rate={1} icon={brands('apple')} color="#a1a1a1" />
           </section>
           <section>
@@ -80,13 +80,13 @@ function SkillRate(props: { rate: number, label: string, color?: string, icon?: 
     <div style={{ paddingLeft: '1rem' }}>
       {props.icon ? (
         <>
-          {[...Array(Math.ceil(props.rate))].map((x, idx) => {
+          {[...Array(Math.floor(props.rate))].map((x, idx) => {
             const key = `${slug}-${idx}`;
             return <FontAwesomeIcon key={key} icon={props.icon} style={{ color: props.color || '#ffc107' }} fixedWidth />;
           })}
-          {[...Array(5 - Math.ceil(props.rate))].map((x, idx) => {
+          {[...Array(5 - Math.floor(props.rate))].map((x, idx) => {
             const key = `empty-${slug}-${idx}`;
-            return <FontAwesomeIcon key={key} icon={props.icon} style={{ color: '#777', opacity: 0.4 }} fixedWidth />;
+            return <FontAwesomeIcon key={key} icon={props.icon} style={{ color: '#777', opacity: 0.2 }} fixedWidth />;
           })}
         </>
       ) : (
