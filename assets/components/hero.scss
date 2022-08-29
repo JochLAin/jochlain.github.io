@@ -52,6 +52,10 @@
     span:first-child {
       order: 2;
     }
+    span:last-child {
+      order: 1;
+    }
+
     html[lang="en"] & span:last-child {
       order: 3;
     }
@@ -113,6 +117,9 @@
   #me {
     h2 {
       flex-direction: row;
+      span:last-child {
+        margin-right: var(--size-3);
+      }
 
       html[lang="en"] & span:last-child {
         margin-left: var(--size-3);
