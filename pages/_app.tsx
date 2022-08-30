@@ -49,7 +49,8 @@ export default function App({ Component, pageProps }: AppProps) {
 
     return <>
         <Head>
-            <title>Jochlain - Blob des internets</title>
+            <title>{store.translate('Jochlain - Internets\' blob')}</title>
+            <meta name="description" content={store.translate('Jocelyn Faihy\'s portfolio')} />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="preconnect" href="https://fonts.googleapis.com" />
             <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />

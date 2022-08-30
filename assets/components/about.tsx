@@ -9,11 +9,11 @@ export default function About() {
     <section>
       <article>
         <p>
-          {main.translate('Having started my training in software development and then in mobile development, I naturally turn to web development because it offered me much more freedom.', {}, 'about')}<br />
-          {main.translate('In this field for {count} years now, I have learned to set up projects from the expression of the need to the monitoring and maintenance of a website.', { count: (new Date()).getFullYear() - 2014 }, 'about')}
+          {main.translate('I started my training in software and later moved to mobile, before naturally turning to web which offers so much more freedom.', {}, 'about')}<br />
+          {main.translate('Thanks to my {count} years of experience in this field, I have learned to set up projects from the expression of the need to website monitoring and maintenance.', { count: (new Date()).getFullYear() - 2014 }, 'about')}
         </p>
         <p>
-          {main.translate('Equally comfortable in the frontend as in the backend, i.e. the user interface / experience and performance, I master many languages and tools, mainly Symfony and Node for the backend and React and SCSS for the frontend.', {}, 'about')}<br />
+          {main.translate('Whether dealing with the frontend or the backend, i.e. the user interface / experience and performance, I am confident with a range of languages and tools, mainly Symfony and Node for the backend and React and SCSS for the frontend.', {}, 'about')}<br />
         </p>
         <p>
           {main.translate('Below are some examples of work in which I was able to participate during my experiences', {}, 'about')} :
@@ -33,7 +33,7 @@ export default function About() {
           <summary>{main.translate('a big data manager on 3D plans', {}, 'about')} : <a href="https://kazaplan.com" target="_blank" rel="noopener noreferer">Kazaplan</a> ;</summary>
           <ul>
             <li>Symfony 3.4 / React 16</li>
-            <li>{main.translate('Front decorrelated from back', {}, 'about')}</li>
+            <li>{main.translate('Decorrelated front and back', {}, 'about')}</li>
             <li>Intranet</li>
             <li>Big data</li>
           </ul>
@@ -49,7 +49,7 @@ export default function About() {
           <summary>{main.translate('an e-commerce site for the sale of suitcases and foams', {}, 'about')} : <a href="https://rank-shop.fr" target="_blank" rel="noopener noreferer">Rank</a> ;</summary>
           <ul>
             <li>Magento 2</li>
-            <li>{main.translate('Theme adapted to the client\'s needs', {}, 'about')}</li>
+            <li>{main.translate('Theme adapted to meet the client\'s needs', {}, 'about')}</li>
             <li>{main.translate('Custom product import', {}, 'about')}</li>
           </ul>
         </details>
@@ -61,7 +61,7 @@ export default function About() {
             <li>{main.translate('Dynamic document generation', {}, 'about')}</li>
             <li>{main.translate('Planning management', {}, 'about')}</li>
             <li>{main.translate('Pay management', {}, 'about')}</li>
-            <li>{main.translate('Tablet app linked by API', {}, 'about')}</li>
+            <li>{main.translate('Tablet app linked via an API', {}, 'about')}</li>
           </ul>
         </details>
       </article>
