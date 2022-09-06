@@ -1,8 +1,8 @@
 @forward "./reboot";
-@forward "../assets/components/layout";
-@forward "../assets/components/hero";
-@forward "../assets/components/timeline/line";
-@forward "../assets/components/timeline/table";
+@forward "../assets/components/form/select_single";
+@forward "../assets/components/form/file";
+@forward "../packages/portfolio";
+@forward "../packages/translation";
 
 @keyframes blink {
   30% {

@@ -1,0 +1,55 @@
+.form-select {
+  position: relative;
+  display: inline-flex;
+  flex-flow: row nowrap;
+  min-width: 10rem;
+  border-bottom: 1px solid black;
+
+  summary {
+    padding: .325rem .5rem;
+    cursor: pointer;
+  }
+
+  + select {
+    position: absolute;
+    top: -1000px;
+    left: -1000px;
+    height: 1px;
+    width: 1px;
+    opacity: 0;
+  }
+
+  &-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 100%;
+    margin: 0;
+    padding: .5rem;
+    background-color: #FFF;
+    border: 1px solid black;
+    z-index: 1010;
+    list-style: none;
+  }
+
+  &-choice,
+  &-value {
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+  }
+
+  &-choice {
+    display: flex;
+    &:hover {
+      background-color: rgba(0, 0, 0, .1);
+    }
+  }
+  &-value {
+    display: inline-flex;
+  }
+
+  .flag {
+    height: 1rem;
+  }
+}

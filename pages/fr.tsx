@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Portfolio from "@assets/components";
+import Portfolio from "../packages/portfolio";
 import useMain from "@assets/hooks/useMain";
 
 export default function Index() {
