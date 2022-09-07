@@ -66,6 +66,10 @@ export default function Grid(props: { children: any, grid: string[][], component
     let bufferTouchY = 0;
 
     const onKeyUp = (evt: KeyboardEvent) => {
+      if (document.querySelector('#me dialog[open]')) {
+        return;
+      }
+
       const screen = document.getElementById(document.location.hash.slice(1) || 'me');
       const [y, x] = store.getCoordinates(screen?.id || 'me');
 
@@ -108,6 +112,10 @@ export default function Grid(props: { children: any, grid: string[][], component
     };
 
     const onScroll = (evt: WheelEvent) => {
+      if (document.querySelector('#me dialog[open]')) {
+        return;
+      }
+
       debounceWheel(() => {
         const target = evt.target as Element;
         const screen = target.matches('.screen') ? target : target.closest('.screen');
@@ -136,6 +144,10 @@ export default function Grid(props: { children: any, grid: string[][], component
     };
 
     const onTouchStart = (evt: TouchEvent) => {
+      if (document.querySelector('#me dialog[open]')) {
+        return;
+      }
+
       bufferTouchId = evt.targetTouches[0].identifier;
       bufferTouchX = evt.targetTouches[0].pageX;
       bufferTouchY = evt.targetTouches[0].pageY;
@@ -146,6 +158,10 @@ export default function Grid(props: { children: any, grid: string[][], component
     };
 
     const onTouchEnd = (evt: TouchEvent) => {
+      if (document.querySelector('#me dialog[open]')) {
+        return;
+      }
+
       debounceTouchEnd(() => {
         const MIN_DELTA = 40;
         const target = evt.target as Element;

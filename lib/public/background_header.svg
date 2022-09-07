@@ -1,0 +1,6 @@
+<svg width="1280" height="233" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" fill-rule="evenodd">
+    <path d="M1280 0c-167.463 0-449.312 114.933-639.815 114.933C449.68 114.933 173.4 0 0 0v233h1280V0z" fill="#e66520" transform="rotate(180 640 116)" />
+    <path d="M1280 140.13C1112.537 140.13 830.503 42 640 42S173.4 140.13 0 140.13v93h1280v-93z" fill="#e85105" transform="rotate(180 640 116)" />
+  </g>
+</svg>

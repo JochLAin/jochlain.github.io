@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { duotone, regular, solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import React from "react";
-import { EXPERIENCES, MONTHS } from "@assets/constants";
+import { EXPERIENCES, MONTHS } from "@assets/constants.ts";
 import useMain from "@assets/hooks/useMain";
 
 export default function TimelineTable() {
@@ -59,6 +59,14 @@ export function TimelineTableGraph() {
                                     && date.getTime() <= experience.end.getTime();
                             });
 
+                            const icon = ((kind) => {
+                                switch (kind) {
+                                    case 'grade': return duotone('graduation-cap');
+                                    case 'job': return duotone('flask');
+                                    case 'both': return duotone('star-half');
+                                }
+                            })(experience?.kind);
+
                             let color = experience?.color || '#607d8b';
                             if (date.getTime() < EXPERIENCES[0].start.getTime()) color = '#e9ecef';
                             if (date.getTime() > EXPERIENCES[EXPERIENCES.length -1].end.getTime()) color = '#e9ecef';
@@ -66,7 +74,7 @@ export function TimelineTableGraph() {
                             return <section key={`tlt-cell-${year}-${month}`} className="tlt-cell" style={{ color }}>
                                 <span className="fa-stack">
                                     {experience && (
-                                        <FontAwesomeIcon icon={experience.icon} fixedWidth size="1x" className="fa-stack-1x" />
+                                        <FontAwesomeIcon icon={icon} fixedWidth size="1x" className="fa-stack-1x" />
                                     )}
                                     <FontAwesomeIcon icon={regular('square')} fixedWidth size="2x" className="fa-stack-1x" />
                                 </span>

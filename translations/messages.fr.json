@@ -8,5 +8,8 @@
   "Frameworks && Librairies": "Outils et librairies",
   "IDE": "Environnement de travail",
   "OS": "Système d'exploitation",
-  "My personal projects": "Mes projets personnels"
+  "My personal projects": "Mes projets personnels",
+  "Close": "Fermer",
+  "Show PDF with zoom cursor": "Montrer le PDF avec un zoom au niveau du curseur",
+  "Next step": "La suite"
 }

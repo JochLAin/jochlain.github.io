@@ -40,13 +40,19 @@ export default function TimelineLine() {
               switch (kind) {
                 case 'grade': return main.translate('Graduation', {}, 'timeline');
                 case 'job': return main.translate('Experience', {}, 'timeline');
-                case 'both': return main.translate('Apprenticeship', {}, 'timeline');
+              }
+            })(exp.kind);
+
+            const icon = ((kind: string) => {
+              switch (kind) {
+                case 'grade': return light('graduation-cap');
+                case 'job': return light('flask');
               }
             })(exp.kind);
 
             return <li key={`tll-exp-${idx}`} className={`tll-exp tll-${exp.kind}`} style={vars as Properties}>
             <span className="tll-icon">
-              <FontAwesomeIcon icon={exp.icon_light} fixedWidth />
+              <FontAwesomeIcon icon={icon} fixedWidth />
             </span>
               <div className="tll-info">
                 <h4 className="tll-title">{label}</h4>
@@ -68,7 +74,7 @@ export default function TimelineLine() {
                 )}
                 {exp.kind === 'job' && (
                   <dl>
-                    <dt>{main.translate(exp.job, {}, 'timeline')}</dt>
+                    <dt>{main.translate(exp.job, {}, 'timeline')}<br /></dt>
                     <dd>{main.translate(exp.company, {}, 'timeline')}</dd>
                   </dl>
                 )}

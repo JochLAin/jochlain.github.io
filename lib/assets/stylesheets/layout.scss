@@ -1,0 +1,38 @@
+body {
+  display: flex;
+  flex-flow: row nowrap;
+
+  &::before,
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    content: '';
+    opacity: 0.8;
+    z-index: -1;
+  }
+  &::before {
+    height: 469px;
+    background-color: transparent;
+    background-image: url('./background_header.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  &::after {
+    height: 122px;
+    background-color: #e85105;
+  }
+}
+
+main {
+  flex: 1 1 auto;
+  padding: 1rem;
+}
+
+nav {
+  flex: 0 1 auto;
+  padding: 1rem;
+  width: 20rem;
+}

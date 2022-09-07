@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "esnext",
-    "target": "es5",
+    "target": "es6",
     "lib": [
       "es7",
       "dom"
@@ -27,9 +27,15 @@
     "suppressImplicitAnyIndexErrors": true,
     "incremental": true,
     "paths": {
-      "@assets/*": ["./assets/*"],
-      "@adventure/*": ["./packages/adventure/*"],
-      "@portfolio/*": ["./packages/portfolio/*"]
+      "@assets/*": [
+        "./assets/*"
+      ],
+      "@adventure/*": [
+        "./packages/adventure/*"
+      ],
+      "@portfolio/*": [
+        "./packages/portfolio/*"
+      ]
     }
   },
   "exclude": [

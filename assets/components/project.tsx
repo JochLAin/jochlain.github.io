@@ -25,6 +25,9 @@ export default function Project() {
               <a href="https://www.npmjs.com/package/@jochlain/translations" target="_blank" rel="noopener noreferer">
                 <FontAwesomeIcon icon={brands('npm')} />
               </a>
+              <a href="https://github.com/JochLAin/translations" target="_blank" rel="noopener noreferer">
+                <FontAwesomeIcon icon={brands('github')} />
+              </a>
             </summary>
             <p>{main.translate('From a catalog of translations allow translation in JS.', {}, 'project')}</p>
             <ul>
