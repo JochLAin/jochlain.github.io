@@ -40,6 +40,7 @@ export default function TimelineLine() {
               switch (kind) {
                 case 'grade': return main.translate('Graduation', {}, 'timeline');
                 case 'job': return main.translate('Experience', {}, 'timeline');
+                default: return null;
               }
             })(exp.kind);
 
@@ -47,6 +48,7 @@ export default function TimelineLine() {
               switch (kind) {
                 case 'grade': return light('graduation-cap');
                 case 'job': return light('flask');
+                default: return light('question');
               }
             })(exp.kind);
 

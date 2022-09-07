@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { duotone, regular, solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import React from "react";
-import { EXPERIENCES, MONTHS } from "@assets/constants.ts";
+import { EXPERIENCES, MONTHS } from "@assets/constants";
 import useMain from "@assets/hooks/useMain";
 
 export default function TimelineTable() {
@@ -64,6 +64,7 @@ export function TimelineTableGraph() {
                                     case 'grade': return duotone('graduation-cap');
                                     case 'job': return duotone('flask');
                                     case 'both': return duotone('star-half');
+                                    default: return duotone('question');
                                 }
                             })(experience?.kind);
 

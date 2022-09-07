@@ -1,4 +1,4 @@
-import type { RefObject, SyntheticEvent } from "react";
+import type { ForwardRefRenderFunction, SyntheticEvent } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { brands, regular, solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import React, { createRef, forwardRef, useRef } from "react";
@@ -57,10 +57,10 @@ export default function Hero() {
     </>;
 }
 
-const Viewer = forwardRef(function Dialog(props: any, ref: RefObject<HTMLDialogElement>) {
+const Viewer = forwardRef(function Dialog(props: any, ref: any) {
     const main = useMain();
     const refCanvas = createRef<HTMLCanvasElement>();
-    const refContext = useRef<{ ctx: CanvasRenderingContext2D, x: number, y: number, zoom: number }|null>(null);
+    const refContext = useRef<{ ctx: CanvasRenderingContext2D|null, x: number, y: number, zoom: number }|null>(null);
     const refImage = createRef<HTMLImageElement>();
 
     const onClickClose = (evt: SyntheticEvent<HTMLButtonElement>) => {
@@ -68,24 +68,30 @@ const Viewer = forwardRef(function Dialog(props: any, ref: RefObject<HTMLDialogE
         ref.current?.close();
     }
 
-    const onMouseMove = (evt: SyntheticEvent<HTMLImageElement>) => {
+    const onMouseMove = (evt: SyntheticEvent<HTMLImageElement, MouseEvent>) => {
         const size = 400;
         const glassZoom = 1.25;
 
         if (refImage.current && refCanvas.current) {
             if (!refContext.current) {
                 const { x, y, height } = refImage.current.getBoundingClientRect();
-                const ctx = refCanvas.current.getContext('2d');
                 const zoom = height / refImage.current.naturalHeight;
-                refContext.current = { ctx, x, y, zoom };
+                refContext.current = { ctx: null, x, y, zoom };
             }
-            const { pageX, pageY } = evt;
-            const { ctx, x, y, zoom } = refContext.current;
-            ctx.fillStyle = '#FFF';
-            ctx.fillRect(0, 0, size, size);
-            ctx.drawImage(refImage.current, (pageX - x) / zoom - (size / glassZoom / 2), (pageY - y) / zoom - (size / glassZoom / 2), size / glassZoom, size / glassZoom, 0, 0, size, size);
-            refCanvas.current.style.left = `${pageX - x}px`;
-            refCanvas.current.style.top = `${pageY - y}px`;
+            if (refContext.current && !refContext.current?.ctx) {
+                refContext.current = Object.assign({}, refContext.current, {
+                    ctx: refCanvas.current.getContext('2d'),
+                });
+            }
+            if (refContext.current?.ctx) {
+                const { pageX, pageY } = evt.nativeEvent;
+                const { ctx, x, y, zoom } = refContext.current;
+                ctx.fillStyle = '#FFF';
+                ctx.fillRect(0, 0, size, size);
+                ctx.drawImage(refImage.current, (pageX - x) / zoom - (size / glassZoom / 2), (pageY - y) / zoom - (size / glassZoom / 2), size / glassZoom, size / glassZoom, 0, 0, size, size);
+                refCanvas.current.style.left = `${pageX - x}px`;
+                refCanvas.current.style.top = `${pageY - y}px`;
+            }
         }
     };
 
