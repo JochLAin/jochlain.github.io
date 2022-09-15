@@ -1,0 +1,85 @@
+{
+  "version": "1.0.0",
+  "experiences": [
+    {
+      "kind": "grade",
+      "grade": "Bac IST EE",
+      "info": "Industrial Sciences and Techniques - Electronic Engineering option",
+      "color": "#f44336",
+      "start": "2008-09-01",
+      "end": "2010-06-01"
+    },
+    {
+      "kind": "job",
+      "job": "Versatile employee",
+      "company": "Mac Donald's",
+      "color": "#9c27b0",
+      "start": "2010-07-01",
+      "end": "2010-08-01"
+    },
+    {
+      "kind": "grade",
+      "grade": "BTS IRIS",
+      "info": "IT and Network for Industries and Technical Services",
+      "color": "#3f51b5",
+      "start": "2010-09-01",
+      "end": "2012-06-01"
+    },
+    {
+      "kind": "job",
+      "job": "Web developer",
+      "company": "Mairie de Villieu-Loyes-Mollon",
+      "color": "#2196f3",
+      "start": "2011-07-01",
+      "end": "2011-07-01"
+    },
+    {
+      "kind": "job",
+      "job": "Versatile employee",
+      "company": "Vente privée",
+      "color": "#009688",
+      "start": "2012-08-01",
+      "end": "2012-08-01"
+    },
+    {
+      "kind": "both",
+      "grade": "LP IEM",
+      "info": "Embedded and Mobile Computing",
+      "job": "Web & mobile developer",
+      "company": "Urban Link / Meden Agan",
+      "color": "#4caf50",
+      "start": "2012-09-01",
+      "end": "2013-09-01"
+    },
+    {
+      "kind": "grade",
+      "grade": "Web development",
+      "info": "Self-taught learning",
+      "color": "#cddc39",
+      "start": "2013-01-010",
+      "end": "2014-03-01"
+    },
+    {
+      "kind": "job",
+      "job": "Web developer",
+      "company": "Wanadev",
+      "color": "#ffc107",
+      "start": "2014-04-01",
+      "end": "2018-01-010"
+    },
+    {
+      "kind": "job",
+      "job": "Web developer",
+      "company": "AMTSolutions",
+      "color": "#ff5722",
+      "start": "2018-01-011",
+      "end": "2022-09-01"
+    },
+    {
+      "kind": "job",
+      "job": "Web developer",
+      "company": "Maybe you ?",
+      "color": "#795548"
+    }
+  ]
+}

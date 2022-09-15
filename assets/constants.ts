@@ -1,90 +1,42 @@
-import { duotone, light } from "@fortawesome/fontawesome-svg-core/import.macro";
+import API from "../public/api.json";
+
+export interface APIExperienceInterface {
+  readonly kind: string,
+  readonly grade?: string,
+  readonly info?: string,
+  readonly job?: string,
+  readonly company?: string,
+  readonly color: string,
+  readonly start?: string,
+  readonly end?: string,
+}
 
 export interface ExperienceInterface {
   readonly kind: string,
-  readonly grade ?: string,
-  readonly info ?: string,
-  readonly job ?: string,
-  readonly company ?: string,
+  readonly grade?: string,
+  readonly info?: string,
+  readonly job?: string,
+  readonly company?: string,
   readonly color: string,
   readonly start: Date,
   readonly end: Date,
 }
 
 export const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-const MIN_DATE = new Date(2022, 10);
+const MIN_DATE = new Date(2023, 1);
 const NOW = new Date();
 
-export const EXPERIENCES: ExperienceInterface[] = [{
-  kind: 'grade',
-  grade: 'Bac IST EE',
-  info: 'Industrial Sciences and Techniques - Electronic Engineering option',
-  color: '#f44336',
-  start: new Date(2008, 9),
-  end: new Date(2010, 6),
-}, {
-  kind: 'job',
-  job: 'Versatile employee',
-  company: 'Mac Donald\'s',
-  color: '#9c27b0',
-  start: new Date(2010, 7),
-  end: new Date(2010, 8),
-}, {
-  kind: 'grade',
-  grade: 'BTS IRIS',
-  info: 'IT and Network for Industries and Technical Services',
-  color: '#3f51b5',
-  start: new Date(2010, 9),
-  end: new Date(2012, 6),
-}, {
-  kind: 'job',
-  job: 'Web developer',
-  company: 'Mairie de Villieu-Loyes-Mollon',
-  color: '#2196f3',
-  start: new Date(2011, 7),
-  end: new Date(2011, 7),
-}, {
-  kind: 'job',
-  job: 'Versatile employee',
-  company: 'Vente privée',
-  color: '#009688',
-  start: new Date(2012, 8),
-  end: new Date(2012, 8),
-}, {
-  kind: 'both',
-  grade: 'LP IEM',
-  info: 'Embedded and Mobile Computing',
-  job: 'Web & mobile developer',
-  company: 'Urban Link / Meden Agan',
-  color: '#4caf50',
-  start: new Date(2012, 9),
-  end: new Date(2013, 9),
-}, {
-  kind: 'grade',
-  grade: 'Web development',
-  info: 'Self-taught learning',
-  color: '#cddc39',
-  start: new Date(2013, 10),
-  end: new Date(2014, 3),
-}, {
-  kind: 'job',
-  job: 'Web developer',
-  company: 'Wanadev',
-  color: '#ffc107',
-  start: new Date(2014, 4),
-  end: new Date(2018, 10),
-}, {
-  kind: 'job',
-  job: 'Web developer',
-  company: 'AMTSolutions',
-  color: '#ff5722',
-  start: new Date(2018, 11),
-  end: new Date(2022, 9),
-}, {
-  kind: 'job',
-  job: 'Web developer',
-  company: 'Maybe you ?',
-  color: '#795548',
-  start: NOW < MIN_DATE ? MIN_DATE : NOW,
-  end: NOW < MIN_DATE ? MIN_DATE : NOW,
-}];
+export const EXPERIENCES: ExperienceInterface[] = API.experiences.map((exp: APIExperienceInterface) => {
+  let start = NOW < MIN_DATE ? MIN_DATE : NOW;
+  let end = NOW < MIN_DATE ? MIN_DATE : NOW;
+  if (exp.start) {
+    const [startYear, startMonth] = exp.start.split('-');
+    start = new Date(Number(startYear), Number(startMonth));
+  }
+  if (exp.end) {
+    const [endYear, endMonth] = exp.end.split('-');
+    end = new Date(Number(endYear), Number(endMonth));
+  }
+
+  return { ...exp, start, end };
+});
