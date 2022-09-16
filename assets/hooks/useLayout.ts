@@ -1,6 +1,7 @@
 import { createContext, useContext } from "react";
 
 export interface LayoutInterface {
+  fullscreen?: boolean,
   getCoordinates: (id: string) => [number, number],
   goDown: (y: number) => void,
   goLeft: (y: number, x: number) => void,

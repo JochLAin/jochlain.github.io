@@ -1,4 +1,5 @@
-import React, { createContext, createElement, useContext, useEffect, useRef, useState } from 'react';
+import { createContext, createElement, useContext, useEffect, useRef, useState } from 'react';
+import * as analytics from "../utils/analytics";
 import translate from "../utils/translate";
 
 export type MainType = {
@@ -42,6 +43,7 @@ export function MainProvider(props: { locale?: string|undefined, children: any }
         localStorage.setItem('locale', value);
         setLocale(value);
         history.replaceState({}, '', `/${value}`);
+        analytics.pageview(`/${value}`);
       }
     },
     translate: (message: string, parameters = {}, domain?: string) => {

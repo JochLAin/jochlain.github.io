@@ -10,6 +10,7 @@ export default function Grid(props: { children: any, grid: string[][], component
   const debounceWheel = useDebounce();
 
   const store = {
+    fullscreen: fullscreen.current,
     getCoordinates: (id: string): [number, number] => {
       for (let _y = 0; _y < props.grid.length; _y++) {
         for (let _x = 0; _x < props.grid[_y].length; _x++) {

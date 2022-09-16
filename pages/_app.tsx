@@ -6,12 +6,10 @@ import useMain, { MainProvider } from "@assets/hooks/useMain";
 import "../assets/stylesheets/index.scss";
 
 export default function App({ Component, pageProps }: AppProps) {
-    return <>
-        <MainProvider>
-            <HtmlHead />
-            <Component {...pageProps} />
-        </MainProvider>
-    </>;
+    return <MainProvider>
+        <HtmlHead />
+        <Component {...pageProps} />
+    </MainProvider>;
 }
 
 function HtmlHead() {
