@@ -1,0 +1,30 @@
+#contact {
+  align-items: center;
+  color: #FFF;
+  background-color: #333;
+  background-image: var(--gradient-dark-reverse);
+  background-size: cover;
+
+  article {
+    position: relative;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+
+    //&::after {
+    //  position: absolute;
+    //  inset: 0;
+    //  content: '';
+    //}
+
+    > * {
+      flex: 1;
+    }
+  }
+
+  body.overview & h3 {
+    color: #000;
+  }
+}

@@ -82,6 +82,7 @@ body {
   --color-extra: var(--red-9);
 
   --gradient-dark: conic-gradient(from 90deg at 50% 0%, #111, 50%, #222, #111);
+  --gradient-dark-reverse: conic-gradient(from -90deg at 50% 100%, #111, 50%, #222, #111);
   --gradient-light: conic-gradient(from 90deg at 50% 0%, #eee, 50%, #f8f9fa, #111);
 
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -155,6 +156,122 @@ details summary {
   }
 }
 
+form footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+input,
+select,
+textarea {
+  display: block;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #AAA;
+  appearance: none;
+}
+
+textarea {
+  min-height: 7em;
+  resize: vertical;
+}
+
+fieldset label {
+  display: block;
+}
+
+fieldset.floating {
+  position: relative;
+  margin: 0 0 .5rem;
+  padding: 0;
+  border: none;
+
+  input,
+  select:not([multiple]) {
+    line-height: 1.25;
+  }
+
+  input,
+  textarea,
+  label {
+    min-height: 3.25rem;
+    padding: .375rem 1rem;
+  }
+
+  label {
+    position: absolute;
+    top: .5rem;
+    left: 0;
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+    color: #000;
+    border: 1px solid transparent;
+    text-align: start;
+    text-overflow: ellipsis;
+    transition: opacity .1s ease-in-out, transform .1s ease-in-out;
+    transform-origin: 0 0;
+    overflow: hidden;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  input,
+  textarea {
+    &::placeholder {
+      color: transparent;
+    }
+
+    &:focus,
+    &:not(:placeholder-shown) {
+      padding-top: 1.5rem;
+      padding-bottom: .625rem;
+    }
+  }
+
+  select {
+    padding-top: 1.625rem;
+    padding-bottom: .625rem;
+  }
+
+  input:focus,
+  input:not(:placeholder-shown),
+  select,
+  textarea:focus,
+  textarea:not(:placeholder-shown), {
+    ~ label {
+      opacity: .65;
+      transform: scale(.85) translateY(-.5rem) translateX(.15rem);
+    }
+  }
+}
+
+button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: none;
+  padding: .325rem .5rem;
+
+  &[type="submit"] {
+    background-color: #34a853;
+    color: #FFF;
+  }
+  &[type="reset"] {
+    background-color: #999;
+    color: #000;
+  }
+  &[disabled]::after {
+    position: absolute;
+    inset: 0;
+    content: '';
+    background-color: rgba(#333, .4);
+  }
+}
+
 a {
   color: var(--color-extra);
 
@@ -164,10 +281,6 @@ a {
   #me &:hover {
     color: #FFF;
   }
-
-  //.fad, .svg-inline--fa {
-  //  padding-right: .5rem;
-  //}
 }
 
 @media (--sm-above) {

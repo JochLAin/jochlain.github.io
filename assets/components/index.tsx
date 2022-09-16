@@ -5,6 +5,7 @@ import useMain from "@assets/hooks/useMain";
 import useLayout from "@assets/hooks/useLayout";
 import * as analytics from "../utils/analytics";
 import About from "./about";
+import Contact from "./contact";
 import Hero from "./hero";
 import Layout from "./layout";
 import Project from "./project";
@@ -14,6 +15,7 @@ import TimelineTable from "./timeline/table";
 
 const COMPONENTS = {
   about: About,
+  contact: Contact,
   me: Hero,
   project: Project,
   timeline: TimelineLine,
@@ -26,6 +28,7 @@ const GRID = [
   ['about', 'skill'],
   ['timeline', 'calendar'],
   ['project'],
+  ['contact'],
 ];
 
 export default function Index() {
