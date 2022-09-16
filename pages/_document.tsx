@@ -12,7 +12,7 @@ export default function Document() {
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'G-992KW4CR8X', { page_path: window.location.pathname, anonymize_ip: ${typeof document !== 'undefined' && !document.cookie.includes('cookie_compliance')} });
+        gtag('config', 'G-992KW4CR8X', { page_path: window.location.pathname, anonymize_ip: ${typeof document === 'undefined' || !document.cookie.includes('cookie_compliance')} });
       ` }} />
     </Head>
     <body>
