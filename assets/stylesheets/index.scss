@@ -16,6 +16,25 @@
   }
 }
 
+.cookie-compliance {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  padding: 1rem;
+  color: #FFF;
+  background-color: rgba(255 255 255 / .4);
+  text-align: center;
+  mix-blend-mode: exclusion;
+
+  .svg-inline--fa {
+    font-size: 5rem;
+  }
+
+  body.overview & {
+    display: none;
+  }
+}
+
 .type-writing {
   position: relative;
   transition: all 30ms ease-in;

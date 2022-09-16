@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { duotone } from "@fortawesome/fontawesome-svg-core/import.macro";
+import { duotone, light } from "@fortawesome/fontawesome-svg-core/import.macro";
 import React, { SyntheticEvent, useEffect } from "react";
 import useMain from "@assets/hooks/useMain";
 import useLayout from "@assets/hooks/useLayout";
@@ -42,6 +42,7 @@ export default function Index() {
     <Layout components={COMPONENTS} grid={GRID}>
       <Menu />
     </Layout>
+    {/*<CookieCompliance />*/}
   </main>;
 }
 
@@ -65,11 +66,21 @@ function Menu() {
 
   return <aside className="menu">
     <button type="button" onClick={onClickFullscreen}>
-      <FontAwesomeIcon icon={duotone('bars-staggered')} />
+      <FontAwesomeIcon icon={light('bars-staggered')} />
     </button>
     <nav>
       <a href="/fr" onClick={onClickLocale('fr')}>Français</a>
       <a href="/en" onClick={onClickLocale('en')}>English</a>
     </nav>
   </aside>;
+}
+
+function CookieCompliance() {
+  if (typeof document === 'undefined') return null;
+  if (document.cookie.includes('cookie_compliance')) return null;
+  if (document.cookie.includes('cookie_dissuasion')) return null;
+
+  return <aside className="cookie-compliance">
+    <FontAwesomeIcon icon={duotone('cookie-bite')} />
+  </aside>
 }
