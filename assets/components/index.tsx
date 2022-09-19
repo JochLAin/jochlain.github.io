@@ -28,7 +28,7 @@ const GRID = [
   ['about', 'skill'],
   ['timeline', 'calendar'],
   ['project'],
-  ['contact'],
+  // ['contact'],
 ];
 
 export default function Index() {

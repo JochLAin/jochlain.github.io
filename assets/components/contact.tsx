@@ -11,27 +11,30 @@ export default function Contact() {
       <article>
         <form action="#!" method="POST">
           <fieldset className="floating">
-            <input name="name" type="text" placeholder="" disabled />
+            <input id="name" name="name" type="text" placeholder="" />
             <label htmlFor="name">{main.translate('Your name')}</label>
           </fieldset>
           <fieldset className="floating">
-            <input name="email" type="email" placeholder="" disabled />
+            <input id="email" name="email" type="email" placeholder="" />
             <label htmlFor="email">{main.translate('Your email')}</label>
           </fieldset>
           <fieldset className="floating">
-            <input name="subject" type="text" placeholder="" disabled />
+            <select name="subject" id="subject">
+              <option value=""></option>
+              <option value="devis" disabled>{main.translate('Demander un devis')}</option>
+            </select>
             <label htmlFor="subject">{main.translate('Subject')}</label>
           </fieldset>
           <fieldset className="floating">
-            <textarea name="message" rows={10} placeholder="" disabled />
+            <textarea id="message" name="message" rows={10} placeholder="" />
             <label htmlFor="message">{main.translate('Your message')}</label>
           </fieldset>
           <footer>
-            <button type="reset" disabled>
+            <button type="reset">
               <FontAwesomeIcon icon={duotone('undo')} />
               {main.translate('Reset')}
             </button>
-            <button type="submit" disabled>
+            <button type="submit">
               <FontAwesomeIcon icon={duotone('paper-plane')} />
               {main.translate('Send')}
             </button>
