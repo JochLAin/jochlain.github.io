@@ -17,6 +17,23 @@
   }
 }
 
+.bmc-btn {
+  min-width: auto;
+  transition: all 350ms ease-in-out;
+
+  &-container {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    display: none;
+    z-index: 1000;
+
+    body.overview & {
+      display: block;
+    }
+  }
+}
+
 .cookie-compliance {
   position: fixed;
   bottom: 1rem;

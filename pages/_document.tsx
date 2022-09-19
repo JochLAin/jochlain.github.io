@@ -14,6 +14,7 @@ export default function Document() {
         gtag('js', new Date());
         gtag('config', 'G-992KW4CR8X', { page_path: window.location.pathname, anonymize_ip: ${typeof document === 'undefined' || !document.cookie.includes('cookie_compliance')} });
       ` }} />
+      <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="jochlain" data-color="#FFDD00" data-emoji="" data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" />
     </Head>
     <body>
       <Main />
