@@ -47,7 +47,7 @@ export default function Contact() {
   };
 
   return <>
-    <h3>{main.translate('Contact')}</h3>
+    <h3>{main.translate('title.contact')}</h3>
     <section>
       <article>
         <section></section>

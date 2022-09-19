@@ -1,11 +1,11 @@
 {
-  "A library with a suite of tools to generate a stylesheet from javascript TemplateString": "A library with a suite of tools to generate a stylesheet from javascript TemplateString",
-  "Sharing of variables between JS and CSS": "Sharing of variables between JS and CSS",
-  "Possible reduction of the size of the sources": "Possible reduction of the size of the sources",
-  "Managing translations": "Managing translations",
-  "From a catalog of translations allow translation in JS.": "From a catalog of translations allow translation in JS.",
-  "Sharing of translation catalogs between frontend and backend": "Sharing of translation catalogs between frontend and backend",
-  "A web app that allows you to make pixel art.": "A web app that allows you to make pixel art.",
-  "Layer and animation management": "Layer and animation management",
-  "Export in various image formats and in CSS": "Export in various image formats and in CSS"
+  "project.bocss.description": "A library with a suite of tools to generate a stylesheet from javascript TemplateString",
+  "project.bocss.feature.1": "Sharing of variables between JS and CSS",
+  "project.bocss.feature.2": "Possible reduction of the size of the sources",
+  "project.translations.detail": "Managing translations",
+  "project.translations.description": "From a catalog of translations allow translation in JS.",
+  "project.translations.feature.1": "Sharing of translation catalogs between frontend and backend",
+  "project.pixelart.description": "A web app that allows you to make pixel art.",
+  "project.pixelart.feature.1": "Layer and animation management",
+  "project.pixelart.feature.2": "Export in various image formats and in CSS"
 }

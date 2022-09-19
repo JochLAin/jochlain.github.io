@@ -7,12 +7,12 @@ export default function Skill() {
   const main = useMain();
 
   return <>
-    <h3>{main.translate('Skills')}</h3>
+    <h3>{main.translate('title.skill')}</h3>
     <section>
       <article>
         <section style={{ display: 'flex', flexFlow: 'row wrap', gap: '2rem' }}>
           <section>
-            <h4>{main.translate('Languages')}</h4>
+            <h4>{main.translate('title.skill.languages')}</h4>
             <SkillRate label="HTML" rate={5} icon={brands('html5')} color="#d84924" />
             <SkillRate label="CSS" rate={3.5} icon={brands('css3')} color="#2449d8" />
             <SkillRate label="SCSS" rate={5} icon={brands('sass')} color="#c36192" />
@@ -28,7 +28,7 @@ export default function Skill() {
             <SkillRate label="Bash" rate={1.5} icon={solid('square-terminal')} color="#000" />
           </section>
           <section>
-            <h4>{main.translate('Frameworks && Librairies')}</h4>
+            <h4>{main.translate('title.skill.libraries')}</h4>
             <h5>Back</h5>
             <SkillRate label="Symfony" rate={3.5} />
             <SkillRate label="Twig" rate={4.5} />
@@ -47,7 +47,7 @@ export default function Skill() {
             <SkillRate label="Material Design" rate={2} />
           </section>
           <section>
-            <h4>{main.translate('OS')}</h4>
+            <h4>{main.translate('title.skill.os')}</h4>
             <SkillRate label="Debian (Linux)" rate={5} icon={brands('linux')} color="#000" />
             <SkillRate label="Windows" rate={4} icon={brands('windows')} color="#00a4e3" />
             <SkillRate label="Ubuntu (Linux)" rate={3} icon={brands('ubuntu')} color="#d24413" />
@@ -55,7 +55,7 @@ export default function Skill() {
             <SkillRate label="Mac" rate={1} icon={brands('apple')} color="#a1a1a1" />
           </section>
           <section>
-            <h4>{main.translate('IDE')}</h4>
+            <h4>{main.translate('title.skill.ide')}</h4>
             <ul style={{ padding: 0, listStyle: 'none' }}>
               <li><b>PHPStorm</b></li>
               <li><b>WebStorm</b></li>

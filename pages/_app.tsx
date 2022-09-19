@@ -16,8 +16,8 @@ function HtmlHead() {
     const main = useMain();
 
     return <Head>
-        <title>{main.translate('Jochlain - Internets\' blob')}</title>
-        <meta name="description" content={main.translate('Jocelyn Faihy\'s portfolio')} />
+        <title>{main.translate('title')}</title>
+        <meta name="description" content={main.translate('description')} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
     </Head>;
 }

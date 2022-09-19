@@ -26,10 +26,10 @@ export default function Hero() {
             <h1>Jocelyn Faihy</h1>
             <h2>
                 <span className="type-writing">{content}</span>
-                <span>{main.translate('developer', {}, 'hero')}</span>
+                <span>{main.translate('hero.title', {}, 'hero')}</span>
             </h2>
             <blockquote>
-                {main.translate('The code both visual and structural.', {}, 'hero')}
+                {main.translate('hero.quote', {}, 'hero')}
             </blockquote>
             <footer>
                 <a href="https://www.linkedin.com/in/jocelyn-faihy-421ba885/" target="_blank" rel="noreferrer noopener">
@@ -45,13 +45,13 @@ export default function Hero() {
                 <a href="/cv.pdf" target="_blank" rel="noreferrer noopener">
                     <FontAwesomeIcon icon={solid('file-pdf')} size="2x" fixedWidth />
                 </a>
-                <a href="#me" title={main.translate('Show PDF with zoom cursor')} onClick={onClickZoom}>
+                <a href="#me" title={main.translate('help.pdf')} onClick={onClickZoom}>
                     <FontAwesomeIcon icon={solid('magnifying-glass')} size="2x" fixedWidth />
                 </a>
             </footer>
             <Viewer ref={refDialog} />
         </article>
-        <a href="#about" className="navigation-hint-bottom" title={main.translate('Next step')}>
+        <a href="#about" className="navigation-hint-bottom" title={main.translate('next')}>
             <FontAwesomeIcon icon={regular('angle-down')} size="2x" fixedWidth />
         </a>
     </>;
@@ -100,7 +100,7 @@ const Viewer = forwardRef(function Dialog(props: any, ref: any) {
             <img ref={refImage} src="/cv.png" alt="Curriculum vitae" onMouseMove={onMouseMove} />
             <canvas ref={refCanvas} height={300} width={300} />
         </div>
-        <button className="close" title={main.translate('Close')} onClick={onClickClose}>
+        <button className="close" title={main.translate('close')} onClick={onClickClose}>
             <FontAwesomeIcon icon={regular('xmark')} fixedWidth />
         </button>
     </dialog>;

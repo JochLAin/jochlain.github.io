@@ -1,5 +1,4 @@
 {
-  "developer": "Développeur",
-  "Web developer (fullstack)": "Développeur web (fullstack)",
-  "The code both visual and structural.": "Le code à la fois visuel et structurel."
+  "hero.title": "Développeur",
+  "hero.quote": "Le code à la fois visuel et structurel."
 }
