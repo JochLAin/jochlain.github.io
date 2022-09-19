@@ -1,10 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { duotone, light } from "@fortawesome/fontawesome-svg-core/import.macro";
-import React, { SyntheticEvent, useEffect } from "react";
+import React, { SyntheticEvent, lazy, useEffect } from "react";
 import useMain from "@assets/hooks/useMain";
 import useLayout from "@assets/hooks/useLayout";
 import About from "./about";
-import Contact from "./contact";
 import Hero from "./hero";
 import Layout from "./layout";
 import Project from "./project";
@@ -12,9 +11,11 @@ import Skill from "./skill";
 import TimelineLine from "./timeline/line";
 import TimelineTable from "./timeline/table";
 
+// const Contact = lazy(() => import('./contact'));
+
 const COMPONENTS = {
   about: About,
-  contact: Contact,
+  // contact: Contact,
   me: Hero,
   project: Project,
   timeline: TimelineLine,
@@ -34,8 +35,8 @@ export default function Index() {
   useEffect(() => {
     // Open all details for desktop
     if (document.body.clientWidth > 1200) {
-      document.querySelectorAll('details').forEach((details) => {
-        details.open = true;
+      document.querySelectorAll('details:not(.form-select)').forEach((details) => {
+        (details as HTMLDetailsElement).open = true;
       });
     }
   }, []);
@@ -44,7 +45,6 @@ export default function Index() {
     <Layout components={COMPONENTS} grid={GRID}>
       <Menu />
     </Layout>
-    {/*<CookieCompliance />*/}
   </main>;
 }
 

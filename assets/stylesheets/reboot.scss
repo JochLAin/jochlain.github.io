@@ -158,22 +158,69 @@ details summary {
 
 form footer {
   display: flex;
+  flex-flow: row-reverse nowrap;
   justify-content: flex-end;
   gap: 10px;
 }
 
-input,
+.form-select,
 select,
+input,
 textarea {
+  position: relative;
   display: block;
   width: 100%;
-  border: none;
-  border-bottom: 1px solid #AAA;
+  border: 1px solid #AAA;
   appearance: none;
 }
 
+.form-select {
+  position: relative;
+  color: #000;
+  background-color: #FFF;
+
+  summary {
+    vertical-align: middle;
+
+    &::marker {
+      color: #000;
+      vertical-align: middle;
+    }
+  }
+
+  &-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 10000;
+    min-width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #FFF;
+    border: 1px solid #000;
+    list-style: none;
+
+    li {
+      padding: .5rem 1rem;
+
+      &:hover {
+        background-color: rgba(0 0 0 / .4);
+        cursor: pointer;
+      }
+    }
+  }
+
+  + select {
+    position: fixed;
+    top: -9999px;
+    left: -9999px;
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
 textarea {
-  min-height: 7em;
+  height: 23em;
   resize: vertical;
 }
 
@@ -188,6 +235,7 @@ fieldset.floating {
   border: none;
 
   input,
+  .form-select summary,
   select:not([multiple]) {
     line-height: 1.25;
   }
@@ -197,6 +245,16 @@ fieldset.floating {
   label {
     min-height: 3.25rem;
     padding: .375rem 1rem;
+  }
+
+  .form-select {
+    summary {
+      min-height: 3.25rem;
+      padding: 1rem 1rem;
+    }
+    &:not(.filled) ~ label {
+      left: .75rem;
+    }
   }
 
   label {
@@ -231,6 +289,7 @@ fieldset.floating {
     }
   }
 
+  .form-select.filled summary,
   select {
     padding-top: 1.625rem;
     padding-bottom: .625rem;
@@ -238,6 +297,7 @@ fieldset.floating {
 
   input:focus,
   input:not(:placeholder-shown),
+  .form-select.filled,
   select,
   textarea:focus,
   textarea:not(:placeholder-shown), {
@@ -245,6 +305,16 @@ fieldset.floating {
       opacity: .65;
       transform: scale(.85) translateY(-.5rem) translateX(.15rem);
     }
+  }
+}
+
+.has-error {
+  border-color: var(--color-danger, #ea4335) !important;
+
+  summary,
+  summary::marker,
+  ~ label {
+    color: var(--color-danger, #ea4335) !important;
   }
 }
 
