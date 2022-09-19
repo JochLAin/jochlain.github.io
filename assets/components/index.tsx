@@ -3,7 +3,6 @@ import { duotone, light } from "@fortawesome/fontawesome-svg-core/import.macro";
 import React, { SyntheticEvent, useEffect } from "react";
 import useMain from "@assets/hooks/useMain";
 import useLayout from "@assets/hooks/useLayout";
-import * as analytics from "../utils/analytics";
 import About from "./about";
 import Contact from "./contact";
 import Hero from "./hero";
@@ -55,9 +54,6 @@ function Menu() {
 
   const onClickFullscreen = (evt: SyntheticEvent) => {
     evt.preventDefault();
-    if (!layout.fullscreen) {
-      analytics.event('event', 'set_fullscreen');
-    }
     layout.toggle();
   };
 

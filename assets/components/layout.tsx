@@ -1,6 +1,8 @@
 import React, {SyntheticEvent, useEffect, useRef, useState} from "react";
 import useDebounce from "@assets/hooks/useDebounce";
 import useLayout, { LayoutContext } from "@assets/hooks/useLayout";
+import * as analytics from "@assets/utils/analytics";
+import {pageview} from "@assets/utils/analytics";
 
 export default function Grid(props: { children: any, grid: string[][], components: { [key: string]: any } }) {
   const [lines, setLines] = useState<number[]>(Array(props.grid.length).fill(0));
@@ -43,6 +45,7 @@ export default function Grid(props: { children: any, grid: string[][], component
         document.querySelector('.layout')?.scrollTo({ left: 0, top: height * y, behavior: smooth ? 'smooth' : 'auto' });
         document.querySelector(`.layout .line:nth-child(${y + 1})`)?.scrollTo({ left: width * x, top: 0, behavior: smooth ? 'smooth' : 'auto' });
         history?.replaceState({}, '', `#${props.grid[y][x]}`);
+        analytics.pageview(`#${props.grid[y][x]}`);
         setTimeout(() => {
           document.getElementById(props.grid[y][x])?.querySelector('section')?.focus();
         }, 80);
@@ -55,6 +58,7 @@ export default function Grid(props: { children: any, grid: string[][], component
       } else {
         document.body.classList.add('overview');
         debounceFullscreen(() => {
+          analytics.pageview(`#overview`);
           fullscreen.current = false;
         }, 150);
       }
