@@ -19,5 +19,6 @@ function HtmlHead() {
         <title>{main.translate('Jochlain - Internets\' blob')}</title>
         <meta name="description" content={main.translate('Jocelyn Faihy\'s portfolio')} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     </Head>;
 }

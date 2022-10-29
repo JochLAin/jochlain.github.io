@@ -65,20 +65,21 @@
       "company": "Wanadev",
       "color": "#ffc107",
       "start": "2014-04-01",
-      "end": "2018-01-010"
+      "end": "2018-10-01"
     },
     {
       "kind": "job",
       "job": "Web developer",
       "company": "AMTSolutions",
       "color": "#ff5722",
-      "start": "2018-01-011",
-      "end": "2022-09-01"
+      "start": "2018-11-01",
+      "end": "2022-10-01"
     },
     {
       "kind": "job",
-      "job": "Web developer",
-      "company": "Maybe you ?",
+      "job": "Fullstack developer",
+      "company": "SILAE",
+      "start": "2022-11-01",
       "color": "#795548"
     }
   ]

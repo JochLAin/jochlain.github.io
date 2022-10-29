@@ -29,7 +29,7 @@ export default function TimelineLine() {
             }];
           }, []).map((exp: ExperienceInterface, idx, exps) => {
             const start = main.date(exp.start, 'yyyy-mm');
-            const end = main.date(exp.end, 'yyyy-mm');
+            const end = exp.end ? main.date(exp.end, 'yyyy-mm') : null;
             const vars = {
               '--tll-color': exp.color || '#607d8b',
               '--tll-color-previous': exps[idx - 1]?.color,
@@ -59,15 +59,15 @@ export default function TimelineLine() {
               <div className="tll-info">
                 <h4 className="tll-title">{label}</h4>
                 <span className="tll-period">
-                {start && (
-                  <span className="tll-date tll-start">{start}</span>
-                )}
-                  {end && end !== start && (end !== main.date(new Date()) ? (
+                  {start && (
+                    <span className="tll-date tll-start">{start}</span>
+                  )}
+                  {(end && end !== start && end !== main.date(new Date())) ? (
                     <span className="tll-date tll-end">{end}</span>
                   ) : (
                     <span className="tll-date tll-end">{main.translate('now', {}, 'timeline')}</span>
-                  ))}
-              </span>
+                  )}
+                </span>
                 {exp.kind === 'grade' && (
                   <details>
                     <summary>{main.translate(exp.grade, {}, 'timeline')}</summary>

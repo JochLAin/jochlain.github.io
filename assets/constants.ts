@@ -23,19 +23,22 @@ export interface ExperienceInterface {
 }
 
 export const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-const MIN_DATE = new Date(2023, 1);
+const MIN_DATE = new Date(2022, 10);
 const NOW = new Date();
 
 export const EXPERIENCES: ExperienceInterface[] = API.experiences.map((exp: APIExperienceInterface) => {
-  let start = NOW < MIN_DATE ? MIN_DATE : NOW;
-  let end = NOW < MIN_DATE ? MIN_DATE : NOW;
+  // let start = NOW < MIN_DATE ? MIN_DATE : NOW;
+  // let end = NOW < MIN_DATE ? MIN_DATE : NOW;
+  let start;
+  let end;
+
   if (exp.start) {
     const [startYear, startMonth] = exp.start.split('-');
-    start = new Date(Number(startYear), Number(startMonth));
+    start = new Date(Number(startYear), Number(startMonth) - 1);
   }
   if (exp.end) {
     const [endYear, endMonth] = exp.end.split('-');
-    end = new Date(Number(endYear), Number(endMonth));
+    end = new Date(Number(endYear), Number(endMonth) - 1);
   }
 
   return { ...exp, start, end };

@@ -51,12 +51,16 @@ export function TimelineTableGraph() {
                     const year = 2008 + y;
                     return <section key={`tlt-year-${year}`} className="tlt-graph-line">
                         {MONTHS.map((label, x) => {
-                            const month = x + 1;
+                            const first = EXPERIENCES[0];
+                            const last = EXPERIENCES[EXPERIENCES.length - 1];
+
+                            const month = x;
                             const date = new Date(year, month);
                             const experience = EXPERIENCES.find(experience => {
-                                return !(experience.kind === 'grade' && [7, 8].includes(date.getMonth()))
+                                const end = experience.end || new Date();
+                                return !(experience.kind === 'grade' && [7, 8].includes(date.getMonth() + 1))
                                     && date.getTime() >= experience.start.getTime()
-                                    && date.getTime() <= experience.end.getTime();
+                                    && date.getTime() <= end.getTime();
                             });
 
                             const icon = ((kind) => {
@@ -69,8 +73,8 @@ export function TimelineTableGraph() {
                             })(experience?.kind);
 
                             let color = experience?.color || '#607d8b';
-                            if (date.getTime() < EXPERIENCES[0].start.getTime()) color = '#e9ecef';
-                            if (date.getTime() > EXPERIENCES[EXPERIENCES.length -1].end.getTime()) color = '#e9ecef';
+                            if (date.getTime() < first.start.getTime()) color = '#e9ecef';
+                            if (date.getTime() > (last.end || new Date()).getTime()) color = '#e9ecef';
 
                             return <section key={`tlt-cell-${year}-${month}`} className="tlt-cell" style={{ color }}>
                                 <span className="fa-stack">

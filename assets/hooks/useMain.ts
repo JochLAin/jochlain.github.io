@@ -54,7 +54,7 @@ export function MainProvider(props: { locale?: string|undefined, children: any }
 
       return store.translate(format, {
         day: String(date.getDate()).padStart(2, '0'),
-        month: String(date.getMonth()).padStart(2, '0'),
+        month: String(date.getMonth() + 1).padStart(2, '0'),
         year: String(date.getFullYear()).padStart(4, '0'),
       }, 'dates');
     },
