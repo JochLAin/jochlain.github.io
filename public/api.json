@@ -79,8 +79,8 @@
       "kind": "job",
       "job": "Fullstack developer",
       "company": "SILAE",
-      "start": "2022-11-01",
-      "color": "#795548"
+      "color": "#795548",
+      "start": "2022-11-01"
     }
   ]
 }
